@@ -8,8 +8,8 @@ export const fr = {
     switchToLabel: "Afficher le site en arabe",
   },
   brand: {
-    name: "MEGA ELECTRO",
-    tagline: "Électroménager",
+    name: "Mega Electro",
+    tagline: "Électroménager & high-tech",
     homeLabel: "Mega Electro — accueil",
   },
   common: {
@@ -177,10 +177,10 @@ export const fr = {
   },
   home: {
     heroBadge: "Livraison partout au Maroc",
-    heroTitleA: "L'électroménager qui rend",
-    heroTitleB: "la maison plus belle.",
-    heroText: "Réfrigérateurs, lave-linge, cuisinières, climatiseurs et petit électroménager des grandes marques — neufs, garantis et livrés chez vous.",
-    heroCta: "Découvrir le catalogue",
+    heroTitleA: "Tout l'électroménager,",
+    heroTitleB: "livré à votre porte.",
+    heroText: "Réfrigérateurs, téléviseurs, climatiseurs, lave-linge : des appareils neufs et garantis, au prix affiché, payés à la livraison partout au Maroc.",
+    heroCta: "Voir tous les produits",
     heroPromo: "Voir les promotions",
     heroNoteFree: "Livraison gratuite dès {amount}",
     heroNoteCod: "Paiement à la livraison",
@@ -338,7 +338,7 @@ export const fr = {
     errCredentials: "E-mail ou mot de passe incorrect.",
     errExists: "Un compte existe déjà avec cet e-mail.",
     errGeneric: "Une erreur est survenue. Réessayez.",
-    asideTitle: "L'électroménager qui rend la maison plus belle.",
+    asideTitle: "Vos commandes et votre suivi, au même endroit.",
   },
   notFound: {
     title: "Page introuvable",

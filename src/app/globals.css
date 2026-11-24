@@ -7,9 +7,11 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-body);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-heading: var(--font-manrope);
+  --font-heading: var(--font-display);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
   --color-brass: var(--brass);
   --color-brass-foreground: var(--brass-foreground);
   --color-success: var(--success);
@@ -51,82 +53,88 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Mega Electro brand tokens ───────────────────────────────
-   Petrol blue (trust) + brass (Moroccan metalwork) on a cool porcelain canvas,
-   so white product photos read as a clean "stage". Sale red is for discounts only. */
+/* ─── Mega Electro brand tokens ────────────────────────────
+   "Lit showroom": cool canvas behind white product stages, ink cobalt for
+   text and the hero, volt blue for actions. Current yellow (--brass, kept
+   for the shared components) marks light and delivery cues only; sale red
+   is for discounts only. */
 :root {
-  --background: oklch(0.972 0.004 220);
-  --foreground: oklch(0.2 0.02 230);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.02 230);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.02 230);
-  --primary: oklch(0.36 0.07 220);
-  --primary-foreground: oklch(0.985 0.004 85);
-  --secondary: oklch(0.955 0.006 220);
-  --secondary-foreground: oklch(0.25 0.03 225);
-  --muted: oklch(0.955 0.005 220);
-  --muted-foreground: oklch(0.5 0.02 230);
-  --accent: oklch(0.95 0.035 80);
-  --accent-foreground: oklch(0.35 0.06 60);
-  --brass: oklch(0.74 0.13 72);
-  --brass-foreground: oklch(0.22 0.04 60);
-  --success: oklch(0.55 0.13 155);
-  --destructive: oklch(0.55 0.19 28);
-  --border: oklch(0.91 0.006 220);
-  --input: oklch(0.88 0.008 220);
-  --ring: oklch(0.55 0.08 220);
-  --chart-1: oklch(0.36 0.07 220);
-  --chart-2: oklch(0.74 0.13 72);
-  --chart-3: oklch(0.55 0.13 155);
-  --chart-4: oklch(0.6 0.1 250);
-  --chart-5: oklch(0.65 0.15 30);
-  --radius: 0.75rem;
-  --sidebar: oklch(0.985 0.004 85);
-  --sidebar-foreground: oklch(0.2 0.02 230);
-  --sidebar-primary: oklch(0.36 0.07 220);
-  --sidebar-primary-foreground: oklch(0.985 0.004 85);
-  --sidebar-accent: oklch(0.95 0.01 220);
-  --sidebar-accent-foreground: oklch(0.25 0.04 225);
-  --sidebar-border: oklch(0.91 0.008 85);
-  --sidebar-ring: oklch(0.55 0.08 220);
+  --background: #f2f4f8;
+  --foreground: #0b1a3a;
+  --card: #ffffff;
+  --card-foreground: #0b1a3a;
+  --popover: #ffffff;
+  --popover-foreground: #0b1a3a;
+  --primary: #2350ff;
+  --primary-foreground: #ffffff;
+  --secondary: #e7ebf3;
+  --secondary-foreground: #14244d;
+  --muted: #edf0f6;
+  --muted-foreground: #586380;
+  --accent: #e5ebff;
+  --accent-foreground: #1a37c4;
+  --ink: #0b1a3a;
+  --ink-foreground: #eef2ff;
+  --brass: #ffc531;
+  --brass-foreground: #2a1e00;
+  --success: #0f9a63;
+  --destructive: #e23a3a;
+  --border: #dde2ec;
+  --input: #cbd3e1;
+  --ring: #2350ff;
+  --chart-1: #2350ff;
+  --chart-2: #ffc531;
+  --chart-3: #0f9a63;
+  --chart-4: #7b8db8;
+  --chart-5: #e23a3a;
+  --radius: 0.875rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0b1a3a;
+  --sidebar-primary: #2350ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #edf0f6;
+  --sidebar-accent-foreground: #14244d;
+  --sidebar-border: #dde2ec;
+  --sidebar-ring: #2350ff;
 }
 
 .dark {
-  --background: oklch(0.17 0.015 230);
-  --foreground: oklch(0.96 0.004 85);
-  --card: oklch(0.21 0.017 230);
-  --card-foreground: oklch(0.96 0.004 85);
-  --popover: oklch(0.21 0.017 230);
-  --popover-foreground: oklch(0.96 0.004 85);
-  --primary: oklch(0.78 0.08 210);
-  --primary-foreground: oklch(0.18 0.02 230);
-  --secondary: oklch(0.26 0.018 230);
-  --secondary-foreground: oklch(0.96 0.004 85);
-  --muted: oklch(0.26 0.018 230);
-  --muted-foreground: oklch(0.72 0.015 230);
-  --accent: oklch(0.3 0.04 70);
-  --accent-foreground: oklch(0.9 0.06 80);
-  --brass: oklch(0.78 0.12 75);
-  --brass-foreground: oklch(0.2 0.03 60);
-  --success: oklch(0.7 0.13 155);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.6 0.06 210);
-  --chart-1: oklch(0.78 0.08 210);
-  --chart-2: oklch(0.78 0.12 75);
-  --chart-3: oklch(0.7 0.13 155);
-  --chart-4: oklch(0.7 0.1 250);
-  --chart-5: oklch(0.7 0.15 30);
-  --sidebar: oklch(0.2 0.017 230);
-  --sidebar-foreground: oklch(0.96 0.004 85);
-  --sidebar-primary: oklch(0.78 0.08 210);
-  --sidebar-primary-foreground: oklch(0.18 0.02 230);
-  --sidebar-accent: oklch(0.27 0.02 230);
-  --sidebar-accent-foreground: oklch(0.96 0.004 85);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.6 0.06 210);
+  --background: #08122b;
+  --foreground: #e8edf8;
+  --card: #0f1c3d;
+  --card-foreground: #e8edf8;
+  --popover: #0f1c3d;
+  --popover-foreground: #e8edf8;
+  --primary: #6f8cff;
+  --primary-foreground: #06102a;
+  --secondary: #17264b;
+  --secondary-foreground: #e8edf8;
+  --muted: #17264b;
+  --muted-foreground: #9aa6c4;
+  --accent: #1b2c5c;
+  --accent-foreground: #c9d4ff;
+  --ink: #050d22;
+  --ink-foreground: #eef2ff;
+  --brass: #ffcf52;
+  --brass-foreground: #2a1e00;
+  --success: #3ccf8e;
+  --destructive: #ff6b6b;
+  --border: rgb(255 255 255 / 10%);
+  --input: rgb(255 255 255 / 16%);
+  --ring: #6f8cff;
+  --chart-1: #6f8cff;
+  --chart-2: #ffcf52;
+  --chart-3: #3ccf8e;
+  --chart-4: #9aa6c4;
+  --chart-5: #ff6b6b;
+  --sidebar: #0b1733;
+  --sidebar-foreground: #e8edf8;
+  --sidebar-primary: #6f8cff;
+  --sidebar-primary-foreground: #06102a;
+  --sidebar-accent: #17264b;
+  --sidebar-accent-foreground: #e8edf8;
+  --sidebar-border: rgb(255 255 255 / 10%);
+  --sidebar-ring: #6f8cff;
 }
 
 @layer base {
@@ -163,12 +171,23 @@
   }
 }
 
-/* Subtle zellige-inspired pattern used on hero/brand surfaces */
-@utility bg-zellige {
+/* Showroom floor: a faint perspective-free grid on the dark hero panel. */
+@utility bg-showroom {
   background-image:
-    radial-gradient(circle at 0 0, color-mix(in oklch, var(--brass) 18%, transparent) 2px, transparent 2.5px),
-    radial-gradient(circle at 12px 12px, color-mix(in oklch, var(--primary-foreground) 10%, transparent) 2px, transparent 2.5px);
-  background-size: 24px 24px;
+    linear-gradient(to right, color-mix(in oklch, var(--ink-foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--ink-foreground) 6%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* The hero's one orchestrated moment: a line of "current" running once along the shelf. */
+@keyframes current-run {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@utility current-line {
+  transform-origin: left center;
+  animation: current-run 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
+  &:dir(rtl) { transform-origin: right center; }
 }
 
 .prose-store {
@@ -181,12 +200,12 @@
 
 /* ─── Arabic (RTL) ─────────────────────────────────────────
    One Arabic typeface for body and headings; Latin words (brands, models)
-   fall back to Inter/Manrope. Letter-spacing breaks joined Arabic letterforms. */
+   fall back to Instrument Sans / Bricolage Grotesque. Letter-spacing breaks joined Arabic letterforms. */
 html:lang(ar) {
-  font-family: var(--font-arabic), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-arabic), var(--font-body), ui-sans-serif, system-ui, sans-serif;
 }
 html:lang(ar) :is(h1, h2, h3, h4, .font-heading) {
-  font-family: var(--font-arabic), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-arabic), var(--font-display), ui-sans-serif, system-ui, sans-serif;
 }
 html:lang(ar) * {
   letter-spacing: 0 !important;

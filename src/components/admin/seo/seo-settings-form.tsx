@@ -135,7 +135,7 @@ export function SeoSettingsForm({ initial, canEdit, envSiteUrl }: { initial: Seo
                 {text("homeTitle", "Titre SEO de l'accueil", { counter: [SEO_LIMITS.titleMin, SEO_LIMITS.titleMax], hint: "Affiché tel quel (sans suffixe)." })}
                 {text("homeDescription", "Méta-description de l'accueil", { rows: 3, counter: [SEO_LIMITS.descMin, SEO_LIMITS.descMax] })}
                 {text("homeKeywords", "Mots-clés de l'accueil")}
-                {text("homeH1", "Titre H1 de l'accueil", { placeholder: "L'électroménager qui rend la maison plus belle." })}
+                {text("homeH1", "Titre H1 de l'accueil", { placeholder: "Tout l'électroménager, livré à votre porte." })}
                 {text("homeSeoHeading", "Titre du bloc texte SEO (bas de page)", { placeholder: "Mega Electro, votre spécialiste de l'électroménager au Maroc" })}
                 {text("homeSeoText", "Texte SEO (bas de page)", { rows: 8, hint: "Paragraphes séparés par une ligne vide. Vide = texte actuel." })}
                 {text("homeOgTitle", "Titre Open Graph de l'accueil")}

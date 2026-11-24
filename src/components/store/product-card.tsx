@@ -26,7 +26,7 @@ export async function ProductCard({ product, priority }: { product: ProductCardD
         : { label: t.common.inStock, tone: "bg-success" };
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/30">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-[0_18px_40px_-24px_rgb(11_26_58/0.35)]">
       <Link href={`/produit/${product.slug}`} prefetch={false} tabIndex={-1} aria-hidden className="relative block aspect-square overflow-hidden bg-white">
         <StoreImage
           imageKey={first?.key}
@@ -39,10 +39,10 @@ export async function ProductCard({ product, priority }: { product: ProductCardD
         {second ? (
           <StoreImage imageKey={second.key} alt="" fill sizes="(min-width: 1280px) 290px, 33vw" className="object-contain p-5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 max-md:hidden" />
         ) : null}
-        {off ? <span dir="ltr" className="absolute start-3 top-3 rounded-md bg-destructive px-2 py-1 text-xs font-bold text-white tabular-nums">-{off}%</span> : null}
+        {off ? <span dir="ltr" className="absolute start-3 top-3 rounded-full bg-destructive px-2.5 py-1 text-xs font-bold text-white tabular-nums">-{off}%</span> : null}
       </Link>
-      <div className="flex flex-1 flex-col gap-1 border-t p-3 sm:p-4">
-        {product.brand ? <span className="text-xs font-medium text-muted-foreground">{product.brand.name}</span> : null}
+      <div className="flex flex-1 flex-col gap-1 p-3 pt-1 sm:p-4 sm:pt-1">
+        {product.brand ? <span className="text-xs font-semibold text-primary">{product.brand.name}</span> : null}
         <h3 className="line-clamp-2 min-h-10 text-sm font-medium leading-5 text-foreground">
           <Link href={`/produit/${product.slug}`} prefetch={false} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
             {name}

@@ -1,7 +1,6 @@
-import { BadgePercent, MapPin } from "lucide-react";
+import { ArrowUpRight, BadgePercent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryIcon } from "@/components/shared/category-icon";
-import { LogoMark } from "@/components/shared/logo";
 import { StoreImage } from "@/components/shared/store-image";
 import { ProductRail } from "@/components/store/product-card";
 import { TrustBar } from "@/components/store/footer";
@@ -41,12 +40,15 @@ export async function generateMetadata() {
 
 function Section({ title, href, linkLabel, children, tone }: { title: string; href?: string; linkLabel?: string; children: React.ReactNode; tone?: "plain" | "card" }) {
   return (
-    <section className={tone === "card" ? "bg-card py-10 sm:py-12" : "py-10 sm:py-12"}>
+    <section className={tone === "card" ? "border-y bg-card py-12 sm:py-16" : "py-12 sm:py-16"}>
       <div className="container-page">
-        <div className="mb-6 flex items-baseline justify-between gap-4">
-          <h2 className="text-2xl font-bold sm:text-[28px]">{title}</h2>
+        <div className="mb-7 flex items-end justify-between gap-4">
+          <h2 className="text-[1.75rem] font-bold leading-tight tracking-[-0.02em] sm:text-[2.125rem]">{title}</h2>
           {href && linkLabel ? (
-            <Link href={href} className="shrink-0 text-sm font-semibold text-primary underline-offset-4 hover:underline">{linkLabel}</Link>
+            <Link href={href} className="group inline-flex shrink-0 items-center gap-1 rounded-full border bg-card px-4 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-primary">
+              {linkLabel}
+              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" aria-hidden />
+            </Link>
           ) : null}
         </div>
         {children}
@@ -55,25 +57,28 @@ function Section({ title, href, linkLabel, children, tone }: { title: string; hr
   );
 }
 
-/** Signature arch frame: the hero product, or the brand arch when no product has a photo yet. */
-async function HeroArch({ product }: { product?: ProductCardData }) {
+/** The showroom shelf: real products, lit on the dark hero panel, with the current running along the shelf edge. */
+async function ShowroomShelf({ products }: { products: ProductCardData[] }) {
   const locale = await getLocale();
+  if (!products.length) return null;
   return (
-    <div className="relative mx-auto w-full max-w-[420px] animate-in fade-in zoom-in-95 duration-700">
-      <div className="arch absolute inset-0 translate-x-3 translate-y-3 border-2 border-brass/60 rtl:-translate-x-3" aria-hidden />
-      {product ? (
-        <Link href={`/produit/${product.slug}`} className="group arch relative block aspect-[4/5] overflow-hidden bg-white shadow-2xl shadow-black/25">
-          <StoreImage imageKey={product.images[0]?.key} alt={product.images[0]?.alt ?? localName(locale, product)} fill priority sizes="(min-width: 1024px) 420px, 80vw" className="object-contain px-10 pb-28 pt-16 transition-transform duration-700 group-hover:scale-[1.03]" />
-          <span className="absolute inset-x-5 bottom-5 rounded-xl bg-background/95 p-4 text-foreground shadow-lg">
-            <span className="line-clamp-1 text-sm font-medium">{localName(locale, product)}</span>
-            <Price price={product.price} compareAtPrice={product.compareAtPrice} size="md" />
-          </span>
-        </Link>
-      ) : (
-        <div className="arch relative flex aspect-[4/5] items-center justify-center bg-primary-foreground/10 ring-1 ring-primary-foreground/20">
-          <LogoMark className="size-40 opacity-90" />
-        </div>
-      )}
+    <div className="relative">
+      <ul className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 scrollbar-none sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-6 lg:overflow-visible lg:px-0">
+        {products.map((p, i) => (
+          <li key={p.id} className="w-[44%] shrink-0 snap-start sm:w-[30%] lg:w-auto">
+            <Link href={`/produit/${p.slug}`} className="group flex h-full flex-col rounded-2xl bg-card p-3 text-card-foreground shadow-[0_24px_48px_-24px_rgb(0_0_0/0.6)] transition-transform duration-300 hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-brass">
+              <span className="relative block aspect-square">
+                <StoreImage imageKey={p.images[0]?.key} alt={p.images[0]?.alt ?? localName(locale, p)} fill priority={i < 3} sizes="(min-width: 1024px) 190px, 45vw" className="object-contain p-2" />
+              </span>
+              <span className="mt-2 line-clamp-2 min-h-10 text-[13px] font-medium leading-5">{localName(locale, p)}</span>
+              <span className="mt-1"><Price price={p.price} compareAtPrice={p.compareAtPrice} size="sm" /></span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-5 h-px bg-ink-foreground/15" aria-hidden>
+        <div className="current-line h-px bg-brass shadow-[0_0_12px_2px] shadow-brass/60" />
+      </div>
     </div>
   );
 }
@@ -82,57 +87,57 @@ export default async function HomePage() {
   const [collections, categories, brands, settings, seo, locale] = await Promise.all([getHomeCollections(), getNavCategories(), getActiveBrands(), getSettings(), getSeoSettings(), getLocale()]);
   const t = await getDictionary(locale);
   const pool = [...collections.featured, ...collections.deals, ...collections.newest, ...collections.bestSellers];
-  const heroProduct = pool.find((p) => p.images.length && p.stock > 0);
+  // Six distinct in-stock products with photos for the shelf.
+  const shelf = [...new Map(pool.filter((p) => p.images.length && p.stock > 0).map((p) => [p.id, p])).values()].slice(0, 6);
   const free = settings.freeShippingThreshold > 0 ? fmt(t.home.heroNoteFree, { amount: formatPrice(settings.freeShippingThreshold, locale) }) : null;
   const seoParagraphs = locale === "fr" && seo.homeSeoText ? seo.homeSeoText.split(/\n{2,}/) : [t.home.seoText1, t.home.seoText2];
   const cities = locale === "ar" ? ["الدار البيضاء", "الرباط", "مراكش", "طنجة", "فاس", "أكادير"] : ["Casablanca", "Rabat", "Marrakech", "Tanger", "Fès", "Agadir"];
 
   return (
     <>
-      <section className="relative overflow-hidden bg-primary text-primary-foreground">
-        <div className="absolute inset-0 bg-zellige opacity-50" aria-hidden />
-        <div className="container-page relative grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[1.15fr_1fr] lg:py-20">
-          <div className="max-w-xl space-y-6">
-            <p className="inline-flex items-center gap-2 text-sm font-medium text-brass"><MapPin className="size-4" aria-hidden /> {t.home.heroBadge}</p>
-            <h1 className="text-[2.5rem] font-extrabold leading-[1.05] sm:text-5xl lg:text-[3.6rem]">
+      <section className="relative overflow-hidden bg-ink text-ink-foreground">
+        <div className="absolute inset-0 bg-showroom [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden />
+        <div className="container-page relative pb-10 pt-12 sm:pt-16 lg:pb-14 lg:pt-20">
+          <div className="grid items-end gap-8 lg:grid-cols-[1.25fr_1fr]">
+            <h1 className="text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4.5rem]">
               {locale === "fr" && seo.homeH1 ? seo.homeH1 : `${t.home.heroTitleA} ${t.home.heroTitleB}`}
             </h1>
-            <p className="text-base leading-7 opacity-85 sm:text-lg">{t.home.heroText}</p>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg" className="h-12 rounded-full bg-brass px-6 text-base text-brass-foreground hover:bg-brass/90">
-                <Link href="/recherche">{t.home.heroCta}</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="h-12 rounded-full border-primary-foreground/30 bg-transparent px-6 text-base text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-                <Link href="/promotions"><BadgePercent /> {t.home.heroPromo}</Link>
-              </Button>
+            <div className="max-w-md space-y-6 lg:pb-2">
+              <p className="text-base leading-7 text-ink-foreground/75 sm:text-lg">{t.home.heroText}</p>
+              <div className="flex flex-wrap gap-3">
+                <Button asChild size="lg" className="h-12 rounded-full px-6 text-base">
+                  <Link href="/recherche">{t.home.heroCta}</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="h-12 rounded-full border-ink-foreground/25 bg-transparent px-6 text-base text-ink-foreground hover:bg-ink-foreground/10 hover:text-ink-foreground">
+                  <Link href="/promotions"><BadgePercent /> {t.home.heroPromo}</Link>
+                </Button>
+              </div>
+              <p className="text-sm text-ink-foreground/60">{[free, t.home.heroNoteCod].filter(Boolean).join(locale === "ar" ? "، " : ", ")}</p>
             </div>
-            <p className="text-sm opacity-75">{[free, t.home.heroNoteCod].filter(Boolean).join(" — ")}</p>
           </div>
-          <div className="max-lg:hidden"><HeroArch product={heroProduct} /></div>
+          <div className="mt-12 lg:mt-16"><ShowroomShelf products={shelf} /></div>
         </div>
       </section>
 
       <div className="border-b bg-card">
-        <div className="container-page py-6"><TrustBar freeShippingThreshold={settings.freeShippingThreshold} /></div>
+        <div className="container-page py-7"><TrustBar freeShippingThreshold={settings.freeShippingThreshold} /></div>
       </div>
 
       {categories.length ? (
         <Section title={t.home.categoriesTitle}>
-          <ul className="-mx-4 grid auto-cols-[8.5rem] grid-flow-col gap-3 overflow-x-auto px-4 pb-2 scrollbar-none sm:-mx-6 sm:px-6 lg:mx-0 lg:auto-cols-fr lg:px-0">
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-6">
             {categories.map((c) => (
               <li key={c.id}>
-                <Link href={`/categorie/${c.slug}`} className="group flex h-full flex-col items-center gap-3 text-center">
-                  <span className="arch relative flex aspect-[4/5] w-full items-end justify-center overflow-hidden border bg-card text-primary transition-colors group-hover:border-primary/40 group-hover:bg-accent/40">
+                <Link href={`/categorie/${c.slug}`} className="group flex h-full flex-col rounded-2xl border bg-card p-4 transition-colors hover:border-primary/40">
+                  <span className="relative flex aspect-[4/3] items-center justify-center text-primary">
                     {c.imageKey ? (
-                      <StoreImage imageKey={c.imageKey} alt={c.imageAlt || localName(locale, c)} fill sizes="160px" className="object-contain p-4 pt-8" />
+                      <StoreImage imageKey={c.imageKey} alt={c.imageAlt || localName(locale, c)} fill sizes="200px" className="object-contain transition-transform duration-500 group-hover:scale-105" />
                     ) : (
-                      <CategoryIcon name={c.icon} className="mb-[30%] size-10" />
+                      <CategoryIcon name={c.icon} className="size-10" />
                     )}
                   </span>
-                  <span className="space-y-0.5">
-                    <span className="block text-sm font-semibold leading-tight">{localName(locale, c)}</span>
-                    <span className="block text-xs text-muted-foreground">{plural(locale, c._count.products, t.home.categoryCount)}</span>
-                  </span>
+                  <span className="mt-4 block text-[15px] font-semibold leading-tight">{localName(locale, c)}</span>
+                  <span className="mt-1 block text-xs tabular-nums text-muted-foreground">{plural(locale, c._count.products, t.home.categoryCount)}</span>
                 </Link>
               </li>
             ))}
@@ -163,15 +168,18 @@ export default async function HomePage() {
 
       <section className="container-page py-10 sm:py-12">
         <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-          <div className="rounded-3xl bg-primary p-7 text-primary-foreground sm:p-10">
+          <div className="relative overflow-hidden rounded-3xl bg-ink p-7 text-ink-foreground sm:p-10">
+            <div className="absolute inset-0 bg-showroom opacity-60" aria-hidden />
+            <div className="relative">
             <h2 className="text-2xl font-bold sm:text-3xl">{t.home.deliveryTitle}</h2>
-            <p className="mt-3 max-w-xl leading-7 opacity-85">{t.home.deliveryText}</p>
+            <p className="mt-3 max-w-xl leading-7 text-ink-foreground/75">{t.home.deliveryText}</p>
             <p className="mt-5 text-sm opacity-80">{t.home.deliveryCities}</p>
             <ul className="mt-2 flex flex-wrap gap-2">
-              {cities.map((c) => <li key={c} className="rounded-full bg-primary-foreground/10 px-3 py-1 text-sm">{c}</li>)}
+              {cities.map((c) => <li key={c} className="rounded-full border border-ink-foreground/15 px-3 py-1 text-sm">{c}</li>)}
             </ul>
             <p className="mt-2 text-sm opacity-80">{t.home.deliveryMore}</p>
             <Link href="/livraison-retours" className="mt-6 inline-block text-sm font-semibold text-brass underline-offset-4 hover:underline">{t.home.deliveryLink}</Link>
+            </div>
           </div>
           <div className="flex flex-col justify-between gap-6 rounded-3xl border bg-card p-7 sm:p-10">
             <div>

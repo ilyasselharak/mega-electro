@@ -40,14 +40,14 @@ function Column({ title, children }: { title: string; children: React.ReactNode 
   return (
     <>
       <details className="group border-b border-primary-foreground/15 md:hidden">
-        <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-sm font-semibold text-brass [&::-webkit-details-marker]:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-sm font-semibold text-ink-foreground/55 [&::-webkit-details-marker]:hidden">
           {title}
           <ChevronDown className="size-4 transition-transform group-open:rotate-180" aria-hidden />
         </summary>
         <div className="pb-5">{children}</div>
       </details>
       <div className="hidden md:block">
-        <h2 className="mb-4 text-sm font-semibold text-brass">{title}</h2>
+        <h2 className="mb-4 text-sm font-semibold text-ink-foreground/55">{title}</h2>
         {children}
       </div>
     </>
@@ -60,10 +60,10 @@ export async function Footer() {
   const year = new Date().getFullYear();
   const link = "opacity-80 transition-opacity hover:opacity-100";
   return (
-    <footer className="mt-16 bg-primary text-primary-foreground">
+    <footer className="mt-16 bg-ink text-ink-foreground">
       <div className="container-page grid gap-x-10 py-10 md:grid-cols-2 md:gap-y-10 md:py-14 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
         <div className="space-y-4 pb-6 md:pb-0">
-          <div className="inline-flex rounded-xl bg-card p-2 pe-3 text-foreground"><Logo /></div>
+          <Logo tone="inverse" />
           <p className="max-w-xs text-sm opacity-80">{locale === "fr" ? settings.tagline : t.trust.deliveryTitle}</p>
           <div className="flex flex-wrap gap-4 text-sm">
             {settings.facebookUrl ? <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" className={link}>Facebook</a> : null}

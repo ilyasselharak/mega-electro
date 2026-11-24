@@ -1,7 +1,7 @@
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
-import { action, internalAction, internalMutation, internalQuery, type ActionCtx } from "./_generated/server";
+import { action, internalAction, internalMutation, internalQuery, type ActionCtx, type MutationCtx } from "./_generated/server";
 import { requireStaff } from "./lib/auth";
 import { deleteImages, uploadFromUrl, type CloudinaryUpload } from "./lib/cloudinary";
 import { fail } from "./lib/errors";
@@ -66,6 +66,89 @@ function warrantyMonths(text: string | null) {
   return months ? Math.min(240, Number(months[1])) : undefined;
 }
 
+
+
+// ── Category matching ──────────────────────────────────────
+// Electro Darna's categories are broad ("Gros Electromenager"); the product
+// name says more, so it is checked first. Then Darna's category (slugified,
+// with aliases). A category still missing is created as a top-level one.
+
+const NAME_RULES: [RegExp, string][] = [
+  [/cong[ée]lateur/i, "congelateurs"],
+  [/am[ée]ricain|side[- ]by[- ]side/i, "refrigerateurs-americains"],
+  [/r[ée]frig[ée]rateur|frigo|mini[- ]?bar/i, "refrigerateurs"],
+  [/lave[- ]vaisselle/i, "lave-vaisselle"],
+  [/machine [àa] laver|lave[- ]linge|s[ée]che[- ]linge/i, "machines-a-laver"],
+  [/micro[- ]?ondes?/i, "micro-ondes"],
+  [/cuisini[èe]re|plaque de cuisson|\bhotte\b/i, "cuisinieres"],
+  [/\bfours?\b/i, "fours"],
+  [/t[ée]l[ée]vis|\bsmart tv\b|\btv\b|\bled\b.*pouces|pouces/i, "tv-image"],
+  [/climatiseur|climatisation|\bsplit\b/i, "climatisation"],
+  [/chauffe[- ]?eau|chauffe[- ]bain/i, "chauffe-eau"],
+  [/chauffage|radiateur|\bpo[êe]le\b|convecteur/i, "chauffage"],
+];
+
+const CATEGORY_ALIASES: Record<string, string> = {
+  televisions: "tv-image",
+  "four-cuisson": "cuisson",
+  congelateur: "congelateurs",
+  "gros-electromenager": "gros-electromenager",
+};
+
+async function categoryBySlug(ctx: MutationCtx, slug: string) {
+  return (await ctx.db.query("categories").withIndex("by_slug", (q) => q.eq("slug", slug)).first())?._id;
+}
+
+async function resolveCategory(ctx: MutationCtx, p: Pick<RemoteProduct, "name" | "category" | "categoryName">): Promise<Id<"categories"> | undefined> {
+  for (const [re, slug] of NAME_RULES) {
+    if (!re.test(p.name)) continue;
+    const id = await categoryBySlug(ctx, slug);
+    if (id) return id;
+  }
+  const label = (p.categoryName || p.category || "").trim();
+  if (!label) return undefined;
+  const raw = slugify(label);
+  const slug = CATEGORY_ALIASES[raw] ?? raw;
+  const existing = await categoryBySlug(ctx, slug);
+  if (existing) return existing;
+  const last = await ctx.db.query("categories").withIndex("by_parent", (q) => q.eq("parentId", undefined)).collect();
+  return ctx.db.insert("categories", {
+    name: label.charAt(0).toUpperCase() + label.slice(1),
+    slug,
+    position: last.reduce((m, c) => Math.max(m, c.position), 0) + 1,
+    isActive: true,
+    updatedAt: Date.now(),
+  });
+}
+
+/** Puts already-cloned products into a category (for clones made before matching improved). */
+export const recategorize = internalAction({
+  args: {},
+  handler: async (ctx): Promise<{ updated: number }> => {
+    const remote = await callFeed();
+    return ctx.runMutation(internal.electrodarna.applyCategories, {
+      items: remote.map((p) => ({ id: p.id, name: p.name, category: p.category, categoryName: p.categoryName })),
+    });
+  },
+});
+
+export const applyCategories = internalMutation({
+  args: { items: v.array(v.object({ id: v.string(), name: v.string(), category: v.union(v.string(), v.null()), categoryName: v.union(v.string(), v.null()) })) },
+  handler: async (ctx, { items }) => {
+    let updated = 0;
+    for (const item of items) {
+      const product = await ctx.db.query("products").withIndex("by_source", (q) => q.eq("sourceId", item.id)).first();
+      if (!product || product.categoryId) continue;
+      const categoryId = await resolveCategory(ctx, item);
+      if (categoryId) {
+        await ctx.db.patch(product._id, { categoryId, searchText: await buildSearchText(ctx, { ...product, categoryId }), updatedAt: Date.now() });
+        updated++;
+      }
+    }
+    return { updated };
+  },
+});
+
 // ── Browse ─────────────────────────────────────────────────
 
 /** Remote catalog for the admin page. */
@@ -103,12 +186,7 @@ export const createClone = internalMutation({
       const brand = await ctx.db.query("brands").withIndex("by_slug", (q) => q.eq("slug", slug)).first();
       brandId = brand?._id ?? (await ctx.db.insert("brands", { name: p.brand, slug, isActive: true, updatedAt: Date.now() }));
     }
-    // Category: only matched, never created (the admin can set it afterwards).
-    let categoryId: Id<"categories"> | undefined;
-    for (const slug of [p.category, p.categoryName ? slugify(p.categoryName) : null]) {
-      if (!slug || categoryId) continue;
-      categoryId = (await ctx.db.query("categories").withIndex("by_slug", (q) => q.eq("slug", slug)).first())?._id;
-    }
+    const categoryId = await resolveCategory(ctx, p);
 
     const unique = async (base: string, index: "by_slug" | "by_sku") => {
       const taken = async (s: string) => Boolean(await ctx.db.query("products").withIndex(index, (q) => q.eq(index === "by_slug" ? "slug" : "sku", s)).first());
@@ -147,45 +225,70 @@ export const createClone = internalMutation({
   },
 });
 
+async function cloneProducts(
+  ctx: ActionCtx,
+  ids: string[],
+  status: "DRAFT" | "ACTIVE",
+  user: { id: string; name: string },
+): Promise<{ created: number; skipped: number; failed: string[] }> {
+  const remote = await fetchByIds(ids);
+  if (!remote.length) fail("Produits introuvables sur Electro Darna.");
+  const linked = new Set((await ctx.runQuery(internal.electrodarna.linkedIds, {})).map((l) => l.sourceId));
+
+  let created = 0;
+  let skipped = 0;
+  const failed: string[] = [];
+  for (const p of remote) {
+    if (linked.has(p.id)) {
+      skipped++;
+      continue;
+    }
+    const images: CloudinaryUpload[] = [];
+    try {
+      for (const url of p.imageUrls.slice(0, MAX_IMAGES)) {
+        try {
+          images.push(await uploadFromUrl(url, "products"));
+        } catch (err) {
+          console.warn("Electro Darna image import failed", url, err);
+        }
+      }
+      const res = await ctx.runMutation(internal.electrodarna.createClone, { remote: p, images, status, userId: user.id, userName: user.name });
+      if (res.created) created++;
+      else {
+        skipped++;
+        await deleteImages(images.map((i) => i.key));
+      }
+    } catch (err) {
+      console.error("Electro Darna clone failed", p.id, err);
+      await deleteImages(images.map((i) => i.key));
+      failed.push(p.name);
+    }
+  }
+  return { created, skipped, failed };
+}
+
 export const importProducts = action({
   args: { ids: v.array(v.string()), status: v.union(v.literal("DRAFT"), v.literal("ACTIVE")) },
   handler: async (ctx, { ids, status }): Promise<{ created: number; skipped: number; failed: string[] }> => {
     const user = await requireStaff(ctx);
     if (!ids.length || ids.length > 50) fail("Sélectionnez entre 1 et 50 produits.");
-    const remote = await fetchByIds(ids);
-    if (!remote.length) fail("Produits introuvables sur Electro Darna.");
-    const linked = new Set((await ctx.runQuery(internal.electrodarna.linkedIds, {})).map((l) => l.sourceId));
+    return cloneProducts(ctx, ids, status, user);
+  },
+});
 
-    let created = 0;
-    let skipped = 0;
-    const failed: string[] = [];
-    for (const p of remote) {
-      if (linked.has(p.id)) {
-        skipped++;
-        continue;
-      }
-      const images: CloudinaryUpload[] = [];
-      try {
-        for (const url of p.imageUrls.slice(0, MAX_IMAGES)) {
-          try {
-            images.push(await uploadFromUrl(url, "products"));
-          } catch (err) {
-            console.warn("Electro Darna image import failed", url, err);
-          }
-        }
-        const res = await ctx.runMutation(internal.electrodarna.createClone, { remote: p, images, status, userId: user.id, userName: user.name });
-        if (res.created) created++;
-        else {
-          skipped++;
-          await deleteImages(images.map((i) => i.key));
-        }
-      } catch (err) {
-        console.error("Electro Darna clone failed", p.id, err);
-        await deleteImages(images.map((i) => i.key));
-        failed.push(p.name);
-      }
-    }
-    return { created, skipped, failed };
+// Bulk import from the terminal (e.g. to fill a new store):
+//   npx convex run electrodarna:importFromCli '{"limit":40,"status":"ACTIVE"}'
+// Skips products already cloned; run again to import the next batch.
+export const importFromCli = internalAction({
+  args: { limit: v.optional(v.number()), status: v.optional(v.union(v.literal("DRAFT"), v.literal("ACTIVE"))) },
+  handler: async (ctx, { limit, status }): Promise<{ created: number; skipped: number; failed: string[]; remaining: number }> => {
+    const all = await callFeed();
+    const linked = new Set((await ctx.runQuery(internal.electrodarna.linkedIds, {})).map((l) => l.sourceId));
+    const todo = all.filter((p) => !linked.has(p.id)).map((p) => p.id);
+    const batch = todo.slice(0, Math.min(Math.max(limit ?? 20, 1), 50));
+    if (!batch.length) return { created: 0, skipped: 0, failed: [], remaining: 0 };
+    const res = await cloneProducts(ctx, batch, status ?? "ACTIVE", { id: "cli", name: "Import terminal" });
+    return { ...res, remaining: todo.length - batch.length };
   },
 });
 
