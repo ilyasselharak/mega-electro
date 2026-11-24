@@ -53,7 +53,7 @@ export async function Header() {
           <ul className="container-page flex h-12 items-center gap-1">
             {nav.map((c) => (
               <li key={c.id} className="group relative">
-                <Link href={`/categorie/${c.slug}`} className="flex h-12 items-center gap-1 rounded-md px-3 text-sm font-medium text-foreground/75 transition-colors hover:text-foreground">
+                <Link href={`/categorie/${c.slug}`} className="flex h-12 items-center gap-1 whitespace-nowrap rounded-md px-3 text-sm font-medium text-foreground/75 transition-colors hover:text-foreground">
                   {c.label}
                   {c.children.length ? <ChevronDown className="size-3.5 opacity-50 transition-transform group-hover:rotate-180" aria-hidden /> : null}
                 </Link>
@@ -72,7 +72,7 @@ export async function Header() {
               </li>
             ))}
             <li className="ms-auto">
-              <Link href="/promotions" className="flex h-12 items-center rounded-md px-3 text-sm font-semibold text-destructive hover:opacity-80">
+              <Link href="/promotions" className="flex h-12 items-center whitespace-nowrap rounded-md px-3 text-sm font-semibold text-destructive hover:opacity-80">
                 {t.header.promotions}
               </Link>
             </li>

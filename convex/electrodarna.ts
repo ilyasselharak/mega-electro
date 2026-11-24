@@ -1,10 +1,11 @@
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
-import type { Id } from "./_generated/dataModel";
+import type { Doc, Id } from "./_generated/dataModel";
 import { action, internalAction, internalMutation, internalQuery, type ActionCtx, type MutationCtx } from "./_generated/server";
 import { requireStaff } from "./lib/auth";
 import { deleteImages, uploadFromUrl, type CloudinaryUpload } from "./lib/cloudinary";
 import { fail } from "./lib/errors";
+import { splitSpecs } from "./lib/description";
 import { buildSearchText } from "./lib/products";
 import { slugify } from "./lib/slug";
 import { logMovement } from "./products";
@@ -76,16 +77,17 @@ function warrantyMonths(text: string | null) {
 const NAME_RULES: [RegExp, string][] = [
   [/cong[ée]lateur/i, "congelateurs"],
   [/am[ée]ricain|side[- ]by[- ]side/i, "refrigerateurs-americains"],
-  [/r[ée]frig[ée]rateur|frigo|mini[- ]?bar/i, "refrigerateurs"],
+  [/r[ée]f[rg][ie]g[ée]?rateur|frigo|mini[- ]?bar|no[- ]?frost|\bref\b|\bdp\s?\d{3}\b|\b2 portes\b/i, "refrigerateurs"],
   [/lave[- ]vaisselle/i, "lave-vaisselle"],
-  [/machine [àa] laver|lave[- ]linge|s[ée]che[- ]linge/i, "machines-a-laver"],
+  [/machine [àa] laver|lave[- ]linge|s[ée]che[- ]linge|ecobubble|\bmal\b|\bww\d|\b\d{1,2}\s?kg\b.*\b(?:tr|tours?|1[0-6]00|inverter)\b/i, "machines-a-laver"],
   [/micro[- ]?ondes?/i, "micro-ondes"],
   [/cuisini[èe]re|plaque de cuisson|\bhotte\b/i, "cuisinieres"],
   [/\bfours?\b/i, "fours"],
   [/t[ée]l[ée]vis|\bsmart tv\b|\btv\b|\bled\b.*pouces|pouces/i, "tv-image"],
   [/climatiseur|climatisation|\bsplit\b/i, "climatisation"],
   [/chauffe[- ]?eau|chauffe[- ]bain/i, "chauffe-eau"],
-  [/chauffage|radiateur|\bpo[êe]le\b|convecteur/i, "chauffage"],
+  [/chauffage|radiateur|\bpo[êe]le\b|convecteur|mdfa|مدفأة/i, "chauffage"],
+  [/distributeur d.eau|fontaine [àa] eau/i, "petit-electromenager"],
 ];
 
 const CATEGORY_ALIASES: Record<string, string> = {
@@ -149,6 +151,45 @@ export const applyCategories = internalMutation({
   },
 });
 
+/**
+ * One-time cleanup for products cloned before these improvements:
+ * moves products out of the catch-all "gros-electromenager" when their name
+ * now matches a category, and turns "Label : value" description lines into specs.
+ *   npx convex run electrodarna:tidyClones
+ */
+export const tidyClones = internalMutation({
+  args: {},
+  handler: async (ctx) => {
+    const fallback = await categoryBySlug(ctx, "gros-electromenager");
+    let moved = 0;
+    let withSpecs = 0;
+    for (const product of await ctx.db.query("products").collect()) {
+      if (!product.sourceId) continue;
+      const patch: Partial<Doc<"products">> = {};
+      if (fallback && product.categoryId === fallback) {
+        for (const [re, slug] of NAME_RULES) {
+          if (!re.test(product.name)) continue;
+          const id = await categoryBySlug(ctx, slug);
+          if (id) { patch.categoryId = id; moved++; break; }
+        }
+      }
+      if (!product.specs.length && product.description) {
+        const text = splitSpecs(product.description);
+        if (text.specs.length) { patch.specs = text.specs; patch.description = text.description; withSpecs++; }
+      }
+      if (Object.keys(patch).length) {
+        const next = { ...product, ...patch };
+        await ctx.db.patch(product._id, { ...patch, searchText: await buildSearchText(ctx, next), updatedAt: Date.now() });
+      }
+    }
+    // The catch-all disappears once nothing is left in it.
+    if (fallback && !(await ctx.db.query("products").withIndex("by_category", (q) => q.eq("categoryId", fallback)).first())) {
+      await ctx.db.delete(fallback);
+    }
+    return { moved, withSpecs };
+  },
+});
+
 // ── Browse ─────────────────────────────────────────────────
 
 /** Remote catalog for the admin page. */
@@ -198,11 +239,12 @@ export const createClone = internalMutation({
     const price = Math.round(p.price * 100);
     const compareAtPrice = p.compareAtPrice ? Math.round(p.compareAtPrice * 100) : undefined;
     const stock = remoteStock(p);
+    const text = splitSpecs(p.description);
     const fields = {
       name: p.name.slice(0, 160),
       slug: await unique(slugify(p.slug || p.name) || "produit", "by_slug"),
       sku: await unique(`ED-${p.id.slice(-8).toUpperCase()}`, "by_sku"),
-      description: p.description || undefined,
+      description: text.description,
       price,
       compareAtPrice: compareAtPrice && compareAtPrice > price ? compareAtPrice : undefined,
       stock,
@@ -210,7 +252,7 @@ export const createClone = internalMutation({
       status,
       isFeatured: false,
       warrantyMonths: warrantyMonths(p.warranty),
-      specs: [],
+      specs: text.specs,
       brandId,
       categoryId,
       images: images.map((i) => ({ ...i, alt: p.name.slice(0, 160) })),

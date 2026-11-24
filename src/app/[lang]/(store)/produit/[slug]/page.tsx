@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Breadcrumbs } from "@/components/store/breadcrumbs";
 import { ProductGallery } from "@/components/store/product-gallery";
 import { ProductBuyBox } from "@/components/store/product-buy-box";
+import { ProductDescription } from "@/components/store/product-description";
 import { ProductRail } from "@/components/store/product-card";
 import { Price } from "@/components/store/price";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -175,63 +176,63 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
           </div>
         </div>
 
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-8 pt-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12">
-          <Accordion type="multiple" defaultValue={["description", "specs", "faq"]} className="rounded-2xl border bg-card px-5">
+        <div className={cn("grid grid-cols-[minmax(0,1fr)] gap-6 pt-10 lg:gap-10", specs.length && "lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]")}>
+          <div className="space-y-6">
             {description ? (
-              <AccordionItem value="description">
-                <AccordionTrigger className="text-base font-semibold">{t.product.description}</AccordionTrigger>
-                <AccordionContent>
-                  {description.lang ? <p className="mb-3 text-xs text-muted-foreground">{t.product.frenchOnly}</p> : null}
-                  <div lang={description.lang} dir={description.lang ? "ltr" : undefined} className={cn("prose-store whitespace-pre-line", description.lang && "text-start")}>{description.text}</div>
+              <section aria-labelledby="desc-title" className="rounded-3xl border bg-card p-6 sm:p-8">
+                <h2 id="desc-title" className="mb-5 text-xl font-bold tracking-[-0.01em]">{t.product.description}</h2>
+                {description.lang ? <p className="mb-3 text-xs text-muted-foreground">{t.product.frenchOnly}</p> : null}
+                <div lang={description.lang} dir={description.lang ? "ltr" : undefined} className={cn(description.lang && "text-start")}>
+                  <ProductDescription text={description.text} />
+                </div>
+              </section>
+            ) : null}
+            <Accordion type="multiple" defaultValue={faq.length ? ["faq"] : []} className="rounded-3xl border bg-card px-6 sm:px-8">
+              {faq.length ? (
+                <AccordionItem value="faq">
+                  <AccordionTrigger className="text-base font-semibold">{t.product.faq}</AccordionTrigger>
+                  <AccordionContent>
+                    <dl className="space-y-4">
+                      {faq.map((f) => (
+                        <div key={f.q}>
+                          <dt className="font-medium">{f.q}</dt>
+                          <dd className="mt-1 whitespace-pre-line text-muted-foreground">{f.a}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </AccordionContent>
+                </AccordionItem>
+              ) : null}
+              <AccordionItem value="delivery" className="border-b-0">
+                <AccordionTrigger className="text-base font-semibold">{t.product.deliveryPayment}</AccordionTrigger>
+                <AccordionContent className="prose-store">
+                  <p>{t.product.deliveryText}</p>
+                  {settings.freeShippingThreshold > 0 ? <p>{fmt(t.product.deliveryFreeText, { amount: price(settings.freeShippingThreshold) })}</p> : null}
+                  <p>{t.product.codText}</p>
+                  <p><Link href="/livraison-retours" className="font-medium text-primary hover:underline">{t.footer.shipping}</Link></p>
                 </AccordionContent>
               </AccordionItem>
-            ) : null}
-            {specs.length ? (
-              <AccordionItem value="specs">
-                <AccordionTrigger className="text-base font-semibold">{t.product.specs}</AccordionTrigger>
-                <AccordionContent>
-                  <dl className="divide-y overflow-hidden rounded-xl border" lang={ar ? "fr" : undefined} dir={ar ? "ltr" : undefined}>
-                    {specs.map((s, i) => (
-                      <div key={`${s.label}-${i}`} className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-4 py-3 text-sm even:bg-muted/50">
-                        <dt className="text-muted-foreground">{s.label}</dt>
-                        <dd className="font-medium">{s.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </AccordionContent>
-              </AccordionItem>
-            ) : null}
-            {faq.length ? (
-              <AccordionItem value="faq">
-                <AccordionTrigger className="text-base font-semibold">{t.product.faq}</AccordionTrigger>
-                <AccordionContent>
-                  <dl className="space-y-4">
-                    {faq.map((f) => (
-                      <div key={f.q}>
-                        <dt className="font-medium">{f.q}</dt>
-                        <dd className="mt-1 whitespace-pre-line text-muted-foreground">{f.a}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </AccordionContent>
-              </AccordionItem>
-            ) : null}
-            <AccordionItem value="delivery" className="border-b-0">
-              <AccordionTrigger className="text-base font-semibold">{t.product.deliveryPayment}</AccordionTrigger>
-              <AccordionContent className="prose-store">
-                <p>{t.product.deliveryText}</p>
-                {settings.freeShippingThreshold > 0 ? <p>{fmt(t.product.deliveryFreeText, { amount: price(settings.freeShippingThreshold) })}</p> : null}
-                <p>{t.product.codText}</p>
-                <p><Link href="/livraison-retours" className="font-medium text-primary hover:underline">{t.footer.shipping}</Link></p>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+            </Accordion>
+          </div>
+          {specs.length ? (
+            <section aria-labelledby="specs-title" className="h-fit rounded-3xl border bg-card p-6 sm:p-8 lg:sticky lg:top-40">
+              <h2 id="specs-title" className="mb-5 text-xl font-bold tracking-[-0.01em]">{t.product.specs}</h2>
+              <dl className="divide-y text-sm" lang={ar ? "fr" : undefined} dir={ar ? "ltr" : undefined}>
+                {specs.map((s, i) => (
+                  <div key={`${s.label}-${i}`} className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 py-3 first:pt-0 last:pb-0">
+                    <dt className="text-muted-foreground">{s.label}</dt>
+                    <dd className="font-medium">{s.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          ) : null}
         </div>
       </div>
 
       {related.length ? (
         <section className="container-page py-10">
-          <h2 className="mb-6 text-2xl font-bold">{t.product.related}</h2>
+          <h2 className="mb-7 text-[1.75rem] font-bold leading-tight tracking-[-0.02em]">{t.product.related}</h2>
           <ProductRail products={related} />
         </section>
       ) : null}
