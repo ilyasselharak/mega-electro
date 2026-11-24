@@ -3,15 +3,20 @@ import { convexBetterAuthNextJs } from "@convex-dev/better-auth/nextjs";
 import { fetchAction, fetchQuery } from "convex/nextjs";
 import type { FunctionArgs, FunctionReference, FunctionReturnType } from "convex/server";
 
-const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL!;
+// Trimmed and without a trailing slash: values pasted into a hosting dashboard often carry either.
+const clean = (value: string | undefined) => value?.trim().replace(/\/+$/, "") || undefined;
+
+const convexUrl = clean(process.env.NEXT_PUBLIC_CONVEX_URL)!;
 if (!convexUrl) {
   // Convex is deployed from the terminal (npm run deploy:convex), so the build no longer gets the URL
   // injected: it must be set in the hosting environment variables (Production and Preview).
   throw new Error("NEXT_PUBLIC_CONVEX_URL is not set. Add it to the environment variables (e.g. Vercel → Settings → Environment Variables).");
 }
 // HTTP actions URL: same deployment, ".convex.cloud" → ".convex.site". `npx convex deploy` only
-// provides NEXT_PUBLIC_CONVEX_URL to the build, so derive the site URL when it is not set.
-const convexSiteUrl = process.env.NEXT_PUBLIC_CONVEX_SITE_URL || convexUrl?.replace(/\.convex\.cloud(\/?)$/, ".convex.site$1");
+// provides NEXT_PUBLIC_CONVEX_URL to the build, so derive the site URL when it is not set, or when
+// it was set to something else by mistake (e.g. the .convex.cloud URL).
+const siteFromEnv = clean(process.env.NEXT_PUBLIC_CONVEX_SITE_URL);
+const convexSiteUrl = siteFromEnv?.endsWith(".convex.site") ? siteFromEnv : convexUrl.replace(/\.convex\.cloud$/, ".convex.site");
 
 /** Calls made as the signed-in user (Convex checks their role). */
 export const { handler, getToken, fetchAuthQuery, fetchAuthMutation, fetchAuthAction } = convexBetterAuthNextJs({
