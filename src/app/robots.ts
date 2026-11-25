@@ -3,7 +3,8 @@ import { BASE_ROBOTS_DISALLOW, isProtectedRobotsPath } from "@convex/lib/seoRule
 import { getSeoSettings } from "@/server/queries/seo";
 import { urlFor } from "@/lib/seo";
 
-export const revalidate = 3600;
+// Read on request: the sitemap address must follow the site's domain at once.
+export const dynamic = "force-dynamic";
 
 const lines = (s: string) => s.split("\n").map((l) => l.trim()).filter((l) => l.startsWith("/"));
 

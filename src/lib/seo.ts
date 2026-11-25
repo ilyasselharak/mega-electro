@@ -10,9 +10,12 @@ export const DEFAULT_DESCRIPTION = DEFAULT_SEO.defaultDescription;
 export const FALLBACK_OG_PATH = "/og";
 
 /** Public origin used in canonicals, sitemaps and JSON-LD (Admin → SEO override, else NEXT_PUBLIC_SITE_URL). */
+const LIVE_URL = "https://www.mega-electro.ma";
+
 export function siteBase(seo?: Pick<SeoSettings, "canonicalBaseUrl"> | null) {
-  const raw = seo?.canonicalBaseUrl?.trim() || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  return raw.replace(/\/+$/, "");
+  const raw = (seo?.canonicalBaseUrl?.trim() || process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000").replace(/\/+$/, "");
+  // A production build must never announce localhost to search engines.
+  return process.env.NODE_ENV === "production" && /^https?:\/\/(localhost|127\.0\.0\.1)/.test(raw) ? LIVE_URL : raw;
 }
 
 /** Absolute URL for a site path (absolute URLs are returned unchanged). */

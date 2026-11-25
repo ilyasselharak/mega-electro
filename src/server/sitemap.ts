@@ -86,16 +86,11 @@ export function renderUrlset(entries: Entry[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${body}\n</urlset>\n`;
 }
 
-export async function renderIndex() {
-  const seo = await getSeoSettings();
-  const sections = [];
-  for (const s of SITEMAP_SECTIONS) {
-    const entries = await sitemapEntries(s);
-    if (!entries.length) continue;
-    const lastmod = Math.max(...entries.map((e) => e.lastmod ?? 0));
-    sections.push(`<sitemap><loc>${esc(urlFor(`/sitemaps/${s}.xml`, seo))}</loc>${lastmod ? `<lastmod>${iso(lastmod)}</lastmod>` : ""}</sitemap>`);
-  }
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sections.join("\n")}\n</sitemapindex>\n`;
+/** Every page in one sitemap (limit per file: 50 000 URLs). */
+export async function renderAll() {
+  const all = [];
+  for (const s of SITEMAP_SECTIONS) all.push(...(await sitemapEntries(s)));
+  return renderUrlset(all);
 }
 
 export const XML_HEADERS = { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" };
