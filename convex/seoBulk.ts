@@ -4,7 +4,7 @@ import { internalMutation, mutation, query, type MutationCtx } from "./_generate
 import { requireAdmin, requireStaff } from "./lib/auth";
 import { fail } from "./lib/errors";
 import { buildSearchText } from "./lib/products";
-import { cleanSeo } from "./lib/seo";
+import { cleanSeo, recordSlugRedirect } from "./lib/seo";
 import { faqEntry } from "./schema";
 
 /**
@@ -197,6 +197,37 @@ export const apply = internalMutation({
   },
 });
 
+const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+/**
+ * Renames a category (display names and URL slug). The old URL gets a 301 to the new one through the same
+ * helper the admin uses (no chains, no loops). Logged in seoChangeLog so it can be rolled back.
+ */
+export const renameCategory = internalMutation({
+  args: { batchId: v.string(), id: v.string(), expectedUpdatedAt: v.number(), name: v.string(), nameAr: v.string(), slug: v.string(), dryRun: v.boolean() },
+  handler: async (ctx, a) => {
+    if (!/^[a-z0-9-]{3,60}$/.test(a.batchId)) fail("batchId invalide.");
+    if (!SLUG_RE.test(a.slug) || a.slug.length > 96) fail("Slug invalide.");
+    const c = (await load(ctx, "category", a.id)) as Doc<"categories">;
+    if (c.updatedAt !== a.expectedUpdatedAt) return { status: "conflict" as const, diff: [] };
+    const taken = await ctx.db.query("categories").withIndex("by_slug", (q) => q.eq("slug", a.slug)).first();
+    if (taken && taken._id !== c._id) fail("Ce slug est déjà utilisé par une autre catégorie.");
+    const diff = plan(c, { name: a.name, nameAr: a.nameAr }).concat(c.slug === a.slug ? [] : [{ field: "slug", before: c.slug, after: a.slug }]);
+    if (!diff.length || a.dryRun) return { status: (diff.length ? "dry-run" : "unchanged") as "dry-run" | "unchanged", diff };
+    await ctx.db.patch(c._id, { name: a.name.trim(), nameAr: a.nameAr.trim(), slug: a.slug, updatedAt: Date.now() });
+    await recordSlugRedirect(ctx, "/categorie", c.slug, a.slug);
+    // Product search text includes the category name.
+    const products = await ctx.db.query("products").withIndex("by_category", (q) => q.eq("categoryId", c._id)).collect();
+    for (const p of products) {
+      const searchText = await buildSearchText(ctx, p);
+      if (searchText !== p.searchText) await ctx.db.patch(p._id, { searchText });
+    }
+    const appliedAt = Date.now();
+    for (const d of diff) await ctx.db.insert("seoChangeLog", { batchId: a.batchId, source: "rename", kind: "category", entityId: a.id, slug: a.slug, field: d.field, before: d.before, after: d.after, appliedAt });
+    return { status: "applied" as const, diff, redirect: `/categorie/${c.slug} -> /categorie/${a.slug}` };
+  },
+});
+
 async function rollback(ctx: MutationCtx, batchId: string, dryRun: boolean) {
   const rows = (await ctx.db.query("seoChangeLog").withIndex("by_batch", (q) => q.eq("batchId", batchId)).collect()).filter((r) => r.rolledBackAt == null);
   if (!rows.length) fail("Lot introuvable ou déjà annulé.");
@@ -221,6 +252,8 @@ async function rollback(ctx: MutationCtx, batchId: string, dryRun: boolean) {
     if (!ok.length) continue;
     if (!dryRun) {
       await write(ctx, kind, doc, patchFor(doc, ok.map((r) => ({ field: r.field, value: r.before }))));
+      const slugRow = ok.find((r) => r.field === "slug");
+      if (slugRow && kind === "category") await recordSlugRedirect(ctx, "/categorie", slugRow.after as string, slugRow.before as string);
       for (const r of ok) await ctx.db.patch(r._id, { rolledBackAt: now });
     }
     restored += ok.length;

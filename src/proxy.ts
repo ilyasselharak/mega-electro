@@ -67,9 +67,21 @@ export async function proxy(req: NextRequest) {
     try {
       decoded = decodeURIComponent(clean);
     } catch {}
-    const rule = rules.get(clean) ?? rules.get(decoded);
+    let rule = rules.get(clean) ?? rules.get(decoded);
+    // Rules are stored as French (unprefixed) paths: an Arabic URL follows the same rule, to the Arabic target.
+    let arabic = false;
+    if (!rule && locale === "ar") {
+      const bare = clean.replace(/^\/ar(?=\/|$)/, "") || "/";
+      let bareDecoded = bare;
+      try {
+        bareDecoded = decodeURIComponent(bare);
+      } catch {}
+      rule = rules.get(bare) ?? rules.get(bareDecoded);
+      arabic = Boolean(rule);
+    }
     if (rule) {
-      const target = /^https?:\/\//i.test(rule.to) ? new URL(rule.to) : new URL(rule.to, req.nextUrl.origin);
+      const to = arabic && rule.to.startsWith("/") && !rule.to.startsWith("/ar/") ? `/ar${rule.to === "/" ? "" : rule.to}` : rule.to;
+      const target = /^https?:\/\//i.test(to) ? new URL(to) : new URL(to, req.nextUrl.origin);
       // Keep the query string (tracking parameters, pagination) unless the target defines its own.
       if (!target.search && search) target.search = search;
       return NextResponse.redirect(target, rule.statusCode === 302 ? 302 : 301);
