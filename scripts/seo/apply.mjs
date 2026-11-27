@@ -100,6 +100,11 @@ function validate(entry) {
   }
   if (/\p{Extended_Pictographic}/u.test(JSON.stringify(changes))) errors.push(`${where}: emoji are not allowed in SEO text`);
   if (/\b(\d(\.\d)?\/5|étoiles|avis clients|meilleur prix garanti)\b/i.test(JSON.stringify(changes))) errors.push(`${where}: rating / unverifiable claim found`);
+  // Competitor names, prices in text and leftover AI phrasing must never be published (model codes like 240DHS are fine).
+  const text = JSON.stringify(changes);
+  for (const [re, why] of [[/Electro ?Darna|electrodarna/i, "competitor name"], [/\b\d[\d\s.,]*\s?(?:DH|MAD|dirhams?)\b/i, "price in text"], [/Voici une description|en tant qu'IA|as an AI/i, "leftover AI text"]]) {
+    if (re.test(text)) errors.push(`${where}: ${why} in published text`);
+  }
 }
 
 // ── Field-level diff (mirrors convex/seoBulk.ts) ─────────────────────────
