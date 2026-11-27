@@ -199,6 +199,7 @@ add("chauffe-eau-gaz-siera-6-litres-blanc",
     ["Type de gaz : la façade porte la mention « GPL » ; confirmer butane/propane avant de l'écrire.",
      "Type d'allumage (piles ou manuel) et garantie non renseignés."],
     {
+     "nameAr": "سخان الماء بالغاز سييرا 6 لتر أبيض",
      "shortDescription": "Chauffe-eau à gaz Siera de 6 litres, compact et blanc, avec réglage de la flamme, de la température de l'eau et sélecteur hiver/été.",
      "description": "Le chauffe-eau à gaz Siera de 6 litres s'adresse aux petits foyers : un studio, un appartement avec une salle de bain, ou une cuisine qui a besoin d'eau chaude rapidement. Son format compact et sa façade blanche se fixent facilement au mur.\n\n### Trois réglages simples\nLa façade réunit trois boutons :\n- le réglage de la flamme, pour adapter la puissance à votre débit ;\n- le sélecteur hiver / été, pour chauffer davantage quand l'eau du réseau est froide ;\n- le réglage de la température de l'eau.\n\n### Quel débit choisir ?\nUn modèle de 6 litres convient en général à un seul point d'eau utilisé à la fois, par exemple la douche. Si plusieurs robinets d'eau chaude doivent fonctionner ensemble, un modèle de plus grande capacité sera plus confortable.\n\n### Sécurité et installation\nL'installation doit être confiée à un professionnel qualifié, dans un local suffisamment ventilé et conforme aux règles de sécurité des appareils à gaz. Ne l'installez jamais dans une salle de bain fermée sans ventilation.",
      "metaTitle": "Chauffe-eau à gaz Siera 6 litres blanc – Prix Maroc",

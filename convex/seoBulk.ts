@@ -77,7 +77,9 @@ const LIMITS: Record<string, number> = {
 };
 
 type Change = { field: string; before: unknown; after: unknown };
-const same = (a: unknown, b: unknown) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+/** Order-independent comparison: Convex returns object keys sorted, proposals may not be. */
+const stable = (v: unknown): unknown => (Array.isArray(v) ? v.map(stable) : v && typeof v === "object" ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, stable((v as Record<string, unknown>)[k])])) : (v ?? null));
+const same = (a: unknown, b: unknown) => JSON.stringify(stable(a)) === JSON.stringify(stable(b));
 
 /** Flattens the requested changes into field-level operations against the current document. */
 function plan(doc: Doc<"products"> | Doc<"categories">, changes: Record<string, unknown>): Change[] {

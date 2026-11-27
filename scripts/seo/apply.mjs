@@ -103,7 +103,9 @@ function validate(entry) {
 }
 
 // ── Field-level diff (mirrors convex/seoBulk.ts) ─────────────────────────
-const same = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+// Order-independent comparison: Convex returns object keys sorted, proposals may not be.
+const stable = (v) => (Array.isArray(v) ? v.map(stable) : v && typeof v === "object" ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, stable(v[k])])) : (v ?? null));
+const same = (a, b) => JSON.stringify(stable(a)) === JSON.stringify(stable(b));
 function diff(doc, changes) {
   const out = [];
   const push = (field, before, after) => {
