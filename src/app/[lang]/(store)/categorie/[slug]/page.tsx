@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/store/breadcrumbs";
+import { ProductDescription } from "@/components/store/product-description";
 import { ProductListing } from "@/components/store/product-listing";
 import { Link } from "@/i18n/client";
 import { localName } from "@/i18n/config";
@@ -97,9 +98,8 @@ export default async function CategoryPage({ params, searchParams }: PageProps<"
       {firstPage && longText ? (
         <section className="max-w-3xl space-y-4 border-t pt-8">
           <h2 className="text-xl font-bold">{fmt(t.listing.buyingGuide, { name })}</h2>
-          <div className="prose-store">
-            {longText.split(/\n{2,}/).map((para, i) => <p key={i} className="whitespace-pre-line">{para}</p>)}
-          </div>
+          {/* Same renderer as product descriptions: ### headings, lists, **bold**, internal links. */}
+          <ProductDescription text={longText} />
           {category.parent ? (
             <p className="text-sm text-muted-foreground">
               {t.listing.seeAlso} : <Link href={`/categorie/${category.parent.slug}`} className="font-medium text-orange-strong hover:underline">{localName(locale, category.parent)}</Link>

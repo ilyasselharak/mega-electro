@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Link } from "@/i18n/client";
 
 // Product descriptions are plain text, often one idea per line (imported
 // descriptions put a blank line between every line). This turns them into
@@ -46,9 +47,29 @@ function parse(text: string): Block[] {
   return blocks;
 }
 
-function Inline({ text }: { text: string }) {
+function Bold({ text }: { text: string }) {
   const parts = text.split(/\*\*(.+?)\*\*/g);
   return <>{parts.map((part, i) => (i % 2 ? <strong key={i} className="font-semibold text-foreground">{part}</strong> : <Fragment key={i}>{part}</Fragment>))}</>;
+}
+
+/**
+ * **bold** and internal links [label](/path). Only site paths become links (localized for /ar);
+ * anything else is left as text, so pasted content can't inject external links.
+ */
+function Inline({ text }: { text: string }) {
+  const parts = text.split(/\[([^\]\n]{1,80})\]\((\/[a-z0-9\-/]{1,120})\)/g);
+  const out: React.ReactNode[] = [];
+  for (let i = 0; i < parts.length; i += 3) {
+    out.push(<Bold key={`t${i}`} text={parts[i]} />);
+    if (i + 2 < parts.length) {
+      out.push(
+        <Link key={`l${i}`} href={parts[i + 2]} className="font-medium text-orange-strong underline-offset-4 hover:underline">
+          {parts[i + 1]}
+        </Link>,
+      );
+    }
+  }
+  return <>{out}</>;
 }
 
 export function ProductDescription({ text }: { text: string }) {
