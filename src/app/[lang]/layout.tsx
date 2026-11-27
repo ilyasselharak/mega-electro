@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cairo, Inter } from "next/font/google";
 import { Providers } from "@/components/providers";
+import { VercelAnalytics } from "@/components/vercel-analytics";
 import { I18nProvider } from "@/i18n/client";
 import { dirOf, LANG_TAG, LOCALES } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/server";
@@ -57,6 +58,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
         <I18nProvider locale={locale} t={t}>
           <Providers>{children}</Providers>
         </I18nProvider>
+        <VercelAnalytics />
       </body>
     </html>
   );
