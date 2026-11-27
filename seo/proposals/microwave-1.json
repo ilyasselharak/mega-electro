@@ -1,0 +1,73 @@
+[
+ {
+  "kind": "product",
+  "slug": "micro-ondes-grill-20l-5-niveaux-de-puissance",
+  "source": "microwave-1",
+  "sources": [
+   "Valeurs de l'ancienne description Mega Electro (aucune valeur ajoutée)"
+  ],
+  "verify": [],
+  "specsVerified": true,
+  "changes": {
+   "name": "Micro-ondes gril Daiko FMO-2042GDK 20 L 700 W",
+   "nameAr": "ميكروويف بالشواية دايكو FMO-2042GDK سعة 20 لترا 700 واط",
+   "shortDescription": "Micro-ondes gril Daiko FMO-2042GDK de 20 litres : micro-ondes 700 W sur 5 niveaux, gril 1000 W, commandes numériques et plateau de 25,5 cm.",
+   "description": "Le Daiko FMO-2042GDK est un micro-ondes compact de 20 litres pour les cuisines où la place compte. Il réchauffe, décongèle et, grâce à son gril, donne du croustillant aux gratins et aux restes.\n\n### Micro-ondes et gril\nLa puissance micro-ondes de 700 W se règle sur 5 niveaux ; le gril de 1000 W dore le dessus des plats.\n\n### Commandes numériques\nInterface numérique, minuterie et fonction de décongélation.\n\n### Caractéristiques\n- Capacité : 20 litres\n- Puissance micro-ondes : 700 W, 5 niveaux\n- Gril : 1000 W\n- Commandes numériques avec minuterie\n- Décongélation\n- Plateau tournant : 25,5 cm\n\nGarantie : 6 mois.",
+   "metaTitle": "Micro-ondes gril Daiko 20 L FMO-2042GDK – Prix Maroc",
+   "metaDescription": "Micro-ondes gril Daiko FMO-2042GDK 20 L, 700 W sur 5 niveaux, gril 1000 W, commandes numériques. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "ميكروويف بالشواية دايكو 20 لترا بالمغرب",
+    "metaDescriptionAr": "ميكروويف بالشواية دايكو FMO-2042GDK سعة 20 لترا، 700 واط بخمس درجات وشواية 1000 واط. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "ميكروويف بالشواية دايكو FMO-2042GDK سعة 20 لترا: 700 واط بخمس درجات، شواية 1000 واط وتحكم رقمي.",
+    "descriptionAr": "دايكو FMO-2042GDK ميكروويف صغير بسعة 20 لترا للمطابخ الضيقة. يسخن ويذيب الثلج، وبفضل الشواية يحمر الأطباق.\n\n### ميكروويف وشواية\nقوة 700 واط بخمس درجات، وشواية 1000 واط.\n\n### تحكم رقمي\nواجهة رقمية ومؤقت ووظيفة إذابة الثلج.\n\n### المواصفات\n- السعة: 20 لترا\n- الميكروويف: 700 واط، 5 درجات\n- الشواية: 1000 واط\n- الصحن الدوار: 25.5 سم\n\nالضمان: 6 أشهر.",
+    "keywords": "micro-ondes Daiko 20L, Daiko FMO-2042GDK, micro-ondes gril, micro-ondes 700W, prix micro-ondes Maroc",
+    "keywordsAr": "ميكروويف, ميكرو أوند, ميكروويف بالشواية, ميكروويف دايكو, ثمن الميكروويف في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Peut-on utiliser des récipients métalliques ?",
+     "answer": "Pas en mode micro-ondes : utilisez du verre, de la céramique ou du plastique adapté. Le métal n'est possible qu'en mode gril seul, selon la notice.",
+     "questionAr": "واش نقدر نستعمل الأواني ديال الحديد؟",
+     "answerAr": "لا فوضع الميكروويف، ستعملو الزجاج ولا الفخار ولا البلاستيك المناسب."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/cmhntwycic8mj89x9oyv",
+     "alt": "Micro-ondes gril Daiko FMO-2042GDK 20 litres",
+     "altAr": "ميكروويف بالشواية دايكو FMO-2042GDK سعة 20 لترا"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Modèle",
+     "value": "FMO-2042GDK"
+    },
+    {
+     "label": "Capacité",
+     "value": "20 L"
+    },
+    {
+     "label": "Puissance micro-ondes",
+     "value": "700 W"
+    },
+    {
+     "label": "Niveaux de puissance",
+     "value": "5"
+    },
+    {
+     "label": "Gril",
+     "value": "1000 W"
+    },
+    {
+     "label": "Commandes",
+     "value": "Numériques, minuterie, décongélation"
+    },
+    {
+     "label": "Plateau tournant",
+     "value": "25,5 cm"
+    }
+   ]
+  }
+ }
+]
