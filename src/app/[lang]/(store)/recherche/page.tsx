@@ -15,6 +15,8 @@ export async function generateMetadata({ searchParams }: PageProps<"/[lang]/rech
   const [{ q, hasFilters, page }, seo, t] = await Promise.all([searchParams.then(parseListingParams), getSeoSettings(), getDictionary()]);
   return localizedMetadata({
     title: q ? fmt(t.listing.searchTitle, { q }) : pagedTitle(t.listing.allProductsMetaTitle, page, t.listing.pageSuffix),
+    // Own description: the catalogue page used to repeat the homepage description.
+    description: t.listing.allProductsMetaDescription,
     path: q ? "/recherche" : pagedPath("/recherche", page),
     // Internal search results are never indexed (Google guidelines); the full catalogue is.
     noIndex: Boolean(q) || hasFilters,

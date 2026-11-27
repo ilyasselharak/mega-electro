@@ -78,6 +78,42 @@ export default async function SeoDashboardPage() {
         <Stat label="Redirections 301" value={overview.redirectCount} href="/admin/seo/redirects" />
       </div>
 
+      {(() => {
+        // Arabic and rich-content completeness of active products (internal indicator, not a Google ranking score).
+        const active = overview.products.filter((x) => x.status === "ACTIVE");
+        const n = active.length || 1;
+        const row = (x: (typeof active)[number]) => x as typeof x & { nameAr?: string | null; faqCount?: number; specCount?: number; images: { altAr?: string | null }[] };
+        const count = (f: (x: ReturnType<typeof row>) => boolean) => active.map(row).filter(f).length;
+        const known = active.some((x) => "nameAr" in x);
+        const items = [
+          { label: "Nom arabe", done: known ? count((x) => Boolean(x.nameAr)) : null },
+          { label: "Titre SEO arabe", done: count((x) => Boolean(x.seo.titleAr)) },
+          { label: "Méta-description arabe", done: count((x) => Boolean(x.seo.metaDescriptionAr)) },
+          { label: "Description arabe", done: count((x) => Boolean(x.seo.descriptionAr)) },
+          { label: "Mots-clés arabes / darija", done: count((x) => Boolean(x.seo.keywordsAr)) },
+          { label: "FAQ produit", done: known ? count((x) => (x.faqCount ?? 0) > 0) : null },
+          { label: "Caractéristiques", done: known ? count((x) => (x.specCount ?? 0) > 0) : null },
+          { label: "ALT arabe des images", done: known ? count((x) => x.images.length > 0 && x.images.every((i) => Boolean(i.altAr))) : null },
+        ];
+        return (
+          <>
+            <h2 className="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-muted-foreground">Arabe et contenu enrichi ({active.length} produits actifs)</h2>
+            <p className="mb-3 text-xs text-muted-foreground">Indicateur interne de complétude, pas un score Google.</p>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+              {items.map((it) => (
+                <Stat
+                  key={it.label}
+                  label={it.label}
+                  value={it.done == null ? "—" : `${Math.round((it.done / n) * 100)}%`}
+                  hint={it.done == null ? "Après déploiement du backend" : `${it.done}/${active.length}`}
+                  tone={it.done == null ? undefined : it.done === active.length ? "good" : it.done / n < 0.5 ? "bad" : "warn"}
+                />
+              ))}
+            </div>
+          </>
+        );
+      })()}
+
       <div className="mt-6 grid gap-6 xl:grid-cols-2">
         <Card>
           <CardHeader><CardTitle className="flex items-center gap-2"><MapIcon className="size-4.5 text-orange-strong" /> SEO technique</CardTitle></CardHeader>

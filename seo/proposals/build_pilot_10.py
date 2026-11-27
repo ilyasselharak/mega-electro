@@ -1,0 +1,356 @@
+# Builds seo/proposals/pilot-10.json (10 products). Facts come from the store database
+# (backups/seo/*/pilot-current.json) and the sources listed per product; anything unverified is in "verify".
+import json, os
+
+STORE_FR = "Livraison partout au Maroc, paiement à la livraison."
+P = []
+
+def add(slug, sources, verify, changes, specsVerified=False):
+    P.append({"kind": "product", "slug": slug, "source": "pilot-10", "sources": sources, "verify": verify, "specsVerified": specsVerified, "changes": changes})
+
+# 1 ── Samsung RT42CG6420S9 ───────────────────────────────────────────────
+add("samsung-2-portes-no-frost-gris-rt42cg6420s9",
+    ["https://www.samsung.com/n_africa/support/model/RT42CG6420S9MA",
+     "https://www.samsung.com/n_africa/refrigerators/top-mount-freezer/rt6300c-top-mount-freezer-optimal-fresh-and-space-max-411l-silver-rt42cg6420s9ma"],
+    ["Capacité : Samsung indique 411 L net pour RT42CG6420S9, mais la fiche du site affiche « Référence fournisseur RT35CG5400S9 » et « 265 L ». Confirmer le modèle réellement vendu puis corriger les caractéristiques.",
+     "Garantie : la fiche indique « 1 an » dans les caractéristiques mais le champ garantie est vide.",
+     "Classe énergétique A+ (caractéristiques actuelles) non confirmée pour ce modèle."],
+    {
+     "nameAr": "ثلاجة سامسونج بابين No Frost رمادية RT42CG6420S9",
+     "shortDescription": "Réfrigérateur Samsung deux portes avec congélateur en haut et froid ventilé No Frost : plus de corvée de dégivrage, des aliments rangés à hauteur des yeux.",
+     "description": "Le Samsung RT42CG6420S9 est un réfrigérateur deux portes à congélateur supérieur, pensé pour les familles qui font leurs courses pour la semaine. Le compartiment frais occupe le bas de l'appareil : les produits que vous utilisez tous les jours restent à portée de main, sans vous baisser.\n\n### Le No Frost, concrètement\nLe froid ventilé répartit l'air froid dans tout l'appareil et évite la formation de givre. Vous n'avez plus à vider et dégivrer le congélateur plusieurs fois par an, et les surgelés ne se collent pas aux parois.\n\n### Pour quelle cuisine ?\nSa finition grise s'accorde avec l'inox des cuisines modernes. Avant de commander, mesurez la niche prévue en largeur, en hauteur et en profondeur, et laissez quelques centimètres à l'arrière pour la circulation de l'air.\n\n### Bon à savoir\nAprès l'installation, attendez quelques heures avant de brancher l'appareil si celui-ci a été transporté couché, puis laissez-le refroidir à vide avant d'y ranger vos aliments.\n\nCommandez en ligne ou sur WhatsApp : notre équipe vous appelle pour confirmer la commande, et vous payez à la livraison.",
+     "metaTitle": "Réfrigérateur Samsung RT42CG6420S9 – Prix Maroc",
+     "metaDescription": "Réfrigérateur Samsung RT42CG6420S9, 2 portes, congélateur en haut et froid ventilé No Frost. " + STORE_FR,
+     "seo": {
+       "titleAr": "ثلاجة سامسونج RT42CG6420S9 بابين – الثمن في المغرب",
+       "metaDescriptionAr": "ثلاجة سامسونج RT42CG6420S9 ببابين ومجمد علوي وتبريد No Frost بدون تكوّن الثلج. توصيل لجميع مدن المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "ثلاجة سامسونج ببابين ومجمد في الأعلى وتبريد No Frost: لا حاجة لإزالة الثلج، والمواد الغذائية في متناول اليد.",
+       "descriptionAr": "ثلاجة سامسونج RT42CG6420S9 ببابين ومجمد في الأعلى، مناسبة للعائلات التي تتسوق مرة في الأسبوع. الجزء المخصص للتبريد في الأسفل، فتبقى المنتجات التي تستعملونها يوميا في مستوى النظر.\n\n### تقنية No Frost\nيتوزع الهواء البارد داخل الثلاجة كلها فلا يتكوّن الثلج. لن تحتاجوا بعد الآن إلى إفراغ المجمد وإزالة الثلج منه عدة مرات في السنة.\n\n### قبل الشراء\nلونها الرمادي يتناسب مع المطابخ العصرية. قيسوا المكان المخصص لها (العرض والارتفاع والعمق) واتركوا مسافة صغيرة في الخلف لتهوية المحرك.\n\n### نصيحة\nإذا نُقلت الثلاجة وهي مستلقية، انتظروا بضع ساعات قبل تشغيلها، ثم اتركوها تبرد فارغة قبل وضع الطعام.\n\nاطلبوا عبر الموقع أو واتساب، يتصل بكم فريقنا لتأكيد الطلب، والدفع عند الاستلام.",
+       "keywords": "réfrigérateur Samsung RT42CG6420S9, réfrigérateur 2 portes No Frost, frigo Samsung Maroc, réfrigérateur congélateur haut, réfrigérateur gris, prix réfrigérateur Samsung Maroc",
+       "keywordsAr": "ثلاجة سامسونج, ثلاجة بابين, فريكو سامسونج, ثلاجة No Frost, ثمن ثلاجة سامسونج في المغرب, ثلاجة رمادية"
+     },
+     "faq": [
+       {"question": "Faut-il dégivrer ce réfrigérateur ?", "answer": "Non. Le système No Frost ventile l'air froid et empêche le givre de se former, y compris dans le congélateur.",
+        "questionAr": "واش هاد الثلاجة كتحتاج إزالة الثلج؟", "answerAr": "لا. تقنية No Frost كتوزع الهواء البارد وكتمنع تكوّن الثلج، حتى فالمجمد."},
+       {"question": "Où se trouve le congélateur ?", "answer": "En haut de l'appareil. Le réfrigérateur, utilisé plus souvent, est en bas, à hauteur de main.",
+        "questionAr": "فين كاين المجمد؟", "answerAr": "المجمد فالفوق، والثلاجة اللي كتستعملوها بزاف فالتحت."},
+       {"question": "Comment se passe le paiement ?", "answer": "Vous payez en espèces à la livraison, après la confirmation de votre commande par téléphone.",
+        "questionAr": "كيفاش كيكون الخلاص؟", "answerAr": "كتخلصو نقدا عند الاستلام، من بعد ما نأكدو معاكم الطلب فالتيليفون."}
+     ],
+     "imageAlts": [{"key": "mega-electro/products/aqeqtfymnhnuwpyscnqz", "alt": "Réfrigérateur Samsung RT42CG6420S9 deux portes No Frost gris", "altAr": "ثلاجة سامسونج RT42CG6420S9 ببابين No Frost رمادية"}]
+    })
+
+# 2 ── Samsung WW80TA046A ──────────────────────────────────────────────────
+add("samsung-ww80ta046a-8kg-ecobubble-1400",
+    ["https://www.samsung.com/africa_en/washers-and-dryers/washing-machines/ww5000t-front-loading-eco-bubble-hygiene-steam-dit-8kg-platinum-silver-ww80ta046ax-eu",
+     "https://www.samsung.com/uk/business/washers-and-dryers/washing-machines/front-load-8kg-inox-ww80ta046ax-eu",
+     "https://markselectrical.co.uk/ww80ta046ae%2feu_samsung-washing-machine"],
+    ["Couleur et suffixe exact (WW80TA046AE blanc ou WW80TA046AX silver) à confirmer sur l'appareil vendu.",
+     "Classe énergétique non indiquée : elle varie selon le marché (A+++ ancienne étiquette au Liban).",
+     "Garantie vide dans la fiche."],
+    {
+     "name": "Lave-linge Samsung WW80TA046A 8 kg EcoBubble 1400 tr/min",
+     "nameAr": "غسالة سامسونج WW80TA046A سعة 8 كيلو EcoBubble بسرعة 1400 دورة",
+     "shortDescription": "Lave-linge frontal Samsung 8 kg : la technologie EcoBubble lave efficacement à basse température et l'essorage à 1400 tr/min sort un linge peu humide.",
+     "description": "Le Samsung WW80TA046A est un lave-linge à chargement frontal de 8 kg, une capacité adaptée à une famille de trois à cinq personnes. Il réunit trois technologies Samsung que l'on retrouve sur sa fiche officielle : EcoBubble, Hygiene Steam et le moteur Digital Inverter.\n\n### EcoBubble : laver à basse température\nLa lessive est mélangée à l'eau et à l'air avant d'entrer dans le tambour. Cette mousse pénètre plus vite dans les fibres, ce qui permet d'obtenir un bon lavage avec des programmes à basse température, plus doux pour les vêtements.\n\n### Hygiene Steam\nLa vapeur est diffusée en fin de cycle pour traiter le linge des enfants, les serviettes ou la literie.\n\n### Essorage à 1400 tr/min\nLe linge ressort moins humide et sèche plus vite, un vrai plus en hiver ou dans un appartement sans terrasse.\n\n### Caractéristiques\n- Capacité de lavage : 8 kg\n- Vitesse d'essorage maximale : 1400 tr/min\n- Moteur Digital Inverter\n- Dimensions (H x L x P) : 85 x 60 x 55 cm\n\nPrévoyez une arrivée d'eau et une évacuation à proximité, sur un sol plan et stable.",
+     "metaTitle": "Lave-linge Samsung WW80TA046A 8 kg – Prix Maroc",
+     "metaDescription": "Lave-linge Samsung WW80TA046A 8 kg, EcoBubble, Hygiene Steam et essorage 1400 tr/min. Livraison partout au Maroc, paiement à la livraison.",
+     "seo": {
+       "titleAr": "غسالة سامسونج WW80TA046A سعة 8 كيلو – الثمن في المغرب",
+       "metaDescriptionAr": "غسالة ملابس سامسونج WW80TA046A بسعة 8 كيلو، تقنية EcoBubble وتعقيم بالبخار وعصر 1400 دورة. توصيل لكل المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "غسالة أمامية من سامسونج بسعة 8 كيلو: تقنية EcoBubble تغسل جيدا بماء منخفض الحرارة، والعصر بسرعة 1400 دورة يخرج الملابس شبه جافة.",
+       "descriptionAr": "غسالة سامسونج WW80TA046A بتعبئة أمامية وسعة 8 كيلو، مناسبة لعائلة من ثلاثة إلى خمسة أفراد. تجمع ثلاث تقنيات من سامسونج: EcoBubble والتعقيم بالبخار Hygiene Steam ومحرك Digital Inverter.\n\n### EcoBubble\nيُخلط مسحوق الغسيل مع الماء والهواء قبل دخوله إلى الحلة، فتدخل الرغوة بسرعة في الأنسجة. هكذا تحصلون على غسيل جيد ببرامج منخفضة الحرارة تحافظ على الملابس.\n\n### التعقيم بالبخار\nيُضاف البخار في آخر الدورة، وهو مفيد لملابس الأطفال والمناشف والأغطية.\n\n### عصر بسرعة 1400 دورة\nتخرج الملابس أقل رطوبة وتجف بسرعة، وهذا مهم في الشتاء أو في شقة بدون سطح.\n\n### المواصفات\n- سعة الغسيل: 8 كيلو\n- سرعة العصر القصوى: 1400 دورة في الدقيقة\n- محرك Digital Inverter\n- الأبعاد (ارتفاع × عرض × عمق): 85 × 60 × 55 سم\n\nضعوها قرب مدخل الماء ومخرج التصريف، على أرضية مستوية.",
+       "keywords": "lave-linge Samsung 8 kg, Samsung WW80TA046A, machine à laver EcoBubble, lave-linge 1400 tours, machine à laver frontale Maroc, prix machine à laver Samsung Maroc",
+       "keywordsAr": "غسالة سامسونج 8 كيلو, ماكينة التصبين سامسونج, ماكينة الصابون, غسالة أمامية, ثمن ماكينة التصبين في المغرب, غسالة ملابس EcoBubble"
+     },
+     "specs": [
+       {"label": "Référence", "value": "WW80TA046A"},
+       {"label": "Type", "value": "Lave-linge à chargement frontal"},
+       {"label": "Capacité de lavage", "value": "8 kg"},
+       {"label": "Vitesse d'essorage maximale", "value": "1400 tr/min"},
+       {"label": "Technologies", "value": "EcoBubble, Hygiene Steam"},
+       {"label": "Moteur", "value": "Digital Inverter"},
+       {"label": "Dimensions (H x L x P)", "value": "85 x 60 x 55 cm"}
+     ],
+     "faq": [
+       {"question": "Pour combien de personnes convient un lave-linge de 8 kg ?", "answer": "Un tambour de 8 kg convient généralement à un foyer de trois à cinq personnes et permet de laver une couette légère ou un grand lot de serviettes.",
+        "questionAr": "غسالة 8 كيلو مناسبة لشحال من شخص؟", "answerAr": "غسالة 8 كيلو مناسبة عادة لعائلة من 3 حتى 5 أفراد، وكتقدر تغسل فيها مانطة خفيفة أو بزاف ديال الفوطات."},
+       {"question": "Quelles sont les dimensions ?", "answer": "85 cm de haut, 60 cm de large et 55 cm de profondeur, hors porte et boutons.",
+        "questionAr": "شنو هي الأبعاد ديالها؟", "answerAr": "85 سم طول، 60 سم عرض و55 سم عمق، بلا الباب والأزرار."},
+       {"question": "À quoi sert EcoBubble ?", "answer": "EcoBubble transforme la lessive en mousse avant le lavage pour mieux nettoyer à basse température.",
+        "questionAr": "شنو هي فايدة EcoBubble؟", "answerAr": "EcoBubble كتحول الصابون لرغوة قبل الغسيل باش تنقي مزيان حتى بالماء اللي ماشي سخون بزاف."}
+     ],
+     "imageAlts": [{"key": "mega-electro/products/w0sp99bzb0lazmod9csz", "alt": "Lave-linge frontal Samsung WW80TA046A 8 kg EcoBubble", "altAr": "غسالة ملابس أمامية سامسونج WW80TA046A سعة 8 كيلو"}]
+    }, specsVerified=True)
+
+# 3 ── LG ARTCOOL Mirror UVnano 24000 BTU ───────────────────────────────────
+add("artcool-mirror-uvnano-24000-btu",
+    ["https://www.lg.com/be_fr/climatiseurs_residentiels/ac24bk/"],
+    ["Référence LG exacte absente (AC24BK, D24UAH, UA24MKH0… ont des caractéristiques différentes) : ajouter la référence pour publier les caractéristiques.",
+     "Fonction chaud/froid, réfrigérant, classe énergétique et Wi-Fi à confirmer avant de les mentionner."],
+    {
+     "name": "Climatiseur LG ARTCOOL Mirror UVnano 24000 BTU",
+     "nameAr": "مكيف LG ARTCOOL Mirror UVnano بقوة 24000 BTU",
+     "shortDescription": "Climatiseur mural LG ARTCOOL Mirror de 24 000 BTU : façade miroir au design soigné et ventilateur nettoyé par la lumière UVnano.",
+     "description": "Le LG ARTCOOL Mirror est un climatiseur mural split pensé pour les pièces où l'appareil se voit : salon, séjour ou grande chambre. Sa façade effet miroir s'intègre comme un élément de décoration, loin du bloc blanc habituel.\n\n### UVnano : un ventilateur qui reste propre\nLa technologie UVnano de LG utilise une lumière LED UV pour garder propre le ventilateur qui souffle l'air dans la pièce. L'air diffusé passe ainsi par une pièce moins exposée à l'accumulation de saleté.\n\n### 24 000 BTU : pour quelle pièce ?\nC'est l'une des puissances les plus élevées en climatisation résidentielle. Elle s'adresse aux grands espaces ou aux pièces très exposées au soleil. Pour une chambre standard, une puissance inférieure suffit souvent : notre équipe peut vous conseiller selon la surface et l'orientation de votre pièce.\n\n### Installation\nUn climatiseur split se compose d'une unité intérieure et d'une unité extérieure reliées par des liaisons frigorifiques. L'installation doit être réalisée par un technicien qualifié.\n\nGarantie : 12 mois.",
+     "metaTitle": "Climatiseur LG ARTCOOL Mirror 24000 BTU – Prix Maroc",
+     "metaDescription": "Climatiseur mural LG ARTCOOL Mirror UVnano 24000 BTU, façade miroir et ventilateur nettoyé par UV. Livraison partout au Maroc, paiement à la livraison.",
+     "seo": {
+       "titleAr": "مكيف LG ARTCOOL Mirror بقوة 24000 BTU – الثمن في المغرب",
+       "metaDescriptionAr": "مكيف هواء حائطي LG ARTCOOL Mirror بقوة 24000 BTU بواجهة مرآة وتقنية UVnano لتنظيف المروحة. توصيل لكل المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "مكيف حائطي LG ARTCOOL Mirror بقوة 24000 BTU: واجهة مرآة أنيقة ومروحة تبقى نظيفة بفضل ضوء UVnano.",
+       "descriptionAr": "مكيف LG ARTCOOL Mirror من نوع سبليت حائطي، مصمم للغرف التي يظهر فيها الجهاز مثل الصالون أو غرفة كبيرة. واجهته التي تشبه المرآة تجعله قطعة ديكور بدل الشكل الأبيض المعتاد.\n\n### تقنية UVnano\nتستعمل LG ضوء LED فوق بنفسجي للحفاظ على نظافة المروحة التي تدفع الهواء إلى الغرفة.\n\n### قوة 24000 BTU لأي غرفة؟\nهي من أعلى القوى في المكيفات المنزلية، وتناسب المساحات الكبيرة أو الغرف المعرضة كثيرا للشمس. لغرفة نوم عادية تكفي غالبا قوة أقل، ويمكن لفريقنا نصحكم حسب مساحة الغرفة واتجاهها.\n\n### التركيب\nيتكون المكيف من وحدة داخلية ووحدة خارجية، ويجب أن يركبه تقني مختص.\n\nالضمان: 12 شهرا.",
+       "keywords": "climatiseur LG 24000 BTU, LG ARTCOOL Mirror, climatiseur mural LG, climatiseur UVnano, climatiseur split Maroc, prix climatiseur LG Maroc",
+       "keywordsAr": "مكيف LG, كليماتيزور LG, مكيف 24000 BTU, مكيف هواء حائطي, ثمن مكيف في المغرب, كليماتيزور سبليت"
+     },
+     "faq": [
+       {"question": "Un climatiseur de 24 000 BTU convient-il à une chambre ?", "answer": "C'est une puissance destinée aux grandes pièces. Pour une chambre de taille courante, un modèle moins puissant est souvent suffisant ; contactez-nous avec la surface de la pièce pour un conseil.",
+        "questionAr": "واش مكيف 24000 BTU مناسب لبيت النعاس؟", "answerAr": "هاد القوة مخصصة للبيوت الكبار. لبيت نعاس عادية غالبا كيكفي مكيف أقل، صيفطو لينا المساحة ونعاونوكم تختارو."},
+       {"question": "À quoi sert la technologie UVnano ?", "answer": "Elle utilise une lumière LED UV pour garder propre le ventilateur de l'unité intérieure.",
+        "questionAr": "شنو هي فايدة UVnano؟", "answerAr": "كتستعمل ضوء LED فوق بنفسجي باش تبقى المروحة ديال الوحدة الداخلية نقية."},
+       {"question": "L'installation est-elle nécessaire ?", "answer": "Oui. Un climatiseur split doit être installé par un technicien qualifié qui raccorde l'unité intérieure à l'unité extérieure.",
+        "questionAr": "واش خاص التركيب؟", "answerAr": "إيه، خاص تقني مختص يركب الوحدة الداخلية والخارجية."}
+     ],
+     "imageAlts": [
+       {"key": "mega-electro/products/wqfaxbnpnnvxav2blrnl", "alt": "Climatiseur mural LG ARTCOOL Mirror UVnano 24000 BTU", "altAr": "مكيف حائطي LG ARTCOOL Mirror UVnano بقوة 24000 BTU"},
+       {"key": "mega-electro/products/kdsz3dsxvhfs4ufz4kfy", "alt": "Climatiseur LG ARTCOOL Mirror, unité intérieure façade miroir", "altAr": "الوحدة الداخلية لمكيف LG ARTCOOL Mirror بواجهة مرآة"}
+     ]
+    })
+
+# 4 ── Whirlpool WFC3B19NX ─────────────────────────────────────────────────
+add("lave-vaisselle-whirlpool-13-couverts-5-programmes-a-inox",
+    [],
+    ["Aucune fiche fabricant trouvée pour WFC3B19NX : les données (13 couverts, 5 programmes, 11 L par cycle, inox) viennent de la fiche du site.",
+     "Classe énergétique « A+ » du nom à vérifier (étiquette EPREL non trouvée)."],
+    {
+     "name": "Lave-vaisselle Whirlpool WFC3B19NX 13 couverts inox",
+     "nameAr": "غسالة صحون ويرلبول WFC3B19NX لـ13 طقما بلون إينوكس",
+     "shortDescription": "Lave-vaisselle pose libre Whirlpool de 13 couverts en finition inox, avec 5 programmes et une consommation de 11 litres d'eau par cycle.",
+     "description": "Le Whirlpool WFC3B19NX est un lave-vaisselle en pose libre d'une capacité de 13 couverts, de quoi laver en une seule fois la vaisselle d'un repas familial ou d'une journée complète pour quatre à six personnes.\n\n### 5 programmes pour le quotidien\nCinq programmes couvrent les usages courants, du lavage de tous les jours à la vaisselle plus sale des repas de fête.\n\n### 11 litres d'eau par cycle\nSelon la fiche du produit, un cycle consomme 11 litres d'eau, souvent moins qu'une vaisselle faite à la main pour la même quantité.\n\n### Caractéristiques\n- Capacité : 13 couverts\n- Nombre de programmes : 5\n- Consommation d'eau : 11 litres par cycle\n- Finition : inox\n- Référence : WFC3B19NX\n\n### Avant l'installation\nPrévoyez une arrivée d'eau, une évacuation et une prise électrique à proximité. Rangez les assiettes face au centre et les verres dans le panier supérieur pour un meilleur résultat.\n\nGarantie : 12 mois.",
+     "metaTitle": "Lave-vaisselle Whirlpool WFC3B19NX – Prix Maroc",
+     "metaDescription": "Lave-vaisselle Whirlpool WFC3B19NX inox, 13 couverts, 5 programmes et 11 L d'eau par cycle. Livraison partout au Maroc, paiement à la livraison.",
+     "seo": {
+       "titleAr": "غسالة صحون ويرلبول 13 طقما WFC3B19NX – الثمن في المغرب",
+       "metaDescriptionAr": "غسالة صحون ويرلبول WFC3B19NX بلون إينوكس، تتسع لـ13 طقما، 5 برامج و11 لترا من الماء في كل دورة. توصيل لكل المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "غسالة صحون ويرلبول تتسع لـ13 طقما بلون إينوكس، مع 5 برامج واستهلاك 11 لترا من الماء في الدورة.",
+       "descriptionAr": "غسالة الصحون ويرلبول WFC3B19NX تتسع لـ13 طقما، أي أواني وجبة عائلية كاملة أو يوم كامل لأسرة من أربعة إلى ستة أفراد.\n\n### 5 برامج للاستعمال اليومي\nخمسة برامج تغطي الاستعمالات العادية، من الغسيل اليومي إلى الأواني المتسخة بعد الحفلات.\n\n### 11 لترا من الماء\nحسب بطاقة المنتج، تستهلك الدورة الواحدة 11 لترا من الماء.\n\n### المواصفات\n- السعة: 13 طقما\n- عدد البرامج: 5\n- استهلاك الماء: 11 لترا في الدورة\n- اللون: إينوكس\n- المرجع: WFC3B19NX\n\n### قبل التركيب\nيجب توفير مدخل للماء ومخرج للتصريف ومقبس كهربائي قريب.\n\nالضمان: 12 شهرا.",
+       "keywords": "lave-vaisselle Whirlpool, lave-vaisselle 13 couverts, Whirlpool WFC3B19NX, lave-vaisselle inox, lave-vaisselle pose libre Maroc, prix lave-vaisselle Maroc",
+       "keywordsAr": "غسالة الصحون, غسالة صحون ويرلبول, ماكينة غسيل الأواني, لافيسيل, ثمن غسالة الصحون في المغرب, غسالة أواني 13 طقم"
+     },
+     "faq": [
+       {"question": "Que signifie 13 couverts ?", "answer": "C'est la quantité de vaisselle standard lavée en un cycle : assiettes, verres et couverts pour 13 personnes.",
+        "questionAr": "شنو معنى 13 طقم؟", "answerAr": "هي كمية الأواني اللي كتغسل فدورة وحدة: صحون وكيسان ومعالق ديال 13 شخص."},
+       {"question": "Combien d'eau consomme-t-il ?", "answer": "11 litres par cycle, selon la fiche du produit.",
+        "questionAr": "شحال كتستهلك من الما؟", "answerAr": "11 لتر فكل دورة، حسب بطاقة المنتج."},
+       {"question": "Quels raccordements faut-il prévoir ?", "answer": "Une arrivée d'eau, une évacuation et une prise électrique proches de l'emplacement de l'appareil.",
+        "questionAr": "شنو خاص نوجد للتركيب؟", "answerAr": "مدخل الما، مخرج التصريف وبريز ديال الضو قريبين من البلاصة ديالها."}
+     ],
+     "imageAlts": [{"key": "mega-electro/products/aqojikrkyltnmk2xa3i1", "alt": "Lave-vaisselle Whirlpool WFC3B19NX 13 couverts finition inox", "altAr": "غسالة صحون ويرلبول WFC3B19NX لـ13 طقما بلون إينوكس"}]
+    })
+
+# 5 ── Xiaomi TV A 50 2026 ─────────────────────────────────────────────────
+add("xiaomi-tv-a-50-2026",
+    ["https://www.mi.com/global/product/xiaomi-tv-a-50-2026/specs/",
+     "https://www.mi.com/ma-fr/product/xiaomi-tv-a-50-2026/specs/",
+     "https://www.mi.com/uk/support/faq/details/KA-569529"],
+    ["Système : Xiaomi indique Google TV (FAQ globale) ; certaines pages régionales mentionnent Android TV. Vérifier sur mi.com/ma-fr.",
+     "Garantie vide dans la fiche."],
+    {
+     "name": "Téléviseur Xiaomi TV A 50 pouces 4K 2026",
+     "nameAr": "تلفاز شاومي TV A مقاس 50 بوصة 4K إصدار 2026",
+     "shortDescription": "Téléviseur Xiaomi de 50 pouces en 4K avec HDR10, son Dolby Audio et DTS:X, trois ports HDMI dont un eARC, et Wi-Fi bi-bande.",
+     "description": "Le Xiaomi TV A 50 2026 est un téléviseur 4K de 50 pouces, une diagonale adaptée à la plupart des salons marocains. Il s'adresse à ceux qui veulent une image nette pour les films, le football et les applications de streaming, sans passer à un modèle haut de gamme.\n\n### Image 4K et HDR\nLa dalle affiche une résolution de 3840 x 2160 pixels à 60 Hz. Elle prend en charge les formats HDR10 et HLG, utilisés par de nombreuses plateformes et chaînes, avec un angle de vision de 178°.\n\n### Son\nDeux haut-parleurs de 10 W compatibles Dolby Audio, DTS:X et DTS Virtual:X. Pour aller plus loin, la sortie HDMI eARC permet de brancher une barre de son.\n\n### Connexions\n- 3 ports HDMI, dont un eARC\n- Port Ethernet (LAN)\n- Wi-Fi bi-bande 2,4 / 5 GHz\n- Bluetooth 5.0\n\n### Stockage\n8 Go de mémoire pour installer vos applications.\n\nConseil : pour un 50 pouces en 4K, une distance de visionnage d'environ 1,5 à 2 mètres est confortable.",
+     "metaTitle": "Téléviseur Xiaomi TV A 50 pouces 4K 2026 – Prix Maroc",
+     "metaDescription": "Xiaomi TV A 50 2026 : écran 4K 50 pouces, HDR10, son Dolby Audio et DTS:X, 3 HDMI dont eARC. Livraison partout au Maroc, paiement à la livraison.",
+     "seo": {
+       "titleAr": "تلفاز شاومي TV A مقاس 50 بوصة 4K – الثمن في المغرب",
+       "metaDescriptionAr": "تلفاز شاومي TV A 50 إصدار 2026: شاشة 4K مقاس 50 بوصة، HDR10، صوت Dolby Audio وDTS:X و3 منافذ HDMI. توصيل لكل المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "تلفاز شاومي بشاشة 50 بوصة ودقة 4K مع HDR10، صوت Dolby Audio وDTS:X، ثلاثة منافذ HDMI منها eARC، وواي فاي ثنائي النطاق.",
+       "descriptionAr": "تلفاز شاومي TV A 50 إصدار 2026 بشاشة 4K مقاس 50 بوصة، مقاس مناسب لأغلب الصالونات المغربية. موجه لمن يريد صورة واضحة للأفلام وكرة القدم وتطبيقات البث دون شراء تلفاز من الفئة العليا.\n\n### صورة 4K وHDR\nدقة الشاشة 3840 × 2160 بكسل بتردد 60 هرتز، مع دعم HDR10 وHLG وزاوية رؤية 178 درجة.\n\n### الصوت\nمكبرا صوت بقوة 10 واط لكل واحد مع Dolby Audio وDTS:X وDTS Virtual:X. ويمكن توصيل مكبر صوت خارجي عبر منفذ HDMI eARC.\n\n### التوصيلات\n- 3 منافذ HDMI منها منفذ eARC\n- منفذ إيثرنت\n- واي فاي ثنائي النطاق 2.4 و5 جيجاهرتز\n- بلوتوث 5.0\n\n### التخزين\nذاكرة 8 جيجابايت لتثبيت التطبيقات.\n\nنصيحة: لشاشة 50 بوصة بدقة 4K، مسافة مشاهدة بين متر ونصف ومترين مريحة.",
+       "keywords": "Xiaomi TV A 50 2026, téléviseur Xiaomi 50 pouces, TV 4K 50 pouces Maroc, smart TV Xiaomi, télé 4K HDR, prix TV Xiaomi Maroc",
+       "keywordsAr": "تلفاز شاومي, تلفزيون 50 بوصة, تلفاز 4K, شاشة شاومي, تلفزة سمارت, ثمن تلفاز شاومي في المغرب"
+     },
+     "specs": [
+       {"label": "Taille d'écran", "value": "50 pouces"},
+       {"label": "Résolution", "value": "4K (3840 x 2160)"},
+       {"label": "Fréquence d'affichage", "value": "60 Hz"},
+       {"label": "Profondeur de couleur", "value": "1,07 milliard de couleurs"},
+       {"label": "Angle de vision", "value": "178° (H) / 178° (V)"},
+       {"label": "HDR", "value": "HDR10, HLG"},
+       {"label": "Audio", "value": "2 x 10 W, Dolby Audio, DTS:X, DTS Virtual:X"},
+       {"label": "Stockage", "value": "8 Go"},
+       {"label": "Ports", "value": "3 x HDMI (dont eARC), Ethernet"},
+       {"label": "Sans fil", "value": "Wi-Fi 2,4 / 5 GHz, Bluetooth 5.0"}
+     ],
+     "faq": [
+       {"question": "Ce téléviseur est-il en 4K ?", "answer": "Oui, la résolution est de 3840 x 2160 pixels, avec prise en charge des formats HDR10 et HLG.",
+        "questionAr": "واش هاد التلفاز 4K؟", "answerAr": "إيه، الدقة ديالو 3840 × 2160 بكسل، وكيدعم HDR10 وHLG."},
+       {"question": "Peut-on brancher une barre de son ?", "answer": "Oui, par le port HDMI eARC, ou en Bluetooth 5.0.",
+        "questionAr": "واش نقدر نركب عليه بارة ديال الصوت؟", "answerAr": "إيه، عبر منفذ HDMI eARC أو بالبلوتوث 5.0."},
+       {"question": "À quelle distance s'installer ?", "answer": "Pour un écran 4K de 50 pouces, environ 1,5 à 2 mètres offre une image nette et confortable.",
+        "questionAr": "على أي مسافة نجلس من التلفاز؟", "answerAr": "لشاشة 50 بوصة 4K، تقريبا بين متر ونص ومترين."}
+     ],
+     "imageAlts": [{"key": "mega-electro/products/ot108dhk5tb0uepzpsax", "alt": "Téléviseur Xiaomi TV A 50 pouces 4K modèle 2026", "altAr": "تلفاز شاومي TV A مقاس 50 بوصة بدقة 4K إصدار 2026"}]
+    }, specsVerified=True)
+
+# 6 ── Siera chauffe-eau gaz 6 L ────────────────────────────────────────────
+add("chauffe-eau-gaz-siera-6-litres-blanc",
+    [],
+    ["Type de gaz : la façade porte la mention « GPL » ; confirmer butane/propane avant de l'écrire.",
+     "Type d'allumage (piles ou manuel) et garantie non renseignés."],
+    {
+     "shortDescription": "Chauffe-eau à gaz Siera de 6 litres, compact et blanc, avec réglage de la flamme, de la température de l'eau et sélecteur hiver/été.",
+     "description": "Le chauffe-eau à gaz Siera de 6 litres s'adresse aux petits foyers : un studio, un appartement avec une salle de bain, ou une cuisine qui a besoin d'eau chaude rapidement. Son format compact et sa façade blanche se fixent facilement au mur.\n\n### Trois réglages simples\nLa façade réunit trois boutons :\n- le réglage de la flamme, pour adapter la puissance à votre débit ;\n- le sélecteur hiver / été, pour chauffer davantage quand l'eau du réseau est froide ;\n- le réglage de la température de l'eau.\n\n### Quel débit choisir ?\nUn modèle de 6 litres convient en général à un seul point d'eau utilisé à la fois, par exemple la douche. Si plusieurs robinets d'eau chaude doivent fonctionner ensemble, un modèle de plus grande capacité sera plus confortable.\n\n### Sécurité et installation\nL'installation doit être confiée à un professionnel qualifié, dans un local suffisamment ventilé et conforme aux règles de sécurité des appareils à gaz. Ne l'installez jamais dans une salle de bain fermée sans ventilation.",
+     "metaTitle": "Chauffe-eau à gaz Siera 6 litres blanc – Prix Maroc",
+     "metaDescription": "Chauffe-eau à gaz Siera 6 L blanc avec réglage de flamme, de température et sélecteur hiver/été. Livraison partout au Maroc, paiement à la livraison.",
+     "seo": {
+       "titleAr": "سخان الماء بالغاز سييرا 6 لتر أبيض – الثمن في المغرب",
+       "metaDescriptionAr": "سخان ماء بالغاز سييرا 6 لتر أبيض، مع تعديل اللهب ودرجة حرارة الماء ومفتاح شتاء/صيف. توصيل لجميع مدن المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "سخان ماء بالغاز سييرا 6 لتر، صغير الحجم وأبيض اللون، مع تعديل اللهب ودرجة الحرارة ومفتاح شتاء/صيف.",
+       "descriptionAr": "سخان الماء بالغاز سييرا 6 لتر مناسب للمنازل الصغيرة: ستوديو، شقة بحمام واحد، أو مطبخ يحتاج ماء ساخنا بسرعة. حجمه صغير ويُثبت بسهولة على الحائط.\n\n### ثلاثة أزرار للتحكم\n- تعديل اللهب حسب كمية الماء\n- مفتاح شتاء / صيف لتسخين أكثر عندما يكون الماء باردا\n- تعديل درجة حرارة الماء\n\n### هل 6 لتر كافية؟\nسخان 6 لتر يناسب عادة نقطة ماء واحدة في نفس الوقت، مثل الدوش. إذا كنتم تحتاجون الماء الساخن في أكثر من صنبور في نفس الوقت، اختاروا سعة أكبر.\n\n### السلامة والتركيب\nيجب أن يركبه مختص في مكان جيد التهوية ومطابق لقواعد سلامة أجهزة الغاز. لا تركبوه أبدا في حمام مغلق بدون تهوية.",
+       "keywords": "chauffe-eau gaz Siera, chauffe-eau à gaz 6 litres, chauffe-bain gaz Maroc, chauffe-eau gaz blanc, prix chauffe-eau gaz Maroc",
+       "keywordsAr": "سخان الماء بالغاز, شوفو الغاز, شوفو سييرا, سخان ماء 6 لتر, ثمن شوفو الغاز في المغرب"
+     },
+     "faq": [
+       {"question": "Un chauffe-eau de 6 litres suffit-il pour une douche ?", "answer": "Oui, un 6 litres convient en général à un point d'eau à la fois, comme une douche. Pour plusieurs robinets simultanés, choisissez une capacité supérieure.",
+        "questionAr": "واش شوفو 6 لتر كافي لدوش؟", "answerAr": "إيه، 6 لتر كتكفي عادة لنقطة ما وحدة فنفس الوقت بحال الدوش. إلا بغيتو بزاف ديال الروبينيات فنفس الوقت، ختارو سعة كبر."},
+       {"question": "Où installer un chauffe-eau à gaz ?", "answer": "Dans un local bien ventilé, par un professionnel qualifié, jamais dans une salle de bain fermée sans aération.",
+        "questionAr": "فين نركب شوفو الغاز؟", "answerAr": "فبلاصة فيها التهوية، وخاص يركبو مختص، وماشي فحمام مسدود بلا تهوية."}
+     ],
+     "imageAlts": [
+       {"key": "mega-electro/products/f6nypbx4paj4ggviikzp", "alt": "Chauffe-eau à gaz Siera 6 litres blanc, façade avec trois boutons de réglage", "altAr": "سخان ماء بالغاز سييرا 6 لتر أبيض بثلاثة أزرار للتحكم"},
+       {"key": "mega-electro/products/xgg9hvxt77ahhtjsprbo", "alt": "Chauffe-eau à gaz Siera 6 litres, vue des raccordements", "altAr": "سخان ماء بالغاز سييرا 6 لتر، صورة الوصلات"}
+     ]
+    })
+
+# 7 ── Goldenstar congélateur coffre 140 L ────────────────────────────────────
+add("conglateur-coffre-goldenstar-140l-silver-a",
+    [],
+    ["Rangé dans la catégorie « minibar » : un congélateur coffre devrait être dans une catégorie froid/congélation.",
+     "Dimensions et garantie non renseignées."],
+    {
+     "name": "Congélateur coffre Goldenstar 140 L silver A++",
+     "nameAr": "مجمد أفقي غولدن ستار 140 لتر فضي A++",
+     "shortDescription": "Congélateur coffre Goldenstar de 140 litres, classe A++ avec 191 kWh par an et 42 dB : une réserve de surgelés économe pour la cuisine ou le cellier.",
+     "description": "Le congélateur coffre Goldenstar BD140-1414 offre 140 litres de stockage supplémentaire, une solution pratique pour conserver la viande achetée en quantité, les provisions de l'Aïd ou les produits faits maison.\n\n### Économe en énergie\nClassé A++, il consomme 191 kWh par an selon sa fiche. Un congélateur fonctionne en continu : sa consommation annuelle compte davantage que son prix d'achat sur la durée.\n\n### Discret\nAvec un niveau sonore de 42 dB, il peut trouver sa place dans une cuisine ou un cellier sans gêner.\n\n### Caractéristiques\n- Capacité : 140 litres\n- Classe énergétique : A++\n- Consommation : 191 kWh/an\n- Niveau sonore : 42 dB\n- Finition : silver\n- Référence : BD140-1414\n\n### Conseils d'utilisation\nLaissez un espace autour de l'appareil pour la ventilation, attendez quelques heures après le transport avant de le brancher, et étiquetez vos sachets avec la date de congélation.",
+     "metaTitle": "Congélateur coffre Goldenstar 140 L A++ – Prix Maroc",
+     "metaDescription": "Congélateur coffre Goldenstar 140 litres A++, 191 kWh/an et 42 dB, finition silver. Livraison partout au Maroc, paiement à la livraison.",
+     "seo": {
+       "titleAr": "مجمد أفقي غولدن ستار 140 لتر A++ – الثمن في المغرب",
+       "metaDescriptionAr": "مجمد أفقي غولدن ستار بسعة 140 لترا، فئة A++ باستهلاك 191 كيلوواط ساعة في السنة و42 ديسيبل. توصيل لكل المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "مجمد أفقي غولدن ستار بسعة 140 لترا، فئة A++ باستهلاك 191 كيلوواط ساعة سنويا وصوت 42 ديسيبل: مخزون إضافي اقتصادي للمطبخ.",
+       "descriptionAr": "المجمد الأفقي غولدن ستار BD140-1414 يوفر 140 لترا من التخزين الإضافي، وهو حل عملي لحفظ اللحم المشترى بكميات أو مؤونة العيد أو الأكل المحضر في البيت.\n\n### اقتصادي في الكهرباء\nفئة A++ باستهلاك 191 كيلوواط ساعة في السنة حسب بطاقته. المجمد يعمل طوال الوقت، لذلك فاستهلاكه السنوي مهم.\n\n### هادئ\nمستوى صوته 42 ديسيبل، فيمكن وضعه في المطبخ دون إزعاج.\n\n### المواصفات\n- السعة: 140 لترا\n- فئة الطاقة: A++\n- الاستهلاك: 191 كيلوواط ساعة في السنة\n- مستوى الصوت: 42 ديسيبل\n- اللون: فضي\n- المرجع: BD140-1414\n\n### نصائح\nاتركوا مسافة حوله للتهوية، وانتظروا بضع ساعات بعد النقل قبل تشغيله.",
+       "keywords": "congélateur coffre 140 litres, congélateur Goldenstar, congélateur horizontal Maroc, congélateur A++, prix congélateur coffre Maroc",
+       "keywordsAr": "كونجيلاتور, مجمد أفقي, كونجيلاتور 140 لتر, مجمد غولدن ستار, ثمن كونجيلاتور في المغرب"
+     },
+     "faq": [
+       {"question": "Combien consomme ce congélateur ?", "answer": "191 kWh par an selon sa fiche, pour une classe énergétique A++.",
+        "questionAr": "شحال كيستهلك هاد الكونجيلاتور؟", "answerAr": "191 كيلوواط ساعة فالعام حسب البطاقة ديالو، وهو من فئة A++."},
+       {"question": "Est-il bruyant ?", "answer": "Son niveau sonore est de 42 dB, ce qui permet de l'installer dans la cuisine.",
+        "questionAr": "واش كيدير الصداع؟", "answerAr": "الصوت ديالو 42 ديسيبل، تقدرو تحطوه فالكوزينة."}
+     ],
+     "imageAlts": [{"key": "mega-electro/products/waftfnxze8euua2zoxvt", "alt": "Congélateur coffre Goldenstar 140 litres silver classe A++", "altAr": "مجمد أفقي غولدن ستار 140 لترا لون فضي فئة A++"}]
+    })
+
+# 8 ── Candy FIDCP N615 L ───────────────────────────────────────────────────
+add("four-lectrique-encastrable-candy-70-l",
+    ["https://www.candy-home.com/en_AE/ovens/33704370/f-idcp-n615-l",
+     "https://www.boulanger.com/ref/9001064068"],
+    ["Couleur : Candy présente le FIDCP N615 L en noir, la fiche du site indique « Inox ». Vérifier l'appareil vendu.",
+     "Capacité nette : 70 L (Candy, Boulanger) mais 65 L chez MediaMarkt ; la valeur fabricant (70 L) est retenue."],
+    {
+     "name": "Four électrique encastrable Candy FIDCP N615 L 70 L",
+     "nameAr": "فرن كهربائي مدمج كاندي FIDCP N615 L سعة 70 لترا",
+     "shortDescription": "Four électrique encastrable Candy de 70 litres, classe énergétique A+, au format standard 60 cm pour s'intégrer dans une cuisine équipée.",
+     "description": "Le Candy FIDCP N615 L est un four électrique encastrable de 70 litres, une grande cavité qui accueille un plat familial, un poulet entier ou deux plaques de gâteaux. Son format standard de 60 cm se loge dans la plupart des meubles de cuisine équipée.\n\n### 70 litres pour cuisiner en famille\nLa capacité de 70 litres annoncée par Candy laisse de la place pour les grands plats du week-end comme pour les fournées de msemen ou de gâteaux des fêtes.\n\n### Classe énergétique A+\nLe four est classé A+, un point important pour un appareil utilisé plusieurs fois par semaine.\n\n### Caractéristiques\n- Référence : FIDCP N615 L\n- Type : four électrique encastrable\n- Capacité : 70 litres\n- Classe énergétique : A+\n- Dimensions (L x P x H) : 59,5 x 59,5 x 56,8 cm\n\n### Installation\nVérifiez les dimensions de la niche avant de commander. Un four électrique encastrable demande une ligne électrique adaptée : faites-le raccorder par un électricien.\n\nGarantie : 2 ans.",
+     "metaTitle": "Four encastrable Candy 70 L FIDCP N615 L – Prix Maroc",
+     "metaDescription": "Four électrique encastrable Candy FIDCP N615 L, 70 litres, classe A+, format 60 cm. Garantie 2 ans. Livraison partout au Maroc, paiement à la livraison.",
+     "seo": {
+       "titleAr": "فرن مدمج كاندي 70 لترا FIDCP N615 L – الثمن في المغرب",
+       "metaDescriptionAr": "فرن كهربائي مدمج كاندي FIDCP N615 L بسعة 70 لترا وفئة A+ ومقاس 60 سم. ضمان سنتين. توصيل لكل المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "فرن كهربائي مدمج من كاندي بسعة 70 لترا وفئة طاقة A+، بمقاس 60 سم المعتاد ليتناسب مع المطبخ المجهز.",
+       "descriptionAr": "فرن كاندي FIDCP N615 L كهربائي مدمج بسعة 70 لترا، يتسع لطبق عائلي أو دجاجة كاملة أو صينيتين من الحلويات. مقاسه 60 سم يتناسب مع أغلب خزائن المطبخ المجهز.\n\n### 70 لترا للطبخ العائلي\nسعة كافية لأطباق نهاية الأسبوع وللمسمن والحلويات في المناسبات.\n\n### فئة الطاقة A+\nمهمة لجهاز يستعمل عدة مرات في الأسبوع.\n\n### المواصفات\n- المرجع: FIDCP N615 L\n- النوع: فرن كهربائي مدمج\n- السعة: 70 لترا\n- فئة الطاقة: A+\n- الأبعاد (عرض × عمق × ارتفاع): 59.5 × 59.5 × 56.8 سم\n\n### التركيب\nتأكدوا من مقاس الخزانة قبل الطلب، واطلبوا من كهربائي توصيله بخط كهربائي مناسب.\n\nالضمان: سنتان.",
+       "keywords": "four encastrable Candy, four électrique encastrable 70 L, Candy FIDCP N615 L, four encastrable 60 cm Maroc, prix four encastrable Maroc",
+       "keywordsAr": "فرن مدمج, فرن كهربائي, فور كاندي, فرن 70 لتر, ثمن الفرن الكهربائي في المغرب"
+     },
+     "specs": [
+       {"label": "Référence", "value": "FIDCP N615 L"},
+       {"label": "Type", "value": "Four électrique encastrable"},
+       {"label": "Capacité", "value": "70 L"},
+       {"label": "Classe énergétique", "value": "A+"},
+       {"label": "Dimensions (L x P x H)", "value": "59,5 x 59,5 x 56,8 cm"},
+       {"label": "Garantie", "value": "2 ans"},
+       {"label": "Marque", "value": "Candy"}
+     ],
+     "faq": [
+       {"question": "Ce four rentre-t-il dans un meuble standard ?", "answer": "Il mesure 59,5 x 59,5 x 56,8 cm, le format courant des niches de 60 cm. Vérifiez tout de même les cotes de votre meuble.",
+        "questionAr": "واش هاد الفرن كيدخل فخزانة عادية؟", "answerAr": "الأبعاد ديالو 59.5 × 59.5 × 56.8 سم، المقاس العادي ديال 60 سم. ولكن قيسو الخزانة ديالكم قبل."},
+       {"question": "Quelle est sa garantie ?", "answer": "2 ans.",
+        "questionAr": "شحال الضمان ديالو؟", "answerAr": "عامين."}
+     ],
+     "imageAlts": [{"key": "mega-electro/products/tiscliyyvtbmlbcca0t1", "alt": "Four électrique encastrable Candy FIDCP N615 L 70 litres", "altAr": "فرن كهربائي مدمج كاندي FIDCP N615 L بسعة 70 لترا"}]
+    }, specsVerified=True)
+
+# 9 ── Active chef plaque gaz 5 feux 90 cm ───────────────────────────────────
+add("plaque-de-cuisson-gaz-encastrable-inox-5-feux-90cm-allumage-lectrique",
+    [],
+    ["Référence du modèle, dimensions de découpe, présence de sécurité thermocouple et garantie non renseignées."],
+    {
+     "name": "Plaque de cuisson gaz encastrable Active Chef 5 feux 90 cm inox",
+     "nameAr": "طباخة غاز مدمجة أكتيف شيف 5 عيون 90 سم إينوكس",
+     "shortDescription": "Plaque de cuisson à gaz encastrable Active Chef en inox, 5 feux sur 90 cm de large avec allumage électrique.",
+     "description": "La plaque de cuisson à gaz Active Chef de 90 cm offre cinq feux, de quoi préparer en même temps le tajine, la harira, le thé et l'accompagnement. C'est le format des grandes cuisines et des familles qui reçoivent souvent.\n\n### 5 feux sur 90 cm\nLa largeur de 90 cm laisse de l'espace entre les casseroles, même quand plusieurs grandes marmites sont sur le feu.\n\n### Allumage électrique\nUn bouton suffit pour allumer le brûleur, sans briquet ni allumettes.\n\n### Inox\nLa surface en inox se nettoie à l'eau savonneuse et à l'éponge douce ; séchez-la pour éviter les traces de calcaire.\n\n### Installation\nUne plaque encastrable s'installe dans une découpe du plan de travail. Le raccordement au gaz doit être fait par un professionnel, avec un flexible en bon état et conforme.",
+     "metaTitle": "Plaque gaz 5 feux 90 cm Active Chef – Prix Maroc",
+     "metaDescription": "Plaque de cuisson à gaz encastrable Active Chef 5 feux, 90 cm, inox, allumage électrique. Livraison partout au Maroc, paiement à la livraison.",
+     "seo": {
+       "titleAr": "طباخة غاز 5 عيون 90 سم أكتيف شيف – الثمن في المغرب",
+       "metaDescriptionAr": "طباخة غاز مدمجة أكتيف شيف بخمسة عيون وعرض 90 سم من الإينوكس مع إشعال كهربائي. توصيل لكل المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "طباخة غاز مدمجة أكتيف شيف من الإينوكس، بخمسة عيون على عرض 90 سم مع إشعال كهربائي.",
+       "descriptionAr": "طباخة الغاز المدمجة أكتيف شيف بعرض 90 سم وخمسة عيون، تسمح بطهي الطاجين والحريرة والأتاي في نفس الوقت. مقاس مناسب للمطابخ الكبيرة وللعائلات التي تستقبل الضيوف كثيرا.\n\n### 5 عيون على 90 سم\nالعرض الكبير يترك مساحة بين الأواني حتى مع عدة طناجر كبيرة.\n\n### إشعال كهربائي\nزر واحد يكفي لإشعال النار بدون ولاعة.\n\n### إينوكس\nتنظف بالماء والصابون وإسفنجة لينة، ثم تجفف لتجنب آثار الجير.\n\n### التركيب\nتركب في فتحة في سطح المطبخ، ويجب أن يوصلها بالغاز مختص بخرطوم سليم ومطابق.",
+       "keywords": "plaque de cuisson gaz encastrable, plaque 5 feux 90 cm, plaque gaz inox, Active Chef, table de cuisson gaz Maroc, prix plaque de cuisson Maroc",
+       "keywordsAr": "طباخة غاز مدمجة, بلاكة الغاز, طباخة 5 عيون, فوكو مدمج, ثمن طباخة الغاز في المغرب"
+     },
+     "faq": [
+       {"question": "Faut-il un professionnel pour l'installer ?", "answer": "Oui pour le raccordement au gaz, qui doit être réalisé avec un flexible conforme et en bon état.",
+        "questionAr": "واش خاص مختص يركبها؟", "answerAr": "إيه، خاص مختص يوصلها بالغاز بخرطوم سليم ومطابق."},
+       {"question": "Comment entretenir l'inox ?", "answer": "À l'eau savonneuse avec une éponge douce, puis séchez pour éviter les traces de calcaire. Évitez les éponges abrasives.",
+        "questionAr": "كيفاش ننقي الإينوكس؟", "answerAr": "بالما والصابون وإسفنجة رطبة، ومن بعد نشفوها. ما تستعملوش الإسفنجة الخشينة."}
+     ],
+     "imageAlts": [{"key": "mega-electro/products/cphn0tjka3ksulqxmgsd", "alt": "Plaque de cuisson à gaz encastrable Active Chef 5 feux 90 cm en inox", "altAr": "طباخة غاز مدمجة أكتيف شيف بخمسة عيون 90 سم من الإينوكس"}]
+    })
+
+# 10 ── SONIC chauffage quartz 1200 W ────────────────────────────────────────
+add("sonic-chauffage-lectrique-quartz-1200w-3-niveaux-avec-rotation",
+    [],
+    ["« Arrêt automatique en cas de chute » vient de l'ancienne description : à confirmer sur l'appareil avant publication définitive."],
+    {
+     "nameAr": "مدفأة كهربائية سونيك كوارتز 1200 واط بثلاث درجات مع الدوران",
+     "shortDescription": "Chauffage d'appoint SONIC à tubes quartz, 1200 W avec trois niveaux (400, 800 et 1200 W) et rotation pour diffuser la chaleur dans la pièce.",
+     "description": "Le chauffage électrique SONIC CEQ-1254NSC est un chauffage d'appoint à quartz pour les soirées fraîches : salon, chambre, bureau ou coin de prière. Il chauffe dès l'allumage, sans attendre qu'un radiateur à bain d'huile monte en température.\n\n### Trois niveaux de puissance\nChoisissez 400 W, 800 W ou 1200 W selon la pièce et le froid. Le niveau bas suffit souvent pour garder une chambre agréable, le niveau haut réchauffe rapidement en début de soirée.\n\n### Rotation\nLe chauffage pivote pour balayer la pièce, ce qui évite de chauffer un seul point.\n\n### Caractéristiques\n- Modèle : CEQ-1254NSC\n- Technologie : quartz\n- Puissance maximale : 1200 W\n- Niveaux : 400 W / 800 W / 1200 W\n- Rotation\n\n### Sécurité\nGardez-le à distance des rideaux, des couvertures et des meubles, ne le couvrez jamais, et éteignez-le en quittant la pièce ou avant de dormir.\n\nGarantie : 12 mois.",
+     "metaTitle": "Chauffage électrique SONIC quartz 1200 W – Prix Maroc",
+     "metaDescription": "Chauffage d'appoint SONIC quartz 1200 W avec 3 niveaux (400/800/1200 W) et rotation, garantie 12 mois. Livraison partout au Maroc, paiement à la livraison.",
+     "seo": {
+       "titleAr": "مدفأة كهربائية سونيك كوارتز 1200 واط – الثمن في المغرب",
+       "metaDescriptionAr": "مدفأة كهربائية سونيك كوارتز 1200 واط بثلاث درجات (400 و800 و1200 واط) مع الدوران، ضمان 12 شهرا. توصيل لكل المغرب والدفع عند الاستلام.",
+       "shortDescriptionAr": "مدفأة سونيك بأنابيب كوارتز بقوة 1200 واط وثلاث درجات (400 و800 و1200 واط) مع الدوران لتوزيع الحرارة في الغرفة.",
+       "descriptionAr": "المدفأة الكهربائية سونيك CEQ-1254NSC تعمل بالكوارتز، مناسبة لليالي الباردة في الصالون أو غرفة النوم أو المكتب. تعطي الحرارة مباشرة بعد التشغيل.\n\n### ثلاث درجات\nاختاروا 400 أو 800 أو 1200 واط حسب الغرفة والبرد. الدرجة المنخفضة تكفي غالبا لغرفة نوم، والعالية تدفئ بسرعة في بداية الليل.\n\n### الدوران\nتدور المدفأة لتوزيع الحرارة في الغرفة كلها.\n\n### المواصفات\n- الموديل: CEQ-1254NSC\n- التقنية: كوارتز\n- القوة القصوى: 1200 واط\n- الدرجات: 400 / 800 / 1200 واط\n- الدوران\n\n### السلامة\nأبعدوها عن الستائر والأغطية والأثاث، لا تغطوها أبدا، وأطفئوها عند الخروج من الغرفة أو قبل النوم.\n\nالضمان: 12 شهرا.",
+       "keywords": "chauffage électrique SONIC, chauffage quartz 1200W, chauffage d'appoint Maroc, radiateur électrique, chauffage électrique Maroc, prix chauffage électrique Maroc",
+       "keywordsAr": "شوفاج كهربائي, رادياتور كهربائي, مدفأة كهربائية, شوفاج كوارتز, ثمن الشوفاج في المغرب, مدفأة سونيك"
+     },
+     "faq": [
+       {"question": "Quelle puissance choisir ?", "answer": "400 W pour maintenir une petite pièce tempérée, 800 W pour une chambre, 1200 W pour réchauffer rapidement une pièce plus grande.",
+        "questionAr": "شنو هي القوة اللي نختار؟", "answerAr": "400 واط لبيت صغيرة، 800 واط لبيت النعاس، و1200 واط باش تسخن بيت كبيرة بالزربة."},
+       {"question": "Peut-on le laisser allumé la nuit ?", "answer": "Non, éteignez-le avant de dormir ou en quittant la pièce, et gardez-le loin des tissus.",
+        "questionAr": "واش نخليه شاعل فالليل؟", "answerAr": "لا، طفيوه قبل النعاس أو منين تخرجو من البيت، وبعدوه على الثوب."}
+     ],
+     "imageAlts": [
+       {"key": "mega-electro/products/rtwujeggpem4mogrefdu", "alt": "Chauffage électrique SONIC quartz 1200 W avec rotation", "altAr": "مدفأة كهربائية سونيك كوارتز 1200 واط مع الدوران"},
+       {"key": "mega-electro/products/lno0fx7umwwxuphrsqeb", "alt": "Chauffage SONIC CEQ-1254NSC, boutons de réglage des trois niveaux", "altAr": "مدفأة سونيك CEQ-1254NSC، أزرار التحكم في الدرجات الثلاث"}
+     ]
+    })
+
+out = os.path.join(os.path.dirname(__file__), "pilot-10.json")
+json.dump(P, open(out, "w"), ensure_ascii=False, indent=1)
+for p in P:
+    c = p["changes"]; s = c["seo"]
+    print(f'{p["slug"][:48]:48} t{len(c["metaTitle"]):3} d{len(c["metaDescription"]):4} tAr{len(s["titleAr"]):3} dAr{len(s["metaDescriptionAr"]):4} words{len(c["description"].split()):4} wAr{len(s["descriptionAr"].split()):4}')

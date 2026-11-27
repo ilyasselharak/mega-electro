@@ -41,7 +41,7 @@ export function makeCardLoader(ctx: Ctx) {
       isFeatured: p.isFeatured,
       createdAt: p._creationTime,
       brand: brand ? { name: brand.name, slug: brand.slug } : null,
-      images: p.images.slice(0, 2).map((i) => ({ key: i.key, alt: i.alt ?? null, width: i.width ?? null, height: i.height ?? null })),
+      images: p.images.slice(0, 2).map((i) => ({ key: i.key, alt: i.alt ?? null, altAr: i.altAr ?? null, width: i.width ?? null, height: i.height ?? null })),
     };
   };
 }

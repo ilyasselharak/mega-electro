@@ -30,6 +30,7 @@ import type * as orders from "../orders.js";
 import type * as products from "../products.js";
 import type * as seed from "../seed.js";
 import type * as seo from "../seo.js";
+import type * as seoBulk from "../seoBulk.js";
 import type * as settings from "../settings.js";
 import type * as taxonomy from "../taxonomy.js";
 import type * as users from "../users.js";
@@ -63,6 +64,7 @@ declare const fullApi: ApiFromModules<{
   products: typeof products;
   seed: typeof seed;
   seo: typeof seo;
+  seoBulk: typeof seoBulk;
   settings: typeof settings;
   taxonomy: typeof taxonomy;
   users: typeof users;

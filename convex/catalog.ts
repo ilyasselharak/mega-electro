@@ -151,7 +151,7 @@ export const productBySlug = query({
       seo: seoOut(p.seo),
       createdAt: p._creationTime,
       updatedAt: p.updatedAt,
-      images: p.images.map((i, position) => ({ id: i.key, key: i.key, alt: i.alt ?? null, width: i.width ?? null, height: i.height ?? null, position })),
+      images: p.images.map((i, position) => ({ id: i.key, key: i.key, alt: i.alt ?? null, altAr: i.altAr ?? null, width: i.width ?? null, height: i.height ?? null, position })),
       brand: brand ? { id: brand._id as string, name: brand.name, slug: brand.slug } : null,
       category: category
         ? { id: category._id as string, name: category.name, nameAr: category.nameAr ?? null, slug: category.slug, parent: parent ? { name: parent.name, nameAr: parent.nameAr ?? null, slug: parent.slug } : null }

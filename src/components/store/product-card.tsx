@@ -36,7 +36,7 @@ export function ProductCard({ product, priority }: { product: ProductCardData; p
         <Link href={`/produit/${product.slug}`} prefetch={false} tabIndex={-1} aria-hidden className="absolute inset-0 block overflow-hidden">
           <StoreImage
             imageKey={first?.key}
-            alt={first?.alt ?? name}
+            alt={(locale === "ar" && first?.altAr) || first?.alt || name}
             fill
             sizes="(min-width: 1536px) 260px, (min-width: 1024px) 22vw, (min-width: 768px) 33vw, 50vw"
             className={cn("object-contain p-4 transition-transform duration-300 group-hover:scale-[1.03] sm:p-6", soldOut && "opacity-50")}

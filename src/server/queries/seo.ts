@@ -27,3 +27,13 @@ export const getSeoEntity = (kind: "category" | "product", id: string) => fetchA
 export type SeoEntity = NonNullable<Awaited<ReturnType<typeof getSeoEntity>>>;
 
 export const listRedirects = () => fetchAuthQuery(api.seo.listRedirects, {});
+
+/** Admin → SEO → Historique. `available: false` until convex/seoBulk.ts is deployed. */
+export async function getSeoHistory() {
+  try {
+    return { available: true as const, batches: await fetchAuthQuery(api.seoBulk.history, {}) };
+  } catch (err) {
+    if (/Could not find (public )?function/i.test(String(err))) return { available: false as const, batches: [] };
+    throw err;
+  }
+}

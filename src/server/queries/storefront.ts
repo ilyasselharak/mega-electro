@@ -49,7 +49,7 @@ export async function getProductCards(ids: string[]): Promise<ProductCardData[]>
       isFeatured: false,
       createdAt: 0,
       brand: null,
-      images: p.images.map((i) => ({ key: i.key, alt: null, width: null, height: null })),
+      images: p.images.map((i) => ({ key: i.key, alt: null, altAr: null, width: null, height: null })),
     }));
   }
 }

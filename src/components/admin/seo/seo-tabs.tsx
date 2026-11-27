@@ -10,6 +10,7 @@ const TABS = [
   { href: "/admin/seo/products", label: "Produits" },
   { href: "/admin/seo/settings", label: "Paramètres SEO" },
   { href: "/admin/seo/redirects", label: "Redirections" },
+  { href: "/admin/seo/historique", label: "Historique" },
 ];
 
 export function SeoTabs() {

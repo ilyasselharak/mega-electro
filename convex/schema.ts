@@ -27,6 +27,8 @@ export const productImage = v.object({
   /** Cloudinary public_id */
   key: v.string(),
   alt: v.optional(v.string()),
+  /** Arabic ALT text (storefront /ar). Empty = French ALT. */
+  altAr: v.optional(v.string()),
   width: v.optional(v.number()),
   height: v.optional(v.number()),
   size: v.optional(v.number()),
@@ -46,6 +48,8 @@ export const seoMeta = v.object({
   titleAr: v.optional(v.string()),
   metaDescriptionAr: v.optional(v.string()),
   descriptionAr: v.optional(v.string()),
+  /** Products only: Arabic short description (shown under the price on /ar). */
+  shortDescriptionAr: v.optional(v.string()),
   keywordsAr: v.optional(v.string()),
   ogTitle: v.optional(v.string()),
   ogDescription: v.optional(v.string()),
@@ -318,6 +322,22 @@ export default defineSchema({
   }).index("by_category", ["categoryId"]),
 
   seoSettings: defineTable({ ...seoSettingsFields, updatedAt: v.number() }),
+
+  /** Field-level log of bulk SEO updates (convex/seoBulk.ts): one row per changed field, for history and rollback. */
+  seoChangeLog: defineTable({
+    batchId: v.string(),
+    source: v.string(),
+    kind: v.union(v.literal("product"), v.literal("category")),
+    entityId: v.string(),
+    slug: v.string(),
+    field: v.string(),
+    before: v.any(),
+    after: v.any(),
+    appliedAt: v.number(),
+    rolledBackAt: v.optional(v.number()),
+  })
+    .index("by_batch", ["batchId"])
+    .index("by_entity", ["entityId"]),
 
   /** Homepage merchandising (single document): banners, collections, section order, theme colours. */
   storefront: defineTable({ ...storefrontFields, updatedAt: v.number() }),

@@ -32,7 +32,7 @@ export async function generateMetadata() {
   return localizedMetadata({
     title: locale === "ar" ? `${t.brand.name} — ${t.home.heroBadge}` : seo.homeTitle || seo.defaultTitle,
     absoluteTitle: true,
-    description: locale === "ar" ? t.home.seoText1 : seo.homeDescription || seo.defaultDescription,
+    description: locale === "ar" ? t.home.metaDescription : seo.homeDescription || seo.defaultDescription,
     path: "/",
     keywords: locale === "ar" ? undefined : keywordList(seo.homeKeywords, seo.defaultKeywords),
     image: ogKey ? imageUrl(ogKey, 1200) : undefined,

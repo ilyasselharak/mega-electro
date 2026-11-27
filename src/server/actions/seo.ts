@@ -7,7 +7,7 @@ import { fetchAuthMutation } from "@/lib/convex";
 import { assertAdmin, assertStaff } from "@/lib/session";
 import { entitySeoFormSchema, redirectFormSchema, seoSettingsFormSchema, type EntitySeoFormInput, type RedirectFormInput, type SeoSettingsFormInput } from "@/lib/validators/seo";
 import { invalidate, TAGS } from "@/server/cache";
-import { ok, toActionError, type ActionResult } from "./result";
+import { ok, toActionError, UserFacingError, type ActionResult } from "./result";
 
 type Kind = "category" | "product";
 
@@ -108,5 +108,19 @@ export async function deleteRedirect(id: string): Promise<ActionResult> {
     return ok(undefined);
   } catch (err) {
     return toActionError(err, "deleteRedirect");
+  }
+}
+
+/** Undo a bulk SEO batch (fields edited since the batch are left untouched and reported). */
+export async function rollbackSeoBatch(batchId: string): Promise<ActionResult<{ restored: number; conflicts: string[] }>> {
+  try {
+    await assertAdmin();
+    if (!/^[a-z0-9-]{3,60}$/.test(batchId)) throw new UserFacingError("Lot invalide.");
+    const res = await fetchAuthMutation(api.seoBulk.rollbackBatchAdmin, { batchId });
+    invalidate(TAGS.catalog);
+    revalidatePath("/admin/seo/historique");
+    return ok(res);
+  } catch (err) {
+    return toActionError(err, "rollbackSeoBatch");
   }
 }

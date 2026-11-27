@@ -56,3 +56,6 @@ next-env.d.ts
 # Redesign review screenshots (large, kept local)
 /docs/redesign/before/
 /docs/redesign/after/
+
+# Local database snapshots (SEO backups)
+/backups/

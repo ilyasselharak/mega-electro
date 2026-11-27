@@ -172,6 +172,7 @@ export const fr = {
     brandDescription: "Tous les produits {name} au meilleur prix au Maroc chez {site}. Garantie officielle, livraison partout au Maroc.",
     promotionsMetaTitle: "Promotions électroménager au Maroc",
     promotionsMetaDescription: "Les meilleures promotions sur l'électroménager au Maroc : réfrigérateurs, machines à laver, climatiseurs et plus. Livraison partout au Maroc.",
+    allProductsMetaDescription: "Réfrigérateurs, lave-linge, climatiseurs, TV et petit électroménager : tout le catalogue Mega Electro, livré partout au Maroc.",
     allProductsMetaTitle: "Tous nos produits d'électroménager",
     pageSuffix: "Page {n}",
     sortLabel: "Tri",
@@ -179,6 +180,7 @@ export const fr = {
     browseAll: "Voir tous les produits",
   },
   home: {
+    metaDescription: "Électroménager neuf et garanti au Maroc : réfrigérateurs, lave-linge, climatiseurs, TV. Livraison partout au Maroc, paiement à la livraison.",
     heroTitle: "Équipez votre maison autrement.",
     heroLead: "Réfrigérateurs, lave-linge, climatiseurs, cuisson : des appareils neufs et garantis, au prix affiché, livrés partout au Maroc et payés à la réception.",
     heroShop: "Découvrir les produits",

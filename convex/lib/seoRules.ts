@@ -139,6 +139,7 @@ export type SeoMetaValues = {
   titleAr?: string;
   metaDescriptionAr?: string;
   descriptionAr?: string;
+  shortDescriptionAr?: string;
   keywordsAr?: string;
   ogTitle?: string;
   ogDescription?: string;

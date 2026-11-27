@@ -103,7 +103,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
               name,
               url: meta.canonicalUrl ? urlFor(meta.canonicalUrl, seo) : publicUrl,
               sku: product.sku,
-              description: (ar ? meta.descriptionAr : null) ?? product.shortDescription ?? product.description,
+              description: (ar ? meta.shortDescriptionAr || meta.descriptionAr : null) || product.shortDescription || product.description,
               price: product.price,
               stock: product.stock,
               images: product.images.map((i) => imageUrl(i.key, 1200)),
@@ -123,7 +123,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
 
         <div className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12">
           <div className="lg:sticky lg:top-40 lg:self-start">
-            <ProductGallery images={product.images.map((i) => ({ key: i.key, alt: i.alt }))} name={name} />
+            <ProductGallery images={product.images.map((i) => ({ key: i.key, alt: (ar && i.altAr) || i.alt }))} name={name} />
           </div>
 
           <div className="space-y-6">
@@ -156,7 +156,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
               )}
             </p>
 
-            {product.shortDescription && !ar ? <p className="text-[15px] leading-7 text-foreground/80">{product.shortDescription}</p> : null}
+            {(ar ? meta.shortDescriptionAr : product.shortDescription) ? <p className="text-[15px] leading-7 text-foreground/80">{ar ? meta.shortDescriptionAr : product.shortDescription}</p> : null}
 
             <ProductBuyBox
               whatsapp={settings.whatsapp}
