@@ -1,0 +1,545 @@
+[
+ {
+  "kind": "product",
+  "slug": "bowen-aspirateur-balai-multifonctions-4-en-1-2-vitesses-16kpa2400w",
+  "source": "pe-C",
+  "sources": [
+   "Valeurs de la fiche et de l'ancienne description Mega Electro (aucune valeur ajoutée)"
+  ],
+  "verify": [
+   "Garantie non renseignée."
+  ],
+  "specsVerified": true,
+  "changes": {
+   "name": "Aspirateur balai Bowen 4 en 1 2400 W sans sac",
+   "nameAr": "مكنسة كهربائية بوين 4 في 1 بقوة 2400 واط بدون كيس",
+   "shortDescription": "Aspirateur balai Bowen 4 en 1 de 2400 W et 16 kPa, cyclonique sans sac, réservoir de 1 litre et 2 vitesses.",
+   "description": "L'aspirateur Bowen se transforme selon l'usage : balai pour les sols, aspirateur à main pour les meubles et les coins. Il fonctionne sur secteur, avec une puissance de 2400 W.\n\n### Sans sac\nLa technologie cyclonique sépare la poussière de l'air ; le réservoir de 1 litre se vide directement.\n\n### Usage\nNettoyage à sec : tapis, sols durs et meubles.\n\n### Caractéristiques\n- Puissance : 2400 W\n- Aspiration : 16 kPa\n- Réservoir : 1 L\n- Vitesses : 2\n- 4 en 1 (balai / main)\n- Alimentation : 220–240 V",
+   "metaTitle": "Aspirateur balai Bowen 4 en 1 2400 W – Prix Maroc",
+   "metaDescription": "Aspirateur balai Bowen 4 en 1 sur secteur, 2400 W, 16 kPa, sans sac, réservoir 1 L et 2 vitesses. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "مكنسة كهربائية بوين 4 في 1 بالمغرب",
+    "metaDescriptionAr": "مكنسة كهربائية بوين 4 في 1 بقوة 2400 واط بدون كيس وخزان 1 لتر. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "مكنسة بوين 4 في 1 بقوة 2400 واط و16 كيلوباسكال، بدون كيس، خزان 1 لتر وسرعتان.",
+    "descriptionAr": "مكنسة بوين تتحول حسب الاستعمال: مكنسة للأرض أو يدوية للأثاث والزوايا، تعمل بالكهرباء بقوة 2400 واط.\n\n### بدون كيس\nتقنية حلزونية وخزان 1 لتر يفرغ مباشرة.\n\n### الاستعمال\nتنظيف جاف للزرابي والأرضيات والأثاث.\n\n### المواصفات\n- القوة: 2400 واط\n- 16 كيلوباسكال\n- خزان 1 لتر\n- سرعتان",
+    "keywords": "aspirateur balai Bowen, aspirateur 4 en 1, aspirateur sans sac 2400W, aspirateur à main, prix aspirateur balai Maroc",
+    "keywordsAr": "سبيراتور, مكنسة كهربائية, سبيراتور بلا ساك, مكنسة بوين, ثمن المكنسة الكهربائية في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Avec ou sans sac ?",
+     "answer": "Sans sac : la poussière est collectée dans un réservoir que l'on vide directement à la poubelle.",
+     "questionAr": "واش بالساك ولا بلا؟",
+     "answerAr": "بلا ساك، الغبرة كتجمع فخزان وكتخويه مباشرة."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/mt1ijc4tmozettbepydp",
+     "alt": "Aspirateur balai Bowen 4 en 1 2400 W",
+     "altAr": "مكنسة كهربائية بوين 4 في 1"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Puissance",
+     "value": "2400 W"
+    },
+    {
+     "label": "Aspiration",
+     "value": "16 kPa"
+    },
+    {
+     "label": "Réservoir à poussière",
+     "value": "1 L"
+    },
+    {
+     "label": "Vitesses",
+     "value": "2"
+    },
+    {
+     "label": "Technologie",
+     "value": "Cyclonique sans sac"
+    },
+    {
+     "label": "Tension",
+     "value": "220–240 V, 50/60 Hz"
+    },
+    {
+     "label": "Nettoyage",
+     "value": "À sec"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "aspirateur-sans-fil-rechargeable-1500-w",
+  "source": "pe-C",
+  "sources": [
+   "Valeurs de la fiche et de l'ancienne description Mega Electro (aucune valeur ajoutée)"
+  ],
+  "verify": [
+   "Puissance « 1500 W » du nom à confirmer pour un aspirateur sur batterie 22,2 V (non publiée)."
+  ],
+  "specsVerified": true,
+  "changes": {
+   "name": "Aspirateur sans fil rechargeable Prima",
+   "nameAr": "مكنسة كهربائية لاسلكية بريما قابلة للشحن",
+   "shortDescription": "Aspirateur sans fil Prima : batterie lithium-ion 22,2 V, 25 à 40 minutes d'autonomie, cyclonique sans sac, éclairage LED et 2 niveaux de puissance.",
+   "description": "Sans fil, l'aspirateur Prima se prend pour un coup de propre rapide dans toute la maison, sans chercher de prise.\n\n### Autonomie\nBatterie lithium-ion 22,2 V : 25 à 40 minutes selon le niveau de puissance.\n\n### Maniable\nDouble pivot avec rotation à 180° et éclairage LED pour voir la poussière sous les meubles.\n\n### Caractéristiques\n- Batterie : lithium-ion 22,2 V\n- Autonomie : 25 à 40 min\n- Technologie : cyclonique sans sac\n- Double pivot 180°\n- Éclairage LED\n- 2 niveaux de puissance",
+   "metaTitle": "Aspirateur sans fil rechargeable Prima – Prix Maroc",
+   "metaDescription": "Aspirateur sans fil Prima, batterie 22,2 V, 25 à 40 min d'autonomie, sans sac, éclairage LED. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "مكنسة كهربائية لاسلكية بريما بالمغرب",
+    "metaDescriptionAr": "مكنسة لاسلكية بريما ببطارية 22.2 فولت و25 إلى 40 دقيقة وإضاءة LED. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "مكنسة لاسلكية بريما: بطارية ليثيوم 22.2 فولت، 25 إلى 40 دقيقة، بدون كيس، إضاءة LED وقوتان.",
+    "descriptionAr": "مكنسة بريما اللاسلكية لتنظيف سريع في كل البيت بدون البحث عن مقبس.\n\n### البطارية\n25 إلى 40 دقيقة حسب القوة.\n\n### سهلة\nرأس يدور 180 درجة وإضاءة LED.\n\n### المواصفات\n- بطارية 22.2 فولت\n- 25–40 دقيقة\n- بدون كيس\n- LED",
+    "keywords": "aspirateur sans fil Prima, aspirateur rechargeable, aspirateur balai sans fil, aspirateur LED, prix aspirateur sans fil Maroc",
+    "keywordsAr": "سبيراتور بلا خيط, مكنسة لاسلكية, سبيراتور بالشارج, مكنسة بريما, ثمن المكنسة اللاسلكية في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Avec ou sans sac ?",
+     "answer": "Sans sac : la poussière est collectée dans un réservoir que l'on vide directement à la poubelle.",
+     "questionAr": "واش بالساك ولا بلا؟",
+     "answerAr": "بلا ساك، الغبرة كتجمع فخزان وكتخويه مباشرة."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/wt1t6wonszih6nme9rzb",
+     "alt": "Aspirateur sans fil rechargeable Prima",
+     "altAr": "مكنسة لاسلكية بريما"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Technologie",
+     "value": "Cyclonique sans sac (Eco-Cyclon Double Spin)"
+    },
+    {
+     "label": "Batterie",
+     "value": "Lithium-ion 22,2 V"
+    },
+    {
+     "label": "Autonomie",
+     "value": "25 à 40 minutes"
+    },
+    {
+     "label": "Mobilité",
+     "value": "Double pivot, rotation 180°"
+    },
+    {
+     "label": "Éclairage",
+     "value": "LED"
+    },
+    {
+     "label": "Niveaux de puissance",
+     "value": "2"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "aspirateur-balai-sans-fil-brosse-lectrique-avec-lumire-led",
+  "source": "pe-C",
+  "sources": [
+   "Valeurs de la fiche et de l'ancienne description Mega Electro (aucune valeur ajoutée)"
+  ],
+  "verify": [],
+  "specsVerified": true,
+  "changes": {
+   "name": "Aspirateur balai sans fil Daiko RABS-7755DK brosse LED",
+   "nameAr": "مكنسة لاسلكية دايكو RABS-7755DK بفرشاة LED",
+   "shortDescription": "Aspirateur balai sans fil Daiko RABS-7755DK : 11,5 kPa, batterie amovible 22,2 V 2600 mAh, brosse motorisée avec LED, se transforme en aspirateur à main.",
+   "description": "Le Daiko RABS-7755DK est un balai sans fil léger qui devient aspirateur à main en un clic, pour le canapé ou la voiture.\n\n### Batterie amovible\nLi-ion 22,2 V, 2600 mAh : elle se retire pour être rechargée ou remplacée.\n\n### Fourni avec\nSuceur plat, brosse 2 en 1 et support mural.\n\n### Caractéristiques\n- Moteur : 180 W\n- Aspiration : 11,5 kPa\n- Batterie : Li-ion 22,2 V, 2600 mAh, amovible\n- Brosse motorisée avec LED\n- Accessoires : suceur plat, brosse 2 en 1, support mural\n\nGarantie : 12 mois.",
+   "metaTitle": "Aspirateur sans fil Daiko RABS-7755DK – Prix Maroc",
+   "metaDescription": "Aspirateur balai sans fil Daiko 11,5 kPa, batterie amovible 22,2 V, brosse LED, devient aspirateur à main. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "مكنسة لاسلكية دايكو RABS-7755DK بالمغرب",
+    "metaDescriptionAr": "مكنسة لاسلكية دايكو 11.5 كيلوباسكال ببطارية قابلة للنزع وفرشاة LED وتتحول إلى يدوية. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "مكنسة لاسلكية دايكو RABS-7755DK: 11.5 كيلوباسكال، بطارية قابلة للنزع، فرشاة بإضاءة LED وتتحول إلى مكنسة يدوية.",
+    "descriptionAr": "دايكو RABS-7755DK مكنسة لاسلكية خفيفة تتحول إلى مكنسة يدوية للكنبة أو السيارة.\n\n### بطارية قابلة للنزع\n22.2 فولت و2600 مللي أمبير.\n\n### الملحقات\nرأس مسطح وفرشاة 2 في 1 وحامل حائطي.\n\n### المواصفات\n- 180 واط\n- 11.5 كيلوباسكال\n- بطارية 2600 مللي أمبير\n- LED\n\nالضمان: 12 شهرا.",
+    "keywords": "aspirateur balai sans fil Daiko, Daiko RABS-7755DK, aspirateur LED, aspirateur à main voiture, prix aspirateur Daiko Maroc",
+    "keywordsAr": "سبيراتور دايكو بلا خيط, مكنسة لاسلكية, سبيراتور للطوموبيل, مكنسة بإضاءة, ثمن المكنسة اللاسلكية في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Avec ou sans sac ?",
+     "answer": "Sans sac : la poussière est collectée dans un réservoir que l'on vide directement à la poubelle.",
+     "questionAr": "واش بالساك ولا بلا؟",
+     "answerAr": "بلا ساك، الغبرة كتجمع فخزان وكتخويه مباشرة."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/jxkeyffbbcoynhyqfgp1",
+     "alt": "Aspirateur balai sans fil Daiko RABS-7755DK",
+     "altAr": "مكنسة لاسلكية دايكو RABS-7755DK"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Modèle",
+     "value": "RABS-7755DK"
+    },
+    {
+     "label": "Moteur",
+     "value": "180 W"
+    },
+    {
+     "label": "Aspiration",
+     "value": "11,5 kPa"
+    },
+    {
+     "label": "Batterie",
+     "value": "Li-ion 22,2 V, 2600 mAh, amovible"
+    },
+    {
+     "label": "Brosse",
+     "value": "Motorisée avec éclairage LED"
+    },
+    {
+     "label": "Accessoires",
+     "value": "Suceur plat, brosse 2 en 1, support mural"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "fer-repasser-general-2200-w",
+  "source": "pe-C",
+  "sources": [
+   "Valeurs de la fiche et de l'ancienne description Mega Electro (aucune valeur ajoutée)"
+  ],
+  "verify": [
+   "Garantie non renseignée."
+  ],
+  "specsVerified": true,
+  "changes": {
+   "name": "Fer à repasser vapeur General DM-2268B 2200 W",
+   "nameAr": "مكواة بخار جنرال DM-2268B بقوة 2200 واط",
+   "shortDescription": "Fer à repasser General DM-2268B de 2200 W : sec, vapeur et pulvérisation, réservoir de 350 ml et semelle antiadhésive.",
+   "description": "Le fer General DM-2268B repasse à sec ou à la vapeur, et la pulvérisation aide à défroisser les plis tenaces.\n\n### Caractéristiques\n- Puissance : 2200 W\n- Fonctions : sec, vapeur, pulvérisation\n- Réservoir : 350 ml transparent\n- Semelle antiadhésive\n- Molette de température",
+   "metaTitle": "Fer à repasser General 2200 W DM-2268B – Prix Maroc",
+   "metaDescription": "Fer à repasser vapeur General DM-2268B 2200 W, sec, vapeur et pulvérisation, réservoir 350 ml. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "مكواة بخار جنرال 2200 واط بالمغرب",
+    "metaDescriptionAr": "مكواة بخار جنرال DM-2268B بقوة 2200 واط وخزان 350 مل ونعل مانع للالتصاق. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "مكواة جنرال DM-2268B بقوة 2200 واط: جاف وبخار ورش، خزان 350 مل ونعل مانع للالتصاق.",
+    "descriptionAr": "مكواة جنرال DM-2268B تكوي جافة أو بالبخار، والرش يساعد على إزالة التجاعيد الصعبة.\n\n### المواصفات\n- 2200 واط\n- جاف وبخار ورش\n- خزان 350 مل",
+    "keywords": "fer à repasser General, fer vapeur 2200W, General DM-2268B, fer à repasser antiadhésif, prix fer à repasser Maroc",
+    "keywordsAr": "مكواة, مكواة البخار, حديدة الصبين, مكواة جنرال, ثمن المكواة في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Quelle eau utiliser ?",
+     "answer": "Dans les régions où l'eau est calcaire, une eau déminéralisée ou mélangée limite le calcaire dans le fer.",
+     "questionAr": "شمن ما نستعمل؟",
+     "answerAr": "إلا كان الما فيه الجير بزاف، ستعملو الما المقطر ولا مخلط."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/k3hjadfrffrcgr2plqhx",
+     "alt": "Fer à repasser vapeur General DM-2268B 2200 W",
+     "altAr": "مكواة بخار جنرال DM-2268B"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Référence",
+     "value": "DM-2268B"
+    },
+    {
+     "label": "Puissance",
+     "value": "2200 W"
+    },
+    {
+     "label": "Fonctions",
+     "value": "Sec, vapeur, pulvérisation"
+    },
+    {
+     "label": "Réservoir",
+     "value": "350 ml, transparent"
+    },
+    {
+     "label": "Semelle",
+     "value": "Antiadhésive"
+    },
+    {
+     "label": "Tension",
+     "value": "220–240 V, 50–60 Hz"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "distributeur-deau-avec-robinet-deau-chaude-normale-froide",
+  "source": "pe-C",
+  "sources": [],
+  "verify": [
+   "« Bouteille 18,9 L incluse » : à confirmer avant de la mentionner.",
+   "Garantie, consommation et dimensions non renseignées."
+  ],
+  "specsVerified": false,
+  "changes": {
+   "name": "Fontaine à eau Daiko DDE-5102DK 3 robinets chaud, froid, ambiant",
+   "nameAr": "موزع الماء دايكو DDE-5102DK بثلاثة صنابير ساخن وبارد وعادي",
+   "shortDescription": "Fontaine à eau sur pied Daiko DDE-5102DK à 3 robinets (chaud, froid, ambiant), refroidissement par compresseur, cuve inox et armoire de rangement.",
+   "description": "La fontaine Daiko DDE-5102DK sert de l'eau fraîche, chaude ou à température ambiante. L'eau chaude est pratique pour le thé et les infusions.\n\n### Compresseur\nLe refroidissement par compresseur (gaz R134a) garde l'eau bien fraîche, même en été.\n\n### Pratique\nCuve en acier inoxydable et armoire de rangement en bas pour les gobelets.\n\n### Caractéristiques\n- Robinets : 3 (chaud, froid, ambiant)\n- Refroidissement par compresseur, gaz R134a\n- Cuve : acier inoxydable\n- Armoire de rangement",
+   "metaTitle": "Fontaine à eau Daiko DDE-5102DK – Prix Maroc",
+   "metaDescription": "Fontaine à eau Daiko DDE-5102DK, 3 robinets chaud, froid, ambiant, compresseur et cuve inox. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "موزع الماء دايكو DDE-5102DK بالمغرب",
+    "metaDescriptionAr": "موزع ماء دايكو DDE-5102DK بثلاثة صنابير وتبريد بالضاغط وخزان إينوكس. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "موزع ماء دايكو DDE-5102DK بثلاثة صنابير (ساخن، بارد، عادي)، تبريد بالضاغط وخزان إينوكس وخزانة.",
+    "descriptionAr": "موزع دايكو DDE-5102DK يقدم الماء البارد والساخن والعادي. الماء الساخن مفيد للأتاي.\n\n### ضاغط\nتبريد بالضاغط يبقي الماء باردا حتى في الصيف.\n\n### عملي\nخزان إينوكس وخزانة في الأسفل.\n\n### المواصفات\n- 3 صنابير\n- تبريد بالضاغط\n- خزان إينوكس",
+    "keywords": "fontaine à eau Daiko, Daiko DDE-5102DK, distributeur d'eau chaud froid, fontaine à eau bureau, prix fontaine à eau Maroc",
+    "keywordsAr": "موزع الماء, فونتين الما, موزع ماء ساخن وبارد, موزع دايكو, ثمن موزع الماء في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Faut-il un raccordement à l'eau ?",
+     "answer": "Non, elle fonctionne avec une bouteille posée sur le dessus ; il suffit d'une prise électrique.",
+     "questionAr": "واش خاصها توصيل بالما؟",
+     "answerAr": "لا، كتخدم بالقرعة اللي كتحط فوق، غير البريز."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/p6pcunqvltbnrakjofv6",
+     "alt": "Fontaine à eau Daiko DDE-5102DK à 3 robinets",
+     "altAr": "موزع الماء دايكو DDE-5102DK"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "distributeur-deau-avec-3-robinets-rservoir-de-stockage",
+  "source": "pe-C",
+  "sources": [],
+  "verify": [
+   "« Bouteille 18,9 L incluse » : à confirmer avant de la mentionner.",
+   "Garantie, consommation et dimensions non renseignées."
+  ],
+  "specsVerified": false,
+  "changes": {
+   "name": "Fontaine à eau Daiko DDE-5103DK 3 robinets chaud, froid, ambiant",
+   "nameAr": "موزع الماء دايكو DDE-5103DK بثلاثة صنابير ساخن وبارد وعادي",
+   "shortDescription": "Fontaine à eau sur pied Daiko DDE-5103DK à 3 robinets (chaud, froid, ambiant), refroidissement par compresseur, cuve inox et armoire de rangement.",
+   "description": "La fontaine Daiko DDE-5103DK sert de l'eau fraîche, chaude ou à température ambiante. Une solution tout-en-un pour le bureau comme pour la maison.\n\n### Compresseur\nLe refroidissement par compresseur garde l'eau bien fraîche, même en été.\n\n### Pratique\nCuve en acier inoxydable et armoire de rangement en bas pour les gobelets.\n\n### Caractéristiques\n- Robinets : 3 (chaud, froid, ambiant)\n- Refroidissement par compresseur\n- Cuve : acier inoxydable\n- Armoire de rangement",
+   "metaTitle": "Fontaine à eau Daiko DDE-5103DK – Prix Maroc",
+   "metaDescription": "Fontaine à eau Daiko DDE-5103DK, 3 robinets, compresseur, cuve inox et armoire de rangement. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "موزع الماء دايكو DDE-5103DK بالمغرب",
+    "metaDescriptionAr": "موزع ماء دايكو DDE-5103DK بثلاثة صنابير وتبريد بالضاغط وخزان إينوكس. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "موزع ماء دايكو DDE-5103DK بثلاثة صنابير (ساخن، بارد، عادي)، تبريد بالضاغط وخزان إينوكس وخزانة.",
+    "descriptionAr": "موزع دايكو DDE-5103DK يقدم الماء البارد والساخن والعادي. حل متكامل للمكتب والبيت.\n\n### ضاغط\nتبريد بالضاغط يبقي الماء باردا حتى في الصيف.\n\n### عملي\nخزان إينوكس وخزانة في الأسفل.\n\n### المواصفات\n- 3 صنابير\n- تبريد بالضاغط\n- خزان إينوكس",
+    "keywords": "fontaine à eau Daiko, Daiko DDE-5103DK, distributeur d'eau chaud froid, fontaine à eau bureau, prix fontaine à eau Maroc",
+    "keywordsAr": "موزع الماء, فونتين الما, موزع ماء ساخن وبارد, موزع دايكو, ثمن موزع الماء في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Faut-il un raccordement à l'eau ?",
+     "answer": "Non, elle fonctionne avec une bouteille posée sur le dessus ; il suffit d'une prise électrique.",
+     "questionAr": "واش خاصها توصيل بالما؟",
+     "answerAr": "لا، كتخدم بالقرعة اللي كتحط فوق، غير البريز."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/zsjbs7dpam6w6eayegpt",
+     "alt": "Fontaine à eau Daiko DDE-5103DK à 3 robinets",
+     "altAr": "موزع الماء دايكو DDE-5103DK"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "leader-insectifuge-insecticide-electrique-tue-mouche-raid-ultra-violet",
+  "source": "pe-C",
+  "sources": [
+   "Valeurs de la fiche et de l'ancienne description Mega Electro (aucune valeur ajoutée)"
+  ],
+  "verify": [
+   "Garantie non renseignée."
+  ],
+  "specsVerified": true,
+  "changes": {
+   "name": "Destructeur d'insectes UV Leader 2 × 15 W",
+   "nameAr": "جهاز قتل الحشرات بالأشعة فوق البنفسجية ليدر 2 × 15 واط",
+   "shortDescription": "Destructeur d'insectes électrique Leader à 2 lampes UV de 15 W, pour des pièces jusqu'à 90 m², sans produit chimique.",
+   "description": "Les lampes UV attirent mouches et moustiques vers une grille électrique. Sans produit chimique ni odeur, le Leader convient aux cuisines, commerces, bureaux et entrepôts.\n\n### Installation\nÀ suspendre, à poser ou à fixer au mur, en intérieur uniquement. Le plateau inférieur se retire pour le vider.\n\n### Caractéristiques\n- Lampes : 2 × 15 W UV\n- Surface : jusqu'à 90 m²\n- Tension : 220–240 V\n- Durée de vie des tubes : 5000 à 8000 h environ\n- Usage intérieur",
+   "metaTitle": "Destructeur d'insectes UV Leader 2 × 15 W – Prix Maroc",
+   "metaDescription": "Destructeur d'insectes Leader à 2 lampes UV 15 W, jusqu'à 90 m², sans produit chimique. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "جهاز قتل الحشرات بالأشعة ليدر بالمغرب",
+    "metaDescriptionAr": "جهاز قتل الذباب والناموس ليدر بمصباحين 15 واط حتى 90 متر مربع بدون مواد كيميائية. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "جهاز قتل الحشرات ليدر بمصباحين فوق بنفسجيين 15 واط، لغرف حتى 90 متر مربع، بدون مواد كيميائية.",
+    "descriptionAr": "المصابيح فوق البنفسجية تجذب الذباب والناموس نحو شبكة كهربائية، بدون مواد كيميائية ولا رائحة.\n\n### التركيب\nيعلق أو يوضع أو يثبت على الحائط، داخل البيت فقط.\n\n### المواصفات\n- مصباحان 15 واط\n- حتى 90 متر مربع\n- داخلي فقط",
+    "keywords": "destructeur d'insectes UV, tue-mouche électrique Leader, lampe anti-moustique, tue-mouche commerce, prix tue-mouche électrique Maroc",
+    "keywordsAr": "قاتل الذبان, جهاز قتل الناموس, لامبة الذبان, قاتل الحشرات الكهربائي, ثمن قاتل الحشرات في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Peut-on l'utiliser dehors ?",
+     "answer": "Non, il est prévu pour un usage intérieur uniquement.",
+     "questionAr": "واش نقدر نستعملو برا؟",
+     "answerAr": "لا، غير للداخل."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/t6mf8vppgeh9arladecq",
+     "alt": "Destructeur d'insectes UV Leader 2 × 15 W",
+     "altAr": "جهاز قتل الحشرات ليدر"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Lampes",
+     "value": "2 × 15 W ultraviolet"
+    },
+    {
+     "label": "Surface couverte",
+     "value": "Jusqu'à 90 m²"
+    },
+    {
+     "label": "Tension",
+     "value": "220–240 V, 50/60 Hz"
+    },
+    {
+     "label": "Tension de grille",
+     "value": "2200–2500 V"
+    },
+    {
+     "label": "Durée de vie des tubes",
+     "value": "5000 à 8000 h environ"
+    },
+    {
+     "label": "Usage",
+     "value": "Intérieur uniquement"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "insecticide-lectronique-antimoustique-tue-mouche-electric",
+  "source": "pe-C",
+  "sources": [],
+  "verify": [
+   "Doublon : deux fiches identiques (149 DH) — fusion + 301 recommandée.",
+   "Ancienne description contradictoire (lampe UV et « technologie ultrasonique ») et « efficacité garantie » : mécanisme non publié.",
+   "Garantie non renseignée."
+  ],
+  "specsVerified": false,
+  "changes": {
+   "name": "Anti-moustique électrique 4 W à brancher",
+   "nameAr": "جهاز طرد الناموس الكهربائي 4 واط",
+   "shortDescription": "Petit anti-moustique électrique à brancher sur une prise, très faible consommation (4 W), pour chambre, cuisine ou bureau.",
+   "description": "Compact et léger, cet appareil se branche directement sur une prise et consomme seulement 4 W : il peut rester en marche toute la nuit dans une chambre.\n\n### Caractéristiques\n- Consommation : 4 W\n- Tension : 220–240 V\n- À brancher directement sur une prise",
+   "metaTitle": "Anti-moustique électrique 4 W – Prix Maroc",
+   "metaDescription": "Anti-moustique électrique à brancher, 4 W seulement, pour chambre, cuisine ou bureau. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "جهاز طرد الناموس الكهربائي بالمغرب",
+    "metaDescriptionAr": "جهاز ضد الناموس يركب في المقبس، 4 واط فقط، لغرفة النوم والمطبخ والمكتب. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "جهاز صغير ضد الناموس يركب في المقبس، استهلاك ضعيف جدا (4 واط)، لغرفة النوم أو المطبخ.",
+    "descriptionAr": "جهاز صغير وخفيف يركب مباشرة في المقبس ويستهلك 4 واط فقط، يمكن تشغيله طوال الليل.\n\n### المواصفات\n- 4 واط\n- يركب في المقبس",
+    "keywords": "anti-moustique électrique, anti-moustique prise, anti-moustique chambre, appareil anti-insectes, prix anti-moustique Maroc",
+    "keywordsAr": "ضد الناموس, جهاز الناموس, ناموسية كهربائية, طارد الحشرات, ثمن جهاز الناموس في المغرب"
+   },
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/uqfb08avmohwkodoiw3m",
+     "alt": "Anti-moustique électrique à brancher",
+     "altAr": "جهاز طرد الناموس الكهربائي"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "general-insecticide-lectronique-antimoustique-tue-mouche",
+  "source": "pe-C",
+  "sources": [],
+  "verify": [
+   "Doublon : deux fiches identiques (149 DH) — fusion + 301 recommandée.",
+   "Ancienne description contradictoire (lampe UV et « technologie ultrasonique ») et « efficacité garantie » : mécanisme non publié.",
+   "Garantie non renseignée."
+  ],
+  "specsVerified": false,
+  "changes": {
+   "name": "Anti-moustique électrique General 4 W à brancher",
+   "nameAr": "جهاز طرد الناموس الكهربائي جنرال 4 واط",
+   "shortDescription": "Petit anti-moustique électrique à brancher sur une prise, très faible consommation (4 W), pour chambre, cuisine ou bureau.",
+   "description": "Compact et léger, cet appareil se branche directement sur une prise et consomme seulement 4 W : il peut rester en marche toute la nuit dans une chambre.\n\n### Caractéristiques\n- Consommation : 4 W\n- Tension : 220–240 V\n- À brancher directement sur une prise",
+   "metaTitle": "Anti-moustique électrique General 4 W – Prix Maroc",
+   "metaDescription": "Anti-moustique électrique General à brancher, 4 W seulement, pour chambre, cuisine ou bureau. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "جهاز طرد الناموس الكهربائي جنرال بالمغرب",
+    "metaDescriptionAr": "جهاز ضد الناموس يركب في المقبس، 4 واط فقط، لغرفة النوم والمطبخ والمكتب. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "جهاز صغير ضد الناموس يركب في المقبس، استهلاك ضعيف جدا (4 واط)، لغرفة النوم أو المطبخ.",
+    "descriptionAr": "جهاز صغير وخفيف يركب مباشرة في المقبس ويستهلك 4 واط فقط، يمكن تشغيله طوال الليل.\n\n### المواصفات\n- 4 واط\n- يركب في المقبس",
+    "keywords": "anti-moustique électrique general, anti-moustique prise, anti-moustique chambre, appareil anti-insectes, prix anti-moustique Maroc",
+    "keywordsAr": "ضد الناموس, جهاز الناموس, ناموسية كهربائية, طارد الحشرات, ثمن جهاز الناموس في المغرب"
+   },
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/ktrdffg8whshxbi20vpp",
+     "alt": "Anti-moustique électrique General à brancher",
+     "altAr": "جهاز طرد الناموس الكهربائي"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "glacire-fresh-22-l",
+  "source": "pe-C",
+  "sources": [],
+  "verify": [
+   "Durée de conservation « jusqu'à 24 h au moins » non reprise (dépend des conditions).",
+   "Couleur selon disponibilité (bleu ou rouge)."
+  ],
+  "specsVerified": false,
+  "changes": {
+   "name": "Glacière Fresh 22 L",
+   "nameAr": "ثلاجة محمولة فريش 22 لتر",
+   "shortDescription": "Glacière Fresh de 22 litres avec couvercle étanche et isolation épaisse, pour la plage, le camping et les voyages.",
+   "description": "La glacière Fresh de 22 litres garde boissons et repas au frais pour une journée à la plage, un pique-nique ou un long trajet en voiture.\n\n### Conseil\nAjoutez des pains de glace ou des bouteilles congelées et ouvrez-la le moins souvent possible pour garder le froid plus longtemps.\n\n### Caractéristiques\n- Capacité brute : environ 22 L\n- Couvercle étanche\n- Isolation épaisse\n- Couleur : bleu ou rouge selon disponibilité",
+   "metaTitle": "Glacière Fresh 22 litres isotherme – Prix Maroc",
+   "metaDescription": "Glacière Fresh 22 L avec couvercle étanche et isolation épaisse, pour plage, camping et voyages. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "ثلاجة محمولة فريش 22 لتر بالمغرب",
+    "metaDescriptionAr": "ثلاجة محمولة فريش 22 لترا بغطاء محكم وعزل سميك للشاطئ والتخييم. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "ثلاجة محمولة فريش 22 لترا بغطاء محكم وعزل سميك، للشاطئ والتخييم والسفر.",
+    "descriptionAr": "ثلاجة فريش 22 لترا تحافظ على برودة المشروبات والأكل ليوم في الشاطئ أو رحلة طويلة.\n\n### نصيحة\nأضيفوا قوالب الثلج وافتحوها أقل ما يمكن.\n\n### المواصفات\n- السعة: 22 لترا\n- غطاء محكم\n- عزل سميك",
+    "keywords": "glacière Fresh 22L, glacière plage, glacière camping, glacière isotherme, prix glacière Maroc",
+    "keywordsAr": "غلاسيير, ثلاجة محمولة, صندوق التبريد, غلاسيير البحر, ثمن الغلاسيير في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Est-elle électrique ?",
+     "answer": "Non, c'est une glacière isotherme : elle garde le froid avec de la glace ou des pains de glace.",
+     "questionAr": "واش كهربائية؟",
+     "answerAr": "لا، كتحافظ على البرودة بالثلج."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/wpcbutwbinvnmdjakvp1",
+     "alt": "Glacière Fresh 22 litres",
+     "altAr": "ثلاجة محمولة فريش 22 لتر"
+    }
+   ]
+  }
+ }
+]

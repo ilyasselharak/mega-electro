@@ -73,6 +73,12 @@ function validate(entry) {
   for (const k of Object.keys(changes)) if (!allowed.has(k)) errors.push(`${where}: field "${k}" is not allowed`);
   for (const k of Object.keys(changes.seo ?? {})) if (!SEO_KEYS.has(k)) errors.push(`${where}: field "seo.${k}" is not allowed`);
   if (changes.specs && !entry.specsVerified) errors.push(`${where}: specs need "specsVerified": true and sources`);
+  // Mirrors the server rule: a bulk update never empties a field.
+  for (const [k, v] of Object.entries(changes)) {
+    if (Array.isArray(v) && !v.length) errors.push(`${where}: "${k}" is an empty list (omit the field instead)`);
+    if (typeof v === "string" && !v.trim()) errors.push(`${where}: "${k}" is empty (omit the field instead)`);
+  }
+  for (const [k, v] of Object.entries(changes.seo ?? {})) if (typeof v === "string" && !v.trim()) errors.push(`${where}: "seo.${k}" is empty`);
   const len = (label, v, [lo, hi], hard) => {
     if (v == null) return;
     const n = v.trim().length;
