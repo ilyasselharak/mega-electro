@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const prices = async (page: import("@playwright/test").Page) =>
   (await page.locator("article").evaluateAll((cards) =>
-    cards.map((c) => Number((c.querySelector(".font-heading")?.textContent ?? "").replace(/[^\d]/g, ""))),
+    cards.map((c) => Number((c.querySelector(".price")?.textContent ?? "").replace(/[^\d]/g, ""))),
   )).filter((n) => n > 0);
 
 test("sorting by ascending price reorders products and updates the URL", async ({ page }) => {
@@ -46,7 +46,7 @@ test("filtered listings are noindex, the plain category is indexable with hrefla
 test("Arabic listing is localized and the filter sheet opens", async ({ page, isMobile }) => {
   await page.goto("/ar/recherche");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("جميع منتجاتنا");
-  await expect(page.getByText(/\d+ منتج/).first()).toBeVisible();
+  await expect(page.locator("main").getByText(/\d+ منتج/).first()).toBeVisible();
   await page.getByRole("combobox", { name: "ترتيب حسب" }).click();
   await expect(page.getByRole("option", { name: "الأحدث" })).toBeVisible();
   await page.keyboard.press("Escape");

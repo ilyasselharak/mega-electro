@@ -149,7 +149,7 @@ export function SeoEntityTable({ kind, rows, initialFilter = "all" }: { kind: "c
               <TableRow key={r.id} data-state={selected.has(r.id) ? "selected" : undefined}>
                 <TableCell className="ps-4"><Checkbox checked={selected.has(r.id)} onCheckedChange={(on) => toggle(r.id, on === true)} aria-label={`Sélectionner ${r.name}`} /></TableCell>
                 <TableCell className="max-w-[22rem]">
-                  <Link href={`/admin/seo/edit/${kind}/${r.id}`} className="line-clamp-1 font-medium hover:text-primary hover:underline">{r.name}</Link>
+                  <Link href={`/admin/seo/edit/${kind}/${r.id}`} className="line-clamp-1 font-medium hover:text-orange-strong hover:underline">{r.name}</Link>
                   <span className="line-clamp-1 text-xs text-muted-foreground">{r.context ?? r.publicPath}{r.isPublic ? "" : " · masqué en boutique"}</span>
                   {r.missing.length ? <span className="line-clamp-1 text-xs text-amber-700 dark:text-amber-400" title={r.missing.join("\n")}>À corriger : {r.missing.join(", ")}</span> : null}
                 </TableCell>

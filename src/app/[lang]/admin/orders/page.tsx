@@ -55,7 +55,7 @@ export default async function OrdersPage({ searchParams }: PageProps<"/[lang]/ad
             {data.items.map((o) => (
               <TableRow key={o.id} className="relative">
                 <TableCell className="ps-5">
-                  <Link href={`/admin/orders/${o.id}`} className="font-mono text-xs font-semibold text-primary after:absolute after:inset-0 hover:underline">{o.number}</Link>
+                  <Link href={`/admin/orders/${o.id}`} className="font-mono text-xs font-semibold text-orange-strong after:absolute after:inset-0 hover:underline">{o.number}</Link>
                 </TableCell>
                 <TableCell><span className="block font-medium">{o.fullName}</span><span className="text-xs text-muted-foreground">{o.city} · {o._count.items} article{o._count.items > 1 ? "s" : ""}</span></TableCell>
                 <TableCell className="hidden font-mono text-xs md:table-cell">{o.phone}</TableCell>

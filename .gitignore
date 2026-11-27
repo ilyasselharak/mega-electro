@@ -52,3 +52,7 @@ next-env.d.ts
 /test-results
 /playwright-report
 /screenshots
+
+# Redesign review screenshots (large, kept local)
+/docs/redesign/before/
+/docs/redesign/after/

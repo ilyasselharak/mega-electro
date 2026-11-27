@@ -74,5 +74,5 @@ export const uploadRequestSchema = z.object({
   filename: z.string().max(200),
   contentType: z.enum(["image/jpeg", "image/png", "image/webp", "image/avif"]),
   size: z.number().int().positive().max(10 * 1024 * 1024, "Image trop volumineuse (10 Mo max)"),
-  scope: z.enum(["products", "categories", "brands", "seo"]),
+  scope: z.enum(["products", "categories", "brands", "seo", "banners"]),
 });

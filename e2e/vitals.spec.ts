@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
 
 // Lab Core Web Vitals per page (production build). Thresholds = Google's "good" limits.
-const PAGES = ["/", "/ar", "/categorie/refrigerateurs", "/produit/refrigerateur-combine-no-frost-340-l-inox-samsung"];
+// Update the product slug if it leaves the catalog.
+const PAGES = ["/", "/ar", "/categorie/refrigerateurs", "/produit/chauffe-eau-gaz-siera-6-litres-blanc"];
 
 for (const path of PAGES) {
   test(`vitals ${path}`, async ({ page }, info) => {

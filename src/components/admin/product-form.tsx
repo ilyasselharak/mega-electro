@@ -151,7 +151,7 @@ export function ProductForm({ productId, initial, categories, brands }: { produc
               <CardTitle>Référencement (SEO)</CardTitle>
               <CardDescription>
                 Laissez vide pour générer automatiquement.
-                {productId ? <> H1, mots-clés, arabe, Open Graph, ALT, canonique et noindex : <Link href={`/admin/seo/edit/product/${productId}`} className="text-primary hover:underline">SEO avancé</Link>.</> : null}
+                {productId ? <> H1, mots-clés, arabe, Open Graph, ALT, canonique et noindex : <Link href={`/admin/seo/edit/product/${productId}`} className="text-orange-strong hover:underline">SEO avancé</Link>.</> : null}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -187,7 +187,7 @@ export function ProductForm({ productId, initial, categories, brands }: { produc
                 <label className="flex items-center justify-between gap-3 text-sm"><span>Mettre en avant sur l&apos;accueil</span><Switch checked={field.value} onCheckedChange={field.onChange} /></label>
               )} />
               {productId && initial.status === "ACTIVE" ? (
-                <Link href={`/produit/${initial.slug}`} target="_blank" className="flex items-center gap-1.5 text-sm text-primary hover:underline">Voir en boutique <ExternalLink className="size-3.5" /></Link>
+                <Link href={`/produit/${initial.slug}`} target="_blank" className="flex items-center gap-1.5 text-sm text-orange-strong hover:underline">Voir en boutique <ExternalLink className="size-3.5" /></Link>
               ) : null}
             </CardContent>
           </Card>

@@ -85,7 +85,7 @@ export function CategoryDialog({ id, initial, parents }: { id?: string; initial?
               <Label>Icône</Label>
               <div className="flex flex-wrap gap-1.5">
                 {Object.keys(CATEGORY_ICONS).map((name) => (
-                  <button key={name} type="button" onClick={() => field.onChange(name)} aria-label={name} aria-pressed={field.value === name} className={`flex size-9 items-center justify-center rounded-lg border ${field.value === name ? "border-primary bg-primary/10 text-primary" : "hover:bg-muted"}`}>
+                  <button key={name} type="button" onClick={() => field.onChange(name)} aria-label={name} aria-pressed={field.value === name} className={`flex size-9 items-center justify-center rounded-lg border ${field.value === name ? "border-primary bg-primary/10 text-orange-strong" : "hover:bg-muted"}`}>
                     <CategoryIcon name={name} className="size-4.5" />
                   </button>
                 ))}

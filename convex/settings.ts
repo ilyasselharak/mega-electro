@@ -1,6 +1,8 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
-import { requireAdmin } from "./lib/auth";
+import { mutation, query } from "./_generated/server";
+import { requireAdmin, requireStaff } from "./lib/auth";
+import { storefrontFields } from "./schema";
+import { fail } from "./lib/errors";
 import { opt } from "./lib/products";
 
 export const save = mutation({
@@ -35,5 +37,32 @@ export const save = mutation({
     const full = { ...doc, codEnabled: a.codEnabled ?? existing?.codEnabled, acceptUnlistedCities: a.acceptUnlistedCities ?? existing?.acceptUnlistedCities };
     if (existing) await ctx.db.replace(existing._id, full);
     else await ctx.db.insert("settings", full);
+  },
+});
+
+/** Admin → Vitrine: the raw storefront document (SKUs, inactive entries included). */
+export const storefrontAdmin = query({
+  args: {},
+  handler: async (ctx) => {
+    await requireStaff(ctx);
+    const doc = await ctx.db.query("storefront").first();
+    if (!doc) return null;
+    const { _id, _creationTime, ...rest } = doc;
+    return rest;
+  },
+});
+
+const HEX = /^#[0-9a-f]{6}$/i;
+
+export const saveStorefront = mutation({
+  args: storefrontFields,
+  handler: async (ctx, a) => {
+    await requireAdmin(ctx);
+    if (a.banners.length > 20 || a.collections.length > 12) fail("Trop d'éléments (20 bannières et 12 collections au maximum)");
+    for (const color of [a.theme?.accent, a.theme?.navy]) if (color && !HEX.test(color)) fail("Couleur invalide (format #rrggbb)");
+    const doc = { ...a, updatedAt: Date.now() };
+    const existing = await ctx.db.query("storefront").first();
+    if (existing) await ctx.db.replace(existing._id, doc);
+    else await ctx.db.insert("storefront", doc);
   },
 });

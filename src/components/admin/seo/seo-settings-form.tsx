@@ -209,7 +209,7 @@ export function SeoSettingsForm({ initial, canEdit, envSiteUrl }: { initial: Seo
               <CardContent className="grid gap-4">
                 {text("robotsExtraDisallow", "Disallow supplémentaires (une règle par ligne)", { rows: 4, placeholder: "/suivi-commande", hint: "Les règles qui bloqueraient l'accueil, les produits, les catégories ou les marques sont refusées." })}
                 {text("robotsExtraAllow", "Allow supplémentaires (une règle par ligne)", { rows: 2 })}
-                <a href="/robots.txt" target="_blank" rel="noopener" className="text-sm text-primary hover:underline">Voir le robots.txt actuel</a>
+                <a href="/robots.txt" target="_blank" rel="noopener" className="text-sm text-orange-strong hover:underline">Voir le robots.txt actuel</a>
               </CardContent>
             </Card>
             <Card>
@@ -218,7 +218,7 @@ export function SeoSettingsForm({ initial, canEdit, envSiteUrl }: { initial: Seo
                 {toggle("sitemapIncludeImages", "Inclure les images (sitemap d'images)")}
                 {toggle("sitemapIncludeBrands", "Inclure les pages marques")}
                 {toggle("sitemapIncludeStaticPages", "Inclure les pages d'information (CGV, contact…)")}
-                <a href="/sitemap.xml" target="_blank" rel="noopener" className="text-sm text-primary hover:underline">Voir le sitemap actuel</a>
+                <a href="/sitemap.xml" target="_blank" rel="noopener" className="text-sm text-orange-strong hover:underline">Voir le sitemap actuel</a>
               </CardContent>
             </Card>
             <Card>

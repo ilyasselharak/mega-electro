@@ -4,9 +4,9 @@ import { Breadcrumbs } from "@/components/store/breadcrumbs";
 import { ProductListing } from "@/components/store/product-listing";
 import { Link } from "@/i18n/client";
 import { localName } from "@/i18n/config";
-import { fmt } from "@/i18n/fmt";
+import { fmt, plural } from "@/i18n/fmt";
 import { getDictionary, getLocale } from "@/i18n/server";
-import { getCategoryBySlug, listProducts } from "@/server/queries/catalog";
+import { getCategoryBySlug, getNavCategories, listProducts } from "@/server/queries/catalog";
 import { getSeoSettings } from "@/server/queries/seo";
 import { parseListingParams } from "@/lib/listing-params";
 import { keywordList, pagedPath, pagedTitle } from "@/lib/seo";
@@ -48,7 +48,7 @@ export async function generateMetadata({ params, searchParams }: PageProps<"/[la
 export default async function CategoryPage({ params, searchParams }: PageProps<"/[lang]/categorie/[slug]">) {
   const { slug } = await params;
   const sp = await searchParams;
-  const [category, locale] = await Promise.all([getCategoryBySlug(slug), getLocale()]);
+  const [category, nav, locale] = await Promise.all([getCategoryBySlug(slug), getNavCategories(), getLocale()]);
   if (!category) notFound();
   const t = await getDictionary(locale);
 
@@ -72,14 +72,17 @@ export default async function CategoryPage({ params, searchParams }: PageProps<"
     <div className="container-page space-y-6 py-6 sm:py-8">
       <Breadcrumbs items={crumbs} />
       <header className="space-y-3">
-        <h1 className="text-3xl font-extrabold sm:text-4xl">{h1}</h1>
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h1 className="text-[1.875rem] font-extrabold tracking-[-0.03em] sm:text-4xl">{h1}</h1>
+          <span className="price text-sm font-medium text-muted-foreground">{plural(locale, result.total, t.listing.resultCount)}</span>
+        </div>
         {intro ? <p className="max-w-3xl leading-7 text-muted-foreground">{intro}</p> : null}
         {category.children.length ? (
           <nav aria-label={t.listing.subcategories}>
             <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pt-1 scrollbar-none sm:mx-0 sm:flex-wrap sm:px-0">
               {category.children.map((c) => (
                 <li key={c.id} className="shrink-0">
-                  <Link href={`/categorie/${c.slug}`} className="inline-flex h-10 items-center rounded-full border bg-card px-4 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary">
+                  <Link href={`/categorie/${c.slug}`} className="inline-flex h-10 items-center rounded-lg bg-card px-4 text-sm font-medium shadow-card ring-1 ring-border/70 transition-colors hover:ring-foreground/30">
                     {localName(locale, c)}
                   </Link>
                 </li>
@@ -99,11 +102,21 @@ export default async function CategoryPage({ params, searchParams }: PageProps<"
           </div>
           {category.parent ? (
             <p className="text-sm text-muted-foreground">
-              {t.listing.seeAlso} : <Link href={`/categorie/${category.parent.slug}`} className="font-medium text-primary hover:underline">{localName(locale, category.parent)}</Link>
+              {t.listing.seeAlso} : <Link href={`/categorie/${category.parent.slug}`} className="font-medium text-orange-strong hover:underline">{localName(locale, category.parent)}</Link>
             </p>
           ) : null}
         </section>
       ) : null}
+
+      {/* Internal links to the other departments (crawlable, helps shoppers who landed from search). */}
+      <nav aria-label={t.header.allCategories} className="border-t pt-6">
+        <h2 className="mb-3 text-base font-bold">{t.header.allCategories}</h2>
+        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          {nav.filter((c) => c.id !== category.id).map((c) => (
+            <li key={c.id}><Link href={`/categorie/${c.slug}`} className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">{localName(locale, c)}</Link></li>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 }

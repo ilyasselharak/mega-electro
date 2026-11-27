@@ -40,3 +40,14 @@ export const getMyOrders = () => fetchAuthQuery(api.orders.mine, {});
 export const listDeliveryZones = () => fetchAuthQuery(api.delivery.listZones, {});
 
 export const listFaqs = () => fetchAuthQuery(api.faq.list, {});
+
+/** Admin → Vitrine. `null` data = nothing saved yet; `available: false` = Convex functions not deployed yet. */
+export async function getAdminStorefront() {
+  try {
+    return { available: true as const, data: await fetchAuthQuery(api.settings.storefrontAdmin, {}) };
+  } catch (err) {
+    const message = String(err);
+    if (/Could not find (public )?function/i.test(message)) return { available: false as const, data: null };
+    throw err;
+  }
+}

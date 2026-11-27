@@ -12,7 +12,7 @@ test("order tracking reports unknown orders in the page language", async ({ page
   await page.goto("/ar/suivi-commande");
   await page.getByLabel("رقم الطلب").fill("DZ000000-ZZZZ");
   await page.getByLabel("رقم الهاتف").fill("0612345678");
-  await page.getByRole("button", { name: "بحث" }).click();
+  await page.getByRole("button", { name: "بحث", exact: true }).click();
   await expect(page.getByRole("alert")).toBeVisible();
 });
 

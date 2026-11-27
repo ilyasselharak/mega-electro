@@ -45,7 +45,7 @@ export default async function DashboardPage() {
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[2fr_1fr]">
         <Card>
-          <CardHeader><CardTitle className="flex items-center gap-2"><TrendingUp className="size-4.5 text-primary" /> Chiffre d&apos;affaires quotidien (14 jours)</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="flex items-center gap-2"><TrendingUp className="size-4.5 text-orange-strong" /> Chiffre d&apos;affaires quotidien (14 jours)</CardTitle></CardHeader>
           <CardContent><RevenueChart data={s.series} /></CardContent>
         </Card>
         <Card>
@@ -71,7 +71,7 @@ export default async function DashboardPage() {
       <Card className="mt-6">
         <CardHeader className="flex flex-row items-center justify-between gap-3">
           <CardTitle>Dernières commandes</CardTitle>
-          <Link href="/admin/orders" className="flex items-center gap-1 text-sm font-medium text-primary hover:underline">Tout voir <ArrowRight className="size-4" /></Link>
+          <Link href="/admin/orders" className="flex items-center gap-1 text-sm font-medium text-orange-strong hover:underline">Tout voir <ArrowRight className="size-4" /></Link>
         </CardHeader>
         <CardContent className="px-0">
           <Table>
@@ -79,7 +79,7 @@ export default async function DashboardPage() {
             <TableBody>
               {s.recentOrders.map((o) => (
                 <TableRow key={o.id}>
-                  <TableCell className="ps-6 font-mono text-xs"><Link href={`/admin/orders/${o.id}`} className="font-semibold text-primary hover:underline">{o.number}</Link></TableCell>
+                  <TableCell className="ps-6 font-mono text-xs"><Link href={`/admin/orders/${o.id}`} className="font-semibold text-orange-strong hover:underline">{o.number}</Link></TableCell>
                   <TableCell><span className="block">{o.fullName}</span><span className="text-xs text-muted-foreground">{o.city}</span></TableCell>
                   <TableCell className="hidden text-muted-foreground sm:table-cell">{formatDate(o.createdAt, { dateStyle: "short", timeStyle: "short" })}</TableCell>
                   <TableCell><OrderStatusBadge status={o.status} /></TableCell>

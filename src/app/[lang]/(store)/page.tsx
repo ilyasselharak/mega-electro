@@ -1,4 +1,4 @@
-import { ArrowUpRight, BadgePercent } from "lucide-react";
+import { ArrowLeft, ArrowRight, BadgePercent, Package, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryIcon } from "@/components/shared/category-icon";
 import { StoreImage } from "@/components/shared/store-image";
@@ -7,16 +7,20 @@ import { TrustBar } from "@/components/store/footer";
 import { Price } from "@/components/store/price";
 import { WhatsAppIcon } from "@/components/store/whatsapp-button";
 import { Link } from "@/i18n/client";
-import { localName } from "@/i18n/config";
+import { localName, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries/fr";
 import { fmt, plural } from "@/i18n/fmt";
 import { getDictionary, getLocale } from "@/i18n/server";
 import { getActiveBrands, getHomeCollections, getNavCategories, type ProductCardData } from "@/server/queries/catalog";
+import { getBrandRanking, getCategoryCovers, getStorefront, type Storefront } from "@/server/queries/storefront";
 import { getSettings } from "@/server/queries/settings";
 import { getSeoSettings } from "@/server/queries/seo";
 import { formatPrice } from "@/lib/money";
 import { keywordList } from "@/lib/seo";
 import { localizedMetadata } from "@/lib/seo-server";
 import { imageUrl } from "@/lib/images";
+import { isLive, resolveSections, type HomeSectionKey } from "@/lib/storefront";
+import { cn } from "@/lib/utils";
 
 export const revalidate = 600;
 
@@ -38,16 +42,25 @@ export async function generateMetadata() {
   });
 }
 
-function Section({ title, href, linkLabel, children, tone }: { title: string; href?: string; linkLabel?: string; children: React.ReactNode; tone?: "plain" | "card" }) {
+/** Internal path or absolute URL from an admin banner. */
+function BannerLink({ href, className, children, label }: { href: string; className?: string; children: React.ReactNode; label?: string }) {
+  if (/^https?:/.test(href)) {
+    return <a href={href} className={className} aria-label={label}>{children}</a>;
+  }
+  return <Link href={href.startsWith("/") ? href : `/${href}`} className={className} aria-label={label}>{children}</Link>;
+}
+
+function Section({ title, href, linkLabel, children, locale, id }: { title: string; href?: string; linkLabel?: string; children: React.ReactNode; locale: Locale; id?: string }) {
+  const Arrow = locale === "ar" ? ArrowLeft : ArrowRight;
   return (
-    <section className={tone === "card" ? "border-y bg-card py-12 sm:py-16" : "py-12 sm:py-16"}>
+    <section className="py-8 sm:py-12" aria-labelledby={id}>
       <div className="container-page">
-        <div className="mb-7 flex items-end justify-between gap-4">
-          <h2 className="text-[1.75rem] font-bold leading-tight tracking-[-0.02em] sm:text-[2.125rem]">{title}</h2>
+        <div className="mb-5 flex items-end justify-between gap-4 sm:mb-6">
+          <h2 id={id} className="text-[1.375rem] font-extrabold leading-tight tracking-[-0.025em] sm:text-[1.75rem]">{title}</h2>
           {href && linkLabel ? (
-            <Link href={href} className="group inline-flex shrink-0 items-center gap-1 rounded-full border bg-card px-4 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-primary">
+            <Link href={href} className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-foreground underline-offset-4 hover:underline">
               {linkLabel}
-              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" aria-hidden />
+              <Arrow className="size-4" aria-hidden />
             </Link>
           ) : null}
         </div>
@@ -57,168 +70,293 @@ function Section({ title, href, linkLabel, children, tone }: { title: string; hr
   );
 }
 
-/** The showroom shelf: real products, lit on the dark hero panel, with the current running along the shelf edge. */
-async function ShowroomShelf({ products }: { products: ProductCardData[] }) {
-  const locale = await getLocale();
-  if (!products.length) return null;
+type HeroProps = { products: ProductCardData[]; banner: Storefront["banners"][number] | null; t: Dictionary; locale: Locale; h1: string; notes: string };
+
+/**
+ * Hero. An admin hero banner (with photo) takes over when one is live; otherwise the store's
+ * promise on navy, beside real products from the catalog standing on white stages.
+ */
+function Hero({ products, banner, t, locale, h1, notes }: HeroProps) {
+  const ar = locale === "ar";
+  if (banner?.imageKey) {
+    const title = (ar && banner.titleAr) || banner.title;
+    const subtitle = (ar && banner.subtitleAr) || banner.subtitle;
+    const cta = (ar && banner.ctaLabelAr) || banner.ctaLabel || t.home.heroShop;
+    return (
+      <section className="bg-ink text-ink-foreground">
+        <div className="container-page grid items-center gap-6 py-8 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12 lg:py-14">
+          <div className="space-y-5">
+            <h1 className="text-[2.1rem] font-extrabold leading-[1.05] tracking-[-0.035em] sm:text-5xl lg:text-[3.5rem]">{h1}</h1>
+            <p className="text-xl font-semibold">{title}</p>
+            {subtitle ? <p className="max-w-lg text-base leading-7 text-ink-foreground/75">{subtitle}</p> : null}
+            <Button asChild size="lg" className="h-12 rounded-xl px-6 text-base font-bold">
+              <BannerLink href={banner.href}>{cta}</BannerLink>
+            </Button>
+          </div>
+          <BannerLink href={banner.href} className="relative block aspect-[16/10] overflow-hidden rounded-2xl bg-white" label={title}>
+            <StoreImage imageKey={banner.imageKey} alt={title} fill priority sizes="(min-width: 1024px) 680px, 100vw" className="object-cover" />
+          </BannerLink>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <div className="relative">
-      <ul className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 scrollbar-none sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-6 lg:overflow-visible lg:px-0">
-        {products.map((p, i) => (
-          <li key={p.id} className="w-[44%] shrink-0 snap-start sm:w-[30%] lg:w-auto">
-            <Link href={`/produit/${p.slug}`} className="group flex h-full flex-col rounded-2xl bg-card p-3 text-card-foreground shadow-[0_24px_48px_-24px_rgb(0_0_0/0.6)] transition-transform duration-300 hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-brass">
-              <span className="relative block aspect-square">
-                <StoreImage imageKey={p.images[0]?.key} alt={p.images[0]?.alt ?? localName(locale, p)} fill priority={i < 3} sizes="(min-width: 1024px) 190px, 45vw" className="object-contain p-2" />
-              </span>
-              <span className="mt-2 line-clamp-2 min-h-10 text-[13px] font-medium leading-5">{localName(locale, p)}</span>
-              <span className="mt-1"><Price price={p.price} compareAtPrice={p.compareAtPrice} size="sm" /></span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-5 h-px bg-ink-foreground/15" aria-hidden>
-        <div className="current-line h-px bg-brass shadow-[0_0_12px_2px] shadow-brass/60" />
+    <section className="bg-ink text-ink-foreground">
+      <div className="container-page grid items-center gap-6 py-7 sm:gap-8 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14 lg:py-16">
+        <div className="space-y-5 sm:space-y-6">
+          <h1 className="max-w-xl text-[2.125rem] font-extrabold leading-[1.04] tracking-[-0.04em] sm:text-[3.25rem] lg:text-[3.75rem]">{h1}</h1>
+          <p className="max-w-lg text-[15px] leading-7 text-ink-foreground/75 sm:text-[17px]">{t.home.heroLead}</p>
+          <div className="flex flex-wrap gap-2.5 sm:gap-3">
+            <Button asChild size="lg" className="h-12 rounded-xl px-5 text-[15px] font-bold sm:px-6 sm:text-base">
+              <Link href="/recherche">{t.home.heroShop}</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="h-12 rounded-xl border-ink-foreground/25 bg-transparent px-4 text-[15px] text-ink-foreground hover:bg-ink-foreground/10 hover:text-ink-foreground sm:px-5 sm:text-base">
+              <Link href="/promotions"><BadgePercent aria-hidden /> {t.home.heroPromo}</Link>
+            </Button>
+          </div>
+          {notes ? <p className="text-sm text-ink-foreground/60">{notes}</p> : null}
+        </div>
+        {products.length ? (
+          <ul className="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-[1.35fr_1fr] lg:grid-rows-2">
+            {products.slice(0, 3).map((p, i) => (
+              <li key={p.id} className={cn(i === 0 && "lg:row-span-2")}>
+                <Link href={`/produit/${p.slug}`} className="group flex h-full flex-col rounded-xl bg-white p-2.5 text-foreground sm:p-3 lg:rounded-2xl lg:p-4">
+                  <span className={cn("relative block aspect-square", i === 0 ? "lg:aspect-auto lg:flex-1" : "lg:aspect-[4/3] lg:flex-1")}>
+                    <StoreImage
+                      imageKey={p.images[0]?.key}
+                      alt={p.images[0]?.alt ?? localName(locale, p)}
+                      fill
+                      priority
+                      sizes={i === 0 ? "(min-width: 1024px) 400px, 30vw" : "(min-width: 1024px) 260px, 30vw"}
+                      className="object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  </span>
+                  <span className="mt-2 line-clamp-1 text-[13px] font-medium max-sm:hidden">{localName(locale, p)}</span>
+                  <Price price={p.price} compareAtPrice={p.compareAtPrice} size={i === 0 ? "md" : "sm"} className="mt-1.5 sm:mt-0.5 max-sm:[&_s]:hidden" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </div>
-    </div>
+    </section>
   );
 }
 
 export default async function HomePage() {
-  const [collections, categories, brands, settings, seo, locale] = await Promise.all([getHomeCollections(), getNavCategories(), getActiveBrands(), getSettings(), getSeoSettings(), getLocale()]);
+  const [collections, categories, covers, brands, ranking, storefront, settings, seo, locale] = await Promise.all([
+    getHomeCollections(),
+    getNavCategories(),
+    getCategoryCovers(),
+    getActiveBrands(),
+    getBrandRanking(),
+    getStorefront(),
+    getSettings(),
+    getSeoSettings(),
+    getLocale(),
+  ]);
   const t = await getDictionary(locale);
+  const ar = locale === "ar";
+  const banners = storefront.banners.filter((b) => isLive(b));
+  const heroBanner = banners.find((b) => b.placement === "hero" && b.imageKey) ?? null;
+  const promos = banners.filter((b) => b.placement === "promo");
+  const liveCollections = storefront.collections.filter((c) => isLive(c) && c.products.length);
+
   const pool = [...collections.featured, ...collections.deals, ...collections.newest, ...collections.bestSellers];
-  // Six distinct in-stock products with photos for the shelf.
-  const shelf = [...new Map(pool.filter((p) => p.images.length && p.stock > 0).map((p) => [p.id, p])).values()].slice(0, 6);
-  const free = settings.freeShippingThreshold > 0 ? fmt(t.home.heroNoteFree, { amount: formatPrice(settings.freeShippingThreshold, locale) }) : null;
-  const seoParagraphs = locale === "fr" && seo.homeSeoText ? seo.homeSeoText.split(/\n{2,}/) : [t.home.seoText1, t.home.seoText2];
-  const cities = locale === "ar" ? ["الدار البيضاء", "الرباط", "مراكش", "طنجة", "فاس", "أكادير"] : ["Casablanca", "Rabat", "Marrakech", "Tanger", "Fès", "Agadir"];
+  // Three distinct in-stock products with photos for the hero stage.
+  const heroProducts = [...new Map(pool.filter((p) => p.images.length && p.stock > 0).map((p) => [p.id, p])).values()].slice(0, 3);
+  const notes = [settings.freeShippingThreshold > 0 ? fmt(t.home.heroNoteFree, { amount: formatPrice(settings.freeShippingThreshold, locale) }) : null, settings.codEnabled ? t.home.heroNoteCod : null]
+    .filter(Boolean)
+    .join(ar ? "، " : ", ");
+  // The French H1 stays editable in Admin → SEO (homeH1); otherwise the brand line.
+  const h1 = !ar && seo.homeH1 ? seo.homeH1 : t.home.heroTitle;
+  const seoParagraphs = !ar && seo.homeSeoText ? seo.homeSeoText.split(/\n{2,}/) : [t.home.seoText1, t.home.seoText2];
+  const logos = new Map(brands.map((b) => [b.slug, b.logoKey]));
+  const topBrands = ranking.slice(0, 12);
 
-  return (
-    <>
-      <section className="relative overflow-hidden bg-ink text-ink-foreground">
-        <div className="absolute inset-0 bg-showroom [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden />
-        <div className="container-page relative pb-10 pt-12 sm:pt-16 lg:pb-14 lg:pt-20">
-          <div className="grid items-end gap-8 lg:grid-cols-[1.25fr_1fr]">
-            <h1 className="text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4.5rem]">
-              {locale === "fr" && seo.homeH1 ? seo.homeH1 : `${t.home.heroTitleA} ${t.home.heroTitleB}`}
-            </h1>
-            <div className="max-w-md space-y-6 lg:pb-2">
-              <p className="text-base leading-7 text-ink-foreground/75 sm:text-lg">{t.home.heroText}</p>
-              <div className="flex flex-wrap gap-3">
-                <Button asChild size="lg" className="h-12 rounded-full px-6 text-base">
-                  <Link href="/recherche">{t.home.heroCta}</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="h-12 rounded-full border-ink-foreground/25 bg-transparent px-6 text-base text-ink-foreground hover:bg-ink-foreground/10 hover:text-ink-foreground">
-                  <Link href="/promotions"><BadgePercent /> {t.home.heroPromo}</Link>
-                </Button>
-              </div>
-              <p className="text-sm text-ink-foreground/60">{[free, t.home.heroNoteCod].filter(Boolean).join(locale === "ar" ? "، " : ", ")}</p>
-            </div>
-          </div>
-          <div className="mt-12 lg:mt-16"><ShowroomShelf products={shelf} /></div>
-        </div>
-      </section>
+  const render: Record<HomeSectionKey, () => React.ReactNode> = {
+    hero: () => <Hero key="hero" products={heroProducts} banner={heroBanner} t={t} locale={locale} h1={h1} notes={notes} />,
 
-      <div className="border-b bg-card">
-        <div className="container-page py-7"><TrustBar freeShippingThreshold={settings.freeShippingThreshold} /></div>
-      </div>
-
-      {categories.length ? (
-        <Section title={t.home.categoriesTitle}>
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-6">
-            {categories.map((c) => (
-              <li key={c.id}>
-                <Link href={`/categorie/${c.slug}`} className="group flex h-full flex-col rounded-2xl border bg-card p-4 transition-colors hover:border-primary/40">
-                  <span className="relative flex aspect-[4/3] items-center justify-center text-primary">
-                    {c.imageKey ? (
-                      <StoreImage imageKey={c.imageKey} alt={c.imageAlt || localName(locale, c)} fill sizes="200px" className="object-contain transition-transform duration-500 group-hover:scale-105" />
-                    ) : (
-                      <CategoryIcon name={c.icon} className="size-10" />
-                    )}
-                  </span>
-                  <span className="mt-4 block text-[15px] font-semibold leading-tight">{localName(locale, c)}</span>
-                  <span className="mt-1 block text-xs tabular-nums text-muted-foreground">{plural(locale, c._count.products, t.home.categoryCount)}</span>
-                </Link>
-              </li>
-            ))}
+    categories: () =>
+      categories.length ? (
+        <Section key="categories" id="home-categories" title={t.home.popularCategories} locale={locale}>
+          <ul className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3 lg:grid-cols-[repeat(auto-fit,minmax(9.5rem,1fr))]">
+            {categories.map((c) => {
+              const cover = covers[c.id];
+              return (
+                <li key={c.id}>
+                  <Link href={`/categorie/${c.slug}`} className="group flex h-full flex-col overflow-hidden rounded-xl bg-card shadow-card ring-1 ring-border/70 transition-shadow hover:shadow-lift">
+                    <span className="relative flex aspect-square items-center justify-center bg-white">
+                      {cover ? (
+                        <StoreImage imageKey={cover.key} alt={cover.alt || localName(locale, c)} fill sizes="(min-width: 1024px) 180px, 32vw" className="object-contain p-3 transition-transform duration-300 group-hover:scale-105 sm:p-4" />
+                      ) : (
+                        <CategoryIcon name={c.icon} className="size-9 text-muted-foreground" />
+                      )}
+                    </span>
+                    <span className="border-t border-border/60 px-2.5 py-2 sm:px-3 sm:py-2.5">
+                      <span className="line-clamp-2 block text-[13px] font-semibold leading-tight sm:text-sm">{localName(locale, c)}</span>
+                      <span className="price mt-0.5 block text-[11px] text-muted-foreground sm:text-xs">{plural(locale, c._count.products, t.home.categoryCount)}</span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </Section>
-      ) : null}
+      ) : null,
 
-      {collections.deals.length ? (
-        <Section title={t.home.dealsTitle} href="/promotions" linkLabel={t.common.seeAll} tone="card">
-          <ProductRail products={collections.deals} />
-        </Section>
-      ) : null}
-      {collections.featured.length ? (
-        <Section title={t.home.featuredTitle} href="/recherche" linkLabel={t.common.seeAll}>
-          <ProductRail products={collections.featured} />
-        </Section>
-      ) : null}
-      {collections.bestSellers.length ? (
-        <Section title={t.home.bestTitle} href="/recherche?tri=meilleures-ventes" linkLabel={t.common.seeAll} tone="card">
+    promos: () =>
+      promos.length ? (
+        <section key="promos" className="container-page py-4 sm:py-6">
+          <ul className={cn("grid gap-3 sm:gap-4", promos.length > 1 && "md:grid-cols-2", promos.length > 2 && "xl:grid-cols-3")}>
+            {promos.slice(0, 3).map((b) => {
+              const title = (ar && b.titleAr) || b.title;
+              const subtitle = (ar && b.subtitleAr) || b.subtitle;
+              const cta = (ar && b.ctaLabelAr) || b.ctaLabel;
+              return (
+                <li key={b.id}>
+                  <BannerLink href={b.href} className="group grid h-full grid-cols-[minmax(0,1fr)_42%] overflow-hidden rounded-2xl bg-ink text-ink-foreground">
+                    <span className="flex flex-col justify-center gap-2 p-5 sm:p-6">
+                      <span className="text-lg font-extrabold leading-tight tracking-[-0.02em] sm:text-xl">{title}</span>
+                      {subtitle ? <span className="text-sm leading-6 text-ink-foreground/70">{subtitle}</span> : null}
+                      {cta ? <span className="mt-1 text-sm font-bold text-primary underline-offset-4 group-hover:underline">{cta}</span> : null}
+                    </span>
+                    <span className="relative min-h-36 bg-white">
+                      {b.imageKey ? <StoreImage imageKey={b.imageKey} alt="" fill sizes="(min-width: 768px) 260px, 42vw" className="object-cover" /> : null}
+                    </span>
+                  </BannerLink>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ) : null,
+
+    bestSellers: () =>
+      collections.bestSellers.length ? (
+        <Section key="bestSellers" id="home-best" title={t.home.bestTitle} href="/recherche?tri=meilleures-ventes" linkLabel={t.common.seeAll} locale={locale}>
           <ProductRail products={collections.bestSellers} />
         </Section>
-      ) : null}
-      {collections.newest.length ? (
-        <Section title={t.home.newTitle} href="/recherche?tri=nouveautes" linkLabel={t.common.seeAll}>
+      ) : null,
+
+    deals: () =>
+      collections.deals.length ? (
+        <Section key="deals" id="home-deals" title={t.home.dealsTitle} href="/promotions" linkLabel={t.common.seeAll} locale={locale}>
+          <ProductRail products={collections.deals} />
+        </Section>
+      ) : null,
+
+    newArrivals: () =>
+      collections.newest.length ? (
+        <Section key="newArrivals" id="home-new" title={t.home.newTitle} href="/recherche?tri=nouveautes" linkLabel={t.common.seeAll} locale={locale}>
           <ProductRail products={collections.newest} />
         </Section>
-      ) : null}
+      ) : null,
 
-      <section className="container-page py-10 sm:py-12">
-        <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-          <div className="relative overflow-hidden rounded-3xl bg-ink p-7 text-ink-foreground sm:p-10">
-            <div className="absolute inset-0 bg-showroom opacity-60" aria-hidden />
-            <div className="relative">
-            <h2 className="text-2xl font-bold sm:text-3xl">{t.home.deliveryTitle}</h2>
-            <p className="mt-3 max-w-xl leading-7 text-ink-foreground/75">{t.home.deliveryText}</p>
-            <p className="mt-5 text-sm opacity-80">{t.home.deliveryCities}</p>
-            <ul className="mt-2 flex flex-wrap gap-2">
-              {cities.map((c) => <li key={c} className="rounded-full border border-ink-foreground/15 px-3 py-1 text-sm">{c}</li>)}
-            </ul>
-            <p className="mt-2 text-sm opacity-80">{t.home.deliveryMore}</p>
-            <Link href="/livraison-retours" className="mt-6 inline-block text-sm font-semibold text-brass underline-offset-4 hover:underline">{t.home.deliveryLink}</Link>
-            </div>
-          </div>
-          <div className="flex flex-col justify-between gap-6 rounded-3xl border bg-card p-7 sm:p-10">
+    featured: () =>
+      collections.featured.length ? (
+        <Section key="featured" id="home-featured" title={t.home.featuredTitle} locale={locale}>
+          <ProductRail products={collections.featured} />
+        </Section>
+      ) : null,
+
+    collections: () =>
+      liveCollections.length ? (
+        <div key="collections">
+          {liveCollections.map((c) => (
+            <Section key={c.id} id={`col-${c.id}`} title={(ar && c.titleAr) || c.title || t.home.collectionsFallback} locale={locale}>
+              {(ar ? c.descriptionAr : c.description) ? <p className="-mt-3 mb-5 max-w-2xl text-sm leading-6 text-muted-foreground">{ar ? c.descriptionAr : c.description}</p> : null}
+              <ProductRail products={c.products} />
+            </Section>
+          ))}
+        </div>
+      ) : null,
+
+    brands: () =>
+      topBrands.length ? (
+        <Section key="brands" id="home-brands" title={t.home.brandsTitle} locale={locale}>
+          <ul className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3 lg:grid-cols-6">
+            {topBrands.map((b) => {
+              const logo = logos.get(b.slug);
+              return (
+                <li key={b.id}>
+                  <Link href={`/marque/${b.slug}`} className="flex h-16 flex-col items-center justify-center rounded-xl bg-card px-3 shadow-card ring-1 ring-border/70 transition-shadow hover:shadow-lift sm:h-20">
+                    {logo ? (
+                      <span className="relative h-8 w-full"><StoreImage imageKey={logo} alt={b.name} fill sizes="120px" className="object-contain" /></span>
+                    ) : (
+                      <span className="truncate text-[15px] font-extrabold capitalize tracking-[-0.02em] text-foreground/80">{b.name}</span>
+                    )}
+                    <span className="price text-[11px] text-muted-foreground">{plural(locale, b.count, t.home.categoryCount)}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          {ranking.length > topBrands.length ? (
+            <details className="group mt-4">
+              <summary className="inline-flex min-h-11 cursor-pointer list-none items-center rounded-lg px-1 text-sm font-semibold underline-offset-4 hover:underline [&::-webkit-details-marker]:hidden">
+                {fmt(t.home.brandsMore, { count: ranking.length })}
+              </summary>
+              <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                {ranking.map((b) => (
+                  <li key={b.id}><Link href={`/marque/${b.slug}`} className="capitalize text-muted-foreground hover:text-foreground hover:underline">{b.name}</Link></li>
+                ))}
+              </ul>
+            </details>
+          ) : null}
+        </Section>
+      ) : null,
+
+    service: () => (
+      <section key="service" className="container-page py-8 sm:py-12">
+        <div className="overflow-hidden rounded-2xl bg-card shadow-card ring-1 ring-border/70">
+          <div className="border-b border-border/60 p-5 sm:p-7"><TrustBar freeShippingThreshold={settings.freeShippingThreshold} /></div>
+          <div className="grid gap-5 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div>
-              <h2 className="text-2xl font-bold">{t.home.whatsappTitle}</h2>
-              <p className="mt-3 leading-7 text-muted-foreground">{t.home.whatsappText}</p>
+              <h2 className="text-xl font-extrabold tracking-[-0.02em] sm:text-2xl">{t.home.serviceTitle}</h2>
+              <p className="mt-2 max-w-2xl leading-7 text-muted-foreground">{t.home.serviceText}</p>
             </div>
-            <Button asChild size="lg" className="h-12 w-fit rounded-full bg-[#25D366] px-6 text-base text-[#063f2d] hover:bg-[#25D366]/90">
-              <a href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(t.home.whatsappGreeting)}`} target="_blank" rel="noopener noreferrer"><WhatsAppIcon className="size-5" /> {t.home.whatsappCta}</a>
-            </Button>
+            <div className="flex flex-wrap gap-2.5">
+              <Button asChild size="lg" className="h-12 rounded-xl bg-success-strong px-5 text-base font-semibold text-white hover:bg-success-strong/90">
+                <a href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(t.home.whatsappGreeting)}`} target="_blank" rel="noopener noreferrer"><WhatsAppIcon className="size-5" /> {t.home.whatsappCta}</a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="h-12 rounded-xl px-5 text-base">
+                <a href={`tel:${settings.phone.replace(/\s/g, "")}`}><Phone aria-hidden /> {t.home.serviceCall}</a>
+              </Button>
+              <Button asChild size="lg" variant="ghost" className="h-12 rounded-xl px-4 text-base">
+                <Link href="/suivi-commande"><Package aria-hidden /> {t.home.serviceTrack}</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
+    ),
 
-      {brands.length ? (
-        <Section title={t.home.brandsTitle}>
-          <ul className="flex flex-wrap gap-3">
-            {brands.map((b) => (
-              <li key={b.id}>
-                <Link href={`/marque/${b.slug}`} className="flex h-14 min-w-28 items-center justify-center rounded-xl border bg-card px-5 transition-colors hover:border-primary/40">
-                  {b.logoKey ? (
-                    <span className="relative h-7 w-20"><StoreImage imageKey={b.logoKey} alt={b.name} fill sizes="80px" className="object-contain" /></span>
-                  ) : (
-                    <span className="font-heading text-[15px] font-bold text-foreground/75">{b.name}</span>
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      ) : null}
-
-      <section className="container-page pb-4 pt-6">
+    seo: () => (
+      <section key="seo" className="container-page pb-6 pt-4">
         <div className="max-w-3xl">
-          <h2 className="mb-3 text-xl font-bold">{locale === "fr" && seo.homeSeoHeading ? seo.homeSeoHeading : t.home.seoTitle}</h2>
+          <h2 className="mb-3 text-lg font-bold">{!ar && seo.homeSeoHeading ? seo.homeSeoHeading : t.home.seoTitle}</h2>
           <div className="prose-store text-muted-foreground">
             {seoParagraphs.map((para, i) => <p key={i} className="whitespace-pre-line">{para}</p>)}
           </div>
+          <nav aria-label={t.header.categories} className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+            {categories.map((c) => (
+              <Link key={c.id} href={`/categorie/${c.slug}`} className="font-medium underline-offset-4 hover:underline">{localName(locale, c)}</Link>
+            ))}
+          </nav>
         </div>
       </section>
+    ),
+  };
+
+  const sections = resolveSections(storefront.sections);
+  // The hero carries the page's only <h1>: if an admin hides it, keep the heading for SEO and screen readers.
+  const heroHidden = !sections.find((s) => s.key === "hero")?.visible;
+  return (
+    <>
+      {heroHidden ? <h1 className="sr-only">{h1}</h1> : null}
+      {sections.filter((s) => s.visible).map((s) => render[s.key]())}
     </>
   );
 }

@@ -7,6 +7,7 @@ import { ProductGallery } from "@/components/store/product-gallery";
 import { ProductBuyBox } from "@/components/store/product-buy-box";
 import { ProductDescription } from "@/components/store/product-description";
 import { ProductRail } from "@/components/store/product-card";
+import { RecentlyViewed, TrackRecentlyViewed } from "@/components/store/saved-products";
 import { Price } from "@/components/store/price";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Link } from "@/i18n/client";
@@ -116,31 +117,32 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
           )}
         />
       ) : null}
+      <TrackRecentlyViewed productId={product.id} />
       <div className="container-page space-y-6 py-5 sm:py-8">
         <Breadcrumbs items={crumbs} />
 
         <div className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12">
-          <div className="lg:sticky lg:top-36 lg:self-start">
+          <div className="lg:sticky lg:top-40 lg:self-start">
             <ProductGallery images={product.images.map((i) => ({ key: i.key, alt: i.alt }))} name={name} />
           </div>
 
           <div className="space-y-6">
             <div className="space-y-2">
               {product.brand ? (
-                <Link href={`/marque/${product.brand.slug}`} className="text-sm font-semibold text-primary hover:underline" title={fmt(t.product.viewBrand, { brand: product.brand.name })}>
+                <Link href={`/marque/${product.brand.slug}`} className="text-sm font-semibold text-orange-strong hover:underline" title={fmt(t.product.viewBrand, { brand: product.brand.name })}>
                   {product.brand.name}
                 </Link>
               ) : null}
-              <h1 className="text-2xl font-bold leading-tight sm:text-[2rem]">{ar ? name : meta.h1 || name}</h1>
+              <h1 className="text-[1.625rem] font-extrabold leading-tight tracking-[-0.03em] sm:text-[2rem]">{ar ? name : meta.h1 || name}</h1>
               <p className="text-xs text-muted-foreground">{t.product.ref} <span dir="ltr">{product.sku}</span></p>
             </div>
 
             <div className="space-y-1.5 border-y py-5">
               <div className="flex flex-wrap items-center gap-3">
                 <Price price={product.price} compareAtPrice={product.compareAtPrice} size="lg" />
-                {off ? <span dir="ltr" className="rounded-md bg-destructive px-2 py-1 text-sm font-bold text-white">-{off}%</span> : null}
+                {off ? <span dir="ltr" className="price rounded-md bg-primary px-2 py-1 text-sm font-bold text-primary-foreground">-{off}%</span> : null}
               </div>
-              {off && product.compareAtPrice ? <p className="text-sm font-medium text-success">{fmt(t.product.youSave, { amount: price(product.compareAtPrice - product.price) })}</p> : null}
+              {off && product.compareAtPrice ? <p className="text-sm font-semibold text-success-strong">{fmt(t.product.youSave, { amount: price(product.compareAtPrice - product.price) })}</p> : null}
               <p className="text-xs text-muted-foreground">{t.product.priceTtc}</p>
             </div>
 
@@ -150,7 +152,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
               ) : lowStock ? (
                 <><CircleAlert className="size-4 text-amber-600" aria-hidden /> <span className="text-amber-800 dark:text-amber-400">{fmt(t.product.lowStock, { count: product.stock })}</span></>
               ) : (
-                <><CheckCircle2 className="size-4 text-success" aria-hidden /> <span className="text-success">{t.product.inStockReady}</span></>
+                <><CheckCircle2 className="size-4 text-success" aria-hidden /> <span className="text-success-strong">{t.product.inStockReady}</span></>
               )}
             </p>
 
@@ -162,10 +164,10 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
               product={{ productId: product.id, slug: product.slug, name, price: product.price, imageKey: product.images[0]?.key ?? null, maxQuantity: product.stock }}
             />
 
-            <ul className="divide-y rounded-2xl border bg-card" aria-label={t.product.keyFacts}>
+            <ul className="divide-y overflow-hidden rounded-xl bg-card shadow-card ring-1 ring-border/70" aria-label={t.product.keyFacts}>
               {facts.map(({ icon: Icon, label, hint }) => (
-                <li key={label} className="flex items-start gap-3 px-4 py-3.5">
-                  <Icon className="mt-0.5 size-5 shrink-0 text-primary" strokeWidth={1.75} aria-hidden />
+                <li key={label} className="flex items-center gap-3 px-4 py-3">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent text-orange-strong"><Icon className="size-4.5" strokeWidth={1.9} aria-hidden /></span>
                   <span className="min-w-0 text-sm">
                     <span className="block font-medium">{label}</span>
                     {hint ? <span className="block text-xs text-muted-foreground">{hint}</span> : null}
@@ -179,7 +181,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
         <div className={cn("grid grid-cols-[minmax(0,1fr)] gap-6 pt-10 lg:gap-10", specs.length && "lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]")}>
           <div className="space-y-6">
             {description ? (
-              <section aria-labelledby="desc-title" className="rounded-3xl border bg-card p-6 sm:p-8">
+              <section aria-labelledby="desc-title" className="rounded-2xl bg-card shadow-card ring-1 ring-border/70 p-6 sm:p-8">
                 <h2 id="desc-title" className="mb-5 text-xl font-bold tracking-[-0.01em]">{t.product.description}</h2>
                 {description.lang ? <p className="mb-3 text-xs text-muted-foreground">{t.product.frenchOnly}</p> : null}
                 <div lang={description.lang} dir={description.lang ? "ltr" : undefined} className={cn(description.lang && "text-start")}>
@@ -187,7 +189,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
                 </div>
               </section>
             ) : null}
-            <Accordion type="multiple" defaultValue={faq.length ? ["faq"] : []} className="rounded-3xl border bg-card px-6 sm:px-8">
+            <Accordion type="multiple" defaultValue={faq.length ? ["faq"] : []} className="rounded-2xl bg-card shadow-card ring-1 ring-border/70 px-6 sm:px-8">
               {faq.length ? (
                 <AccordionItem value="faq">
                   <AccordionTrigger className="text-base font-semibold">{t.product.faq}</AccordionTrigger>
@@ -209,13 +211,13 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
                   <p>{t.product.deliveryText}</p>
                   {settings.freeShippingThreshold > 0 ? <p>{fmt(t.product.deliveryFreeText, { amount: price(settings.freeShippingThreshold) })}</p> : null}
                   <p>{t.product.codText}</p>
-                  <p><Link href="/livraison-retours" className="font-medium text-primary hover:underline">{t.footer.shipping}</Link></p>
+                  <p><Link href="/livraison-retours" className="font-medium text-orange-strong hover:underline">{t.footer.shipping}</Link></p>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
           </div>
           {specs.length ? (
-            <section aria-labelledby="specs-title" className="h-fit rounded-3xl border bg-card p-6 sm:p-8 lg:sticky lg:top-40">
+            <section aria-labelledby="specs-title" className="h-fit rounded-2xl bg-card shadow-card ring-1 ring-border/70 p-6 sm:p-8 lg:sticky lg:top-40">
               <h2 id="specs-title" className="mb-5 text-xl font-bold tracking-[-0.01em]">{t.product.specs}</h2>
               <dl className="divide-y text-sm" lang={ar ? "fr" : undefined} dir={ar ? "ltr" : undefined}>
                 {specs.map((s, i) => (
@@ -231,11 +233,12 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/produit
       </div>
 
       {related.length ? (
-        <section className="container-page py-10">
-          <h2 className="mb-7 text-[1.75rem] font-bold leading-tight tracking-[-0.02em]">{t.product.related}</h2>
+        <section className="container-page py-8 sm:py-10" aria-labelledby="related-title">
+          <h2 id="related-title" className="mb-5 text-[1.375rem] font-extrabold tracking-[-0.025em] sm:text-[1.75rem]">{t.product.related}</h2>
           <ProductRail products={related} />
         </section>
       ) : null}
+      <RecentlyViewed excludeId={product.id} />
     </div>
   );
 }

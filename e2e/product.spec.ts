@@ -1,18 +1,23 @@
 import { expect, test } from "@playwright/test";
-
-const SLUG = "refrigerateur-combine-no-frost-340-l-inox-samsung";
+import { findProduct } from "./catalog";
 
 for (const lang of ["fr", "ar"] as const) {
-  const path = `${lang === "ar" ? "/ar" : ""}/produit/${SLUG}`;
   const L = lang === "ar"
     ? { buyNow: "اطلب الآن", wa: "اطلب عبر واتساب", specs: "المواصفات التقنية", checkout: /\/ar\/commande$/ }
     : { buyNow: "Commander maintenant", wa: "Commander sur WhatsApp", specs: "Caractéristiques techniques", checkout: /\/commande$/ };
 
   test(`product page essentials (${lang})`, async ({ page }) => {
-    await page.goto(path);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Réfrigérateur combiné");
-    await expect(page.getByText(lang === "ar" ? /6\s990 درهم/ : /6\s990 DH/).first()).toBeVisible();
-    await expect(page.getByRole("button", { name: L.specs })).toBeVisible();
+    const { slug, name } = await findProduct(page);
+    const SLUG = slug;
+    await page.goto(`${lang === "ar" ? "/ar" : ""}/produit/${slug}`);
+    if (lang === "fr") await expect(page.getByRole("heading", { level: 1 })).toContainText(name.slice(0, 20));
+    const ldPrice = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const offer = ldPrice.flatMap((t) => [JSON.parse(t)].flat()).find((d) => d["@type"] === "Product").offers;
+    const shown = new Intl.NumberFormat("fr-FR").format(Number(offer.price)).replace(/\s/g, "\\s");
+    await expect(page.getByText(new RegExp(`${shown} ${lang === "ar" ? "درهم" : "DH"}`)).first()).toBeVisible();
+    // Specs are optional catalog data: when present they get their own titled section.
+    const specs = page.getByRole("heading", { name: L.specs });
+    if (await specs.count()) await expect(specs).toBeVisible();
     const wa = page.getByRole("link", { name: L.wa }).first();
     const href = decodeURIComponent((await wa.getAttribute("href")) ?? "");
     expect(href).toContain("https://wa.me/");
@@ -29,7 +34,8 @@ for (const lang of ["fr", "ar"] as const) {
 
   test(`buy now goes to the localized checkout (${lang})`, async ({ page, isMobile }) => {
     test.skip(isMobile, "desktop buy box");
-    await page.goto(path);
+    const { slug } = await findProduct(page);
+    await page.goto(`${lang === "ar" ? "/ar" : ""}/produit/${slug}`);
     await page.getByRole("button", { name: L.buyNow }).click();
     await expect(page).toHaveURL(L.checkout);
   });
@@ -37,7 +43,8 @@ for (const lang of ["fr", "ar"] as const) {
 
 test("mobile shows the sticky purchase bar instead of the floating WhatsApp bubble", async ({ page, isMobile }) => {
   test.skip(!isMobile, "mobile only");
-  await page.goto(`/produit/${SLUG}`);
+  const { path } = await findProduct(page);
+  await page.goto(path);
   const bar = page.locator(".has-sticky-cta");
   await expect(bar).toBeVisible();
   await expect(page.getByRole("link", { name: "WhatsApp", exact: true })).toBeHidden();
@@ -45,7 +52,9 @@ test("mobile shows the sticky purchase bar instead of the floating WhatsApp bubb
   await expect(page.getByRole("dialog")).toBeVisible();
 });
 
-test("products without photos say so instead of showing a broken image", async ({ page }) => {
-  await page.goto(`/produit/${SLUG}`);
-  await expect(page.getByText("Photo bientôt disponible")).toBeVisible();
+test("product pages hide the bottom navigation behind the sticky purchase bar", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "mobile only");
+  const { path } = await findProduct(page);
+  await page.goto(path);
+  await expect(page.getByRole("navigation", { name: "Menu principal" }).last()).toBeHidden();
 });

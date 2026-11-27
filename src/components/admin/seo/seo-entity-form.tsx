@@ -291,11 +291,11 @@ export function SeoEntityForm({ kind, id, initial, imageKey, publicPath, isPubli
             </CardContent>
           </Card>
           {isPublic ? (
-            <a href={publicPath} target="_blank" rel="noopener" className="flex items-center gap-1.5 text-sm text-primary hover:underline">Voir la page publique <ExternalLink className="size-3.5" /></a>
+            <a href={publicPath} target="_blank" rel="noopener" className="flex items-center gap-1.5 text-sm text-orange-strong hover:underline">Voir la page publique <ExternalLink className="size-3.5" /></a>
           ) : (
             <p className="text-sm text-muted-foreground">Cette page n&apos;est pas visible en boutique ({isCategory ? "catégorie masquée" : "produit non actif"}).</p>
           )}
-          {kind === "product" ? <Link href={`/admin/products/${id}`} className="block text-sm text-primary hover:underline">Ouvrir la fiche produit complète</Link> : <Link href="/admin/categories" className="block text-sm text-primary hover:underline">Gérer les catégories</Link>}
+          {kind === "product" ? <Link href={`/admin/products/${id}`} className="block text-sm text-orange-strong hover:underline">Ouvrir la fiche produit complète</Link> : <Link href="/admin/categories" className="block text-sm text-orange-strong hover:underline">Gérer les catégories</Link>}
         </div>
       </div>
 

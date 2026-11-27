@@ -9,7 +9,7 @@ export default async function NotFound() {
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center gap-6 p-6 text-center">
       <Logo />
-      <p className="font-heading text-7xl font-extrabold text-primary">404</p>
+      <p className="font-heading text-7xl font-extrabold text-orange-strong">404</p>
       <div className="space-y-2">
         <h1 className="text-2xl font-bold">{t.notFound.title}</h1>
         <p className="text-muted-foreground">{t.notFound.text}</p>

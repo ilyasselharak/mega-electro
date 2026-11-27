@@ -80,7 +80,7 @@ export default async function SeoDashboardPage() {
 
       <div className="mt-6 grid gap-6 xl:grid-cols-2">
         <Card>
-          <CardHeader><CardTitle className="flex items-center gap-2"><MapIcon className="size-4.5 text-primary" /> SEO technique</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="flex items-center gap-2"><MapIcon className="size-4.5 text-orange-strong" /> SEO technique</CardTitle></CardHeader>
           <CardContent>
             <ul className="space-y-3">
               <StatusLine ok={baseOk} warn={!baseOk}>
@@ -91,12 +91,12 @@ export default async function SeoDashboardPage() {
               <StatusLine ok={seo.robotsIndex}>Indexation globale : {seo.robotsIndex ? "autorisée" : "BLOQUÉE (noindex)"}{seo.robotsFollow ? "" : " · nofollow"}</StatusLine>
               <StatusLine ok>
                 Sitemap XML : {sitemapCategories} catégories, {sitemapProducts} produits{seo.sitemapIncludeBrands ? `, ${overview.brandCount} marques` : ""}{seo.sitemapIncludeImages ? " + images" : ""}.{" "}
-                <a href="/sitemap.xml" target="_blank" rel="noopener" className="inline-flex items-center gap-1 text-primary hover:underline">Ouvrir <ExternalLink className="size-3" /></a>
+                <a href="/sitemap.xml" target="_blank" rel="noopener" className="inline-flex items-center gap-1 text-orange-strong hover:underline">Ouvrir <ExternalLink className="size-3" /></a>
               </StatusLine>
               <StatusLine ok>
                 robots.txt : zones privées bloquées (admin, panier, commande, compte), pages produits et catégories autorisées
                 {seo.robotsExtraDisallow.trim() ? ` · ${seo.robotsExtraDisallow.trim().split("\n").length} règle(s) personnalisée(s)` : ""}.{" "}
-                <a href="/robots.txt" target="_blank" rel="noopener" className="inline-flex items-center gap-1 text-primary hover:underline">Ouvrir <ExternalLink className="size-3" /></a>
+                <a href="/robots.txt" target="_blank" rel="noopener" className="inline-flex items-center gap-1 text-orange-strong hover:underline">Ouvrir <ExternalLink className="size-3" /></a>
               </StatusLine>
               <StatusLine ok={Boolean(seo.googleVerification)} warn>
                 Google Search Console : {seo.googleVerification ? "balise de validation installée" : "aucune balise de validation (facultatif si le domaine est validé par DNS)"}
@@ -109,7 +109,7 @@ export default async function SeoDashboardPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2"><FileCode2 className="size-4.5 text-primary" /> Données structurées (JSON-LD)</CardTitle>
+            <CardTitle className="flex items-center gap-2"><FileCode2 className="size-4.5 text-orange-strong" /> Données structurées (JSON-LD)</CardTitle>
             <CardDescription>Uniquement des données réelles du catalogue. Modifiables dans Paramètres SEO → Données structurées.</CardDescription>
           </CardHeader>
           <CardContent>
@@ -141,7 +141,7 @@ export default async function SeoDashboardPage() {
       <Card className="mt-6">
         <CardHeader className="flex flex-row items-center justify-between gap-3">
           <div><CardTitle>Priorités</CardTitle><CardDescription>Pages visibles avec le score SEO le plus bas.</CardDescription></div>
-          <Link href="/admin/seo/categories?filtre=incomplete" className="flex items-center gap-1 text-sm font-medium text-primary hover:underline">Catégories <ArrowRight className="size-4" /></Link>
+          <Link href="/admin/seo/categories?filtre=incomplete" className="flex items-center gap-1 text-sm font-medium text-orange-strong hover:underline">Catégories <ArrowRight className="size-4" /></Link>
         </CardHeader>
         <CardContent>
           {priorities.length ? (
@@ -149,7 +149,7 @@ export default async function SeoDashboardPage() {
               {priorities.map((r) => (
                 <li key={`${r.kind}-${r.id}`} className="flex flex-wrap items-center gap-3 py-2.5">
                   <span className="w-20 text-xs uppercase tracking-wide text-muted-foreground">{r.kind === "category" ? "Catégorie" : "Produit"}</span>
-                  <Link href={`/admin/seo/edit/${r.kind}/${r.id}`} className="min-w-0 flex-1 truncate font-medium hover:text-primary hover:underline">{r.name}</Link>
+                  <Link href={`/admin/seo/edit/${r.kind}/${r.id}`} className="min-w-0 flex-1 truncate font-medium hover:text-orange-strong hover:underline">{r.name}</Link>
                   <SeoStatusBadge status={r.status} />
                   <ScoreBar score={r.score} />
                 </li>

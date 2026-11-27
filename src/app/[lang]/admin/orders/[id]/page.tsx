@@ -90,7 +90,7 @@ export default async function OrderDetailPage({ params }: PageProps<"/[lang]/adm
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
               <p className="flex items-center gap-2.5"><User className="size-4 text-muted-foreground" /> {order.fullName}</p>
-              <p className="flex items-center gap-2.5"><Phone className="size-4 text-muted-foreground" /> <a href={`tel:${order.phone}`} className="font-mono text-primary hover:underline">{order.phone}</a></p>
+              <p className="flex items-center gap-2.5"><Phone className="size-4 text-muted-foreground" /> <a href={`tel:${order.phone}`} className="font-mono text-orange-strong hover:underline">{order.phone}</a></p>
               <p className="flex items-start gap-2.5"><MapPin className="mt-0.5 size-4 text-muted-foreground" /> <span>{order.address}<br /><strong>{order.city}</strong></span></p>
               {order.email ? <p className="text-muted-foreground">{order.email}</p> : null}
               {order.user ? <p className="text-xs text-muted-foreground">Compte : {order.user.email}</p> : <p className="text-xs text-muted-foreground">Commande invité</p>}

@@ -6,8 +6,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Mega Electro",
     start_url: "/",
     display: "standalone",
-    background_color: "#f2f4f8",
-    theme_color: "#0b1a3a",
+    background_color: "#f1f5f9",
+    theme_color: "#0f172a",
     lang: "fr-MA",
     icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
   };

@@ -23,8 +23,8 @@ export async function TrustBar({ freeShippingThreshold, className }: { freeShipp
   return (
     <ul className={`grid grid-cols-2 gap-x-4 gap-y-5 lg:grid-cols-4 ${className ?? ""}`}>
       {items.map(({ icon: Icon, title, text }) => (
-        <li key={title} className="flex items-start gap-3">
-          <Icon className="mt-0.5 size-6 shrink-0 text-brass" strokeWidth={1.75} aria-hidden />
+        <li key={title} className="flex items-center gap-3">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent text-orange-strong"><Icon className="size-5" strokeWidth={1.9} aria-hidden /></span>
           <span className="min-w-0">
             <span className="block text-sm font-semibold leading-5">{title}</span>
             <span className="block text-xs leading-5 text-muted-foreground">{text}</span>
@@ -39,15 +39,15 @@ function Column({ title, children }: { title: string; children: React.ReactNode 
   // Collapsed <details> on mobile (short footer); plain open column from md up.
   return (
     <>
-      <details className="group border-b border-primary-foreground/15 md:hidden">
-        <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-sm font-semibold text-ink-foreground/55 [&::-webkit-details-marker]:hidden">
+      <details className="group border-b border-white/10 md:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-sm font-semibold text-white/60 [&::-webkit-details-marker]:hidden">
           {title}
           <ChevronDown className="size-4 transition-transform group-open:rotate-180" aria-hidden />
         </summary>
         <div className="pb-5">{children}</div>
       </details>
       <div className="hidden md:block">
-        <h2 className="mb-4 text-sm font-semibold text-ink-foreground/55">{title}</h2>
+        <h2 className="mb-4 text-sm font-semibold text-white/60">{title}</h2>
         {children}
       </div>
     </>
@@ -60,7 +60,7 @@ export async function Footer() {
   const year = new Date().getFullYear();
   const link = "opacity-80 transition-opacity hover:opacity-100";
   return (
-    <footer className="mt-16 bg-ink text-ink-foreground">
+    <footer className="mt-10 bg-ink text-ink-foreground">
       <div className="container-page grid gap-x-10 py-10 md:grid-cols-2 md:gap-y-10 md:py-14 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
         <div className="space-y-4 pb-6 md:pb-0">
           <Logo tone="inverse" />
@@ -73,7 +73,7 @@ export async function Footer() {
         </div>
         <Column title={t.header.categories}>
           <ul className="space-y-2.5 text-sm">
-            {categories.slice(0, 8).map((c) => (
+            {categories.slice(0, 10).map((c) => (
               <li key={c.id}><Link href={`/categorie/${c.slug}`} className={link}>{localName(locale, c)}</Link></li>
             ))}
           </ul>
@@ -82,6 +82,8 @@ export async function Footer() {
           <ul className="space-y-2.5 text-sm">
             {[
               ["/suivi-commande", t.footer.trackOrder],
+              ["/favoris", t.wishlist.title],
+              ["/promotions", t.header.promotions],
               ["/livraison-retours", t.footer.shipping],
               ["/a-propos", t.footer.about],
               ["/contact", t.footer.contactPage],
@@ -101,7 +103,7 @@ export async function Footer() {
           </ul>
         </Column>
       </div>
-      <div className="border-t border-primary-foreground/15">
+      <div className="border-t border-white/10">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-5 text-xs opacity-75 sm:flex-row">
           <p>© {year} {settings.storeName}. {t.footer.rights}</p>
           <div className="flex items-center gap-5">

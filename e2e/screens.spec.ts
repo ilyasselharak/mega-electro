@@ -5,7 +5,7 @@ const STAGE = process.env.STAGE ?? "0-before";
 const PAGES: [string, string][] = [
   ["home", "/"],
   ["category", "/categorie/refrigerateurs"],
-  ["product", "/produit/refrigerateur-combine-no-frost-340-l-inox-samsung"],
+  ["product", "/produit/chauffe-eau-gaz-siera-6-litres-blanc"],
   ["cart", "/panier"],
   ["checkout", "/commande"],
 ];

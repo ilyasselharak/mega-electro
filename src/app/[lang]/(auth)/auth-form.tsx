@@ -88,9 +88,9 @@ export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
       </form>
       <p className="text-center text-sm text-muted-foreground">
         {mode === "sign-in" ? (
-          <>{t.auth.noAccount} <Link href={`/inscription${next ? `?next=${encodeURIComponent(next)}` : ""}`} className="font-medium text-primary hover:underline">{t.auth.signUp}</Link></>
+          <>{t.auth.noAccount} <Link href={`/inscription${next ? `?next=${encodeURIComponent(next)}` : ""}`} className="font-medium text-orange-strong hover:underline">{t.auth.signUp}</Link></>
         ) : (
-          <>{t.auth.haveAccount} <Link href={`/connexion${next ? `?next=${encodeURIComponent(next)}` : ""}`} className="font-medium text-primary hover:underline">{t.auth.submitSignIn}</Link></>
+          <>{t.auth.haveAccount} <Link href={`/connexion${next ? `?next=${encodeURIComponent(next)}` : ""}`} className="font-medium text-orange-strong hover:underline">{t.auth.submitSignIn}</Link></>
         )}
       </p>
       <p className="text-center text-xs text-muted-foreground"><Link href="/" className="hover:underline">{t.auth.back}</Link></p>

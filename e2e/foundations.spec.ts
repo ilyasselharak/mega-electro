@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const PRODUCT = "/produit/refrigerateur-combine-no-frost-340-l-inox-samsung";
+import { findProduct } from "./catalog";
 
 test("French pages are LTR and Arabic pages RTL", async ({ page }) => {
   await page.goto("/");
@@ -21,6 +21,7 @@ test("language switch keeps the same page", async ({ page }) => {
 });
 
 test("/fr URLs redirect to the unprefixed French URL", async ({ page }) => {
+  const PRODUCT = (await findProduct(page)).path;
   const res = await page.goto(`/fr${PRODUCT}`);
   expect(res?.status()).toBe(200);
   await expect(page).toHaveURL(new RegExp(`${PRODUCT}$`));
@@ -28,6 +29,7 @@ test("/fr URLs redirect to the unprefixed French URL", async ({ page }) => {
 
 for (const lang of ["fr", "ar"] as const) {
   test(`add to cart opens a working cart drawer (${lang})`, async ({ page }) => {
+    const PRODUCT = (await findProduct(page)).path;
     await page.goto(lang === "ar" ? `/ar${PRODUCT}` : PRODUCT);
     await page.getByRole("button", { name: lang === "ar" ? "أضف إلى السلة" : "Ajouter au panier" }).first().click();
     // Adding opens the cart drawer directly

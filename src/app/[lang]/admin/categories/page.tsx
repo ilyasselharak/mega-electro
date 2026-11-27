@@ -30,7 +30,7 @@ export default async function CategoriesPage() {
               <TableRow key={c.id}>
                 <TableCell className="ps-5">
                   <span className={`flex items-center gap-2.5 ${c.parentId ? "ps-7 text-muted-foreground" : "font-medium"}`}>
-                    {c.parentId ? "↳" : <CategoryIcon name={c.icon} className="size-4 text-primary" />} {c.name}
+                    {c.parentId ? "↳" : <CategoryIcon name={c.icon} className="size-4 text-orange-strong" />} {c.name}
                   </span>
                 </TableCell>
                 <TableCell className="hidden font-mono text-xs text-muted-foreground sm:table-cell">/categorie/{c.slug}</TableCell>

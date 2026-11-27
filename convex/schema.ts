@@ -134,6 +134,48 @@ export const orderItem = v.object({
   lineTotal: v.number(),
 });
 
+/** Homepage banner (Admin → Vitrine). Hero banners replace the default hero; promo banners show as tiles. */
+export const storefrontBanner = v.object({
+  id: v.string(),
+  placement: v.union(v.literal("hero"), v.literal("promo")),
+  title: v.string(),
+  titleAr: v.optional(v.string()),
+  subtitle: v.optional(v.string()),
+  subtitleAr: v.optional(v.string()),
+  ctaLabel: v.optional(v.string()),
+  ctaLabelAr: v.optional(v.string()),
+  /** Site path ("/promotions") or absolute URL. */
+  href: v.string(),
+  /** Cloudinary public_id. */
+  imageKey: v.optional(v.string()),
+  isActive: v.boolean(),
+  /** Campaign window (ms since epoch). Empty = always. */
+  startsAt: v.optional(v.number()),
+  endsAt: v.optional(v.number()),
+});
+
+/** Hand-picked product collection (seasonal, campaign). Products are referenced by SKU. */
+export const storefrontCollection = v.object({
+  id: v.string(),
+  title: v.string(),
+  titleAr: v.optional(v.string()),
+  description: v.optional(v.string()),
+  descriptionAr: v.optional(v.string()),
+  skus: v.array(v.string()),
+  isActive: v.boolean(),
+  startsAt: v.optional(v.number()),
+  endsAt: v.optional(v.number()),
+});
+
+export const storefrontFields = {
+  banners: v.array(storefrontBanner),
+  collections: v.array(storefrontCollection),
+  /** Homepage sections in display order. Unknown keys are ignored; missing ones use the default order. */
+  sections: v.array(v.object({ key: v.string(), visible: v.boolean() })),
+  /** Optional brand colour overrides (#rrggbb). */
+  theme: v.optional(v.object({ accent: v.optional(v.string()), navy: v.optional(v.string()) })),
+};
+
 export default defineSchema({
   settings: defineTable({
     storeName: v.string(),
@@ -276,6 +318,9 @@ export default defineSchema({
   }).index("by_category", ["categoryId"]),
 
   seoSettings: defineTable({ ...seoSettingsFields, updatedAt: v.number() }),
+
+  /** Homepage merchandising (single document): banners, collections, section order, theme colours. */
+  storefront: defineTable({ ...storefrontFields, updatedAt: v.number() }),
 
   /** 301/302 redirects applied by src/proxy.ts. `from` is a site path ("/produit/old-slug"). */
   redirects: defineTable({

@@ -10,7 +10,7 @@ export type UploadedImage = {
   mimeType: string;
 };
 
-export type UploadScope = "products" | "categories" | "brands" | "seo";
+export type UploadScope = "products" | "categories" | "brands" | "seo" | "banners";
 
 export function validateImageFile(file: File): string | null {
   if (!(ALLOWED_IMAGE_TYPES as readonly string[]).includes(file.type)) return `${file.name} : format non supporté (JPEG, PNG, WebP, AVIF)`;

@@ -1,10 +1,10 @@
 import { expect, test, type Page } from "@playwright/test";
+import { ALLOW_ORDERS, findProduct } from "./catalog";
 
-// Uses the cheap iron (449 DH, below the 1 000 DH free-shipping threshold) so the delivery fee shows.
-const CHEAP = "/produit/fer-a-repasser-vapeur-2600-w-tefal";
-const PRICEY = "/produit/refrigerateur-combine-no-frost-340-l-inox-samsung";
-
-async function addAndCheckout(page: Page, lang: "fr" | "ar", path = CHEAP) {
+// The cheapest in-stock product (below the 1 000 DH free-shipping threshold) so the delivery fee shows;
+// the most expensive one to cross the threshold.
+async function addAndCheckout(page: Page, lang: "fr" | "ar", sort: "prix-asc" | "prix-desc" = "prix-asc") {
+  const { path } = await findProduct(page, sort);
   const p = lang === "ar" ? "/ar" : "";
   await page.goto(p + path);
   await page.getByRole("button", { name: lang === "ar" ? "أضف إلى السلة" : "Ajouter au panier" }).first().click();
@@ -33,8 +33,8 @@ test("choosing a city shows the real delivery fee, free above the threshold", as
   await expect(page.getByText("Choisissez votre ville pour voir les frais et le délai.")).toBeVisible();
   await page.getByLabel("Ville *").fill("Casablanca");
   await expect(page.getByText(/Livraison : 30\sDH/)).toBeVisible();
-  // Add the fridge: subtotal > 1 000 DH → free delivery
-  await page.goto(PRICEY);
+  // Add the most expensive product: subtotal > 1 000 DH → free delivery
+  await page.goto((await findProduct(page, "prix-desc")).path);
   await page.getByRole("button", { name: "Ajouter au panier" }).first().click();
   await page.goto("/commande");
   await page.getByLabel("Ville *").fill("Casablanca");
@@ -44,6 +44,7 @@ test("choosing a city shows the real delivery fee, free above the threshold", as
 for (const lang of ["fr", "ar"] as const) {
   test(`a complete order reaches the localized confirmation (${lang})`, async ({ page, isMobile }) => {
     test.skip(isMobile, "one real order per language (dev database)");
+    test.skip(!ALLOW_ORDERS, "writes a real order: run with E2E_ALLOW_ORDERS=1 against a test deployment only");
     await addAndCheckout(page, lang);
     const L = lang === "ar"
       ? { name: "الاسم الكامل *", phone: "رقم الهاتف *", city: "المدينة *", address: "العنوان الكامل *", submit: "تأكيد الطلب", done: "شكراً، تم تسجيل طلبك!" }

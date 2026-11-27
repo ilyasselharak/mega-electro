@@ -16,9 +16,9 @@ export function WhatsAppButton({ number, message, label }: { number: string; mes
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="fixed bottom-5 end-5 z-30 flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/15 transition-transform hover:scale-105 max-lg:[body:has(.has-sticky-cta)_&]:hidden"
+      className="fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] end-4 z-30 flex size-13 items-center justify-center rounded-full bg-success-strong text-white shadow-lift transition-transform hover:scale-105 lg:bottom-6 lg:end-6 lg:size-14 max-lg:[body:has(.has-sticky-cta)_&]:hidden"
     >
-      <WhatsAppIcon className="size-7" />
+      <WhatsAppIcon className="size-6.5" />
     </a>
   );
 }

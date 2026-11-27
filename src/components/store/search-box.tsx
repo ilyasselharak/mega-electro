@@ -20,7 +20,7 @@ function useDebounced<T>(value: T, ms: number) {
   return v;
 }
 
-export function SearchBox({ className, autoFocus, onNavigate }: { className?: string; autoFocus?: boolean; onNavigate?: () => void }) {
+export function SearchBox({ className, autoFocus, onNavigate, id }: { className?: string; autoFocus?: boolean; onNavigate?: () => void; id?: string }) {
   const { t, locale } = useI18n();
   const router = useRouter();
   const listId = useId();
@@ -63,8 +63,9 @@ export function SearchBox({ className, autoFocus, onNavigate }: { className?: st
   return (
     <div ref={wrapper} className={cn("relative", className)}>
       <form role="search" onSubmit={onSubmit} className="relative">
-        <Search className="pointer-events-none absolute start-3.5 top-1/2 size-4.5 -translate-y-1/2 text-muted-foreground" aria-hidden />
+        <Search className="pointer-events-none absolute start-4 top-1/2 size-4.5 -translate-y-1/2 text-muted-foreground" aria-hidden />
         <input
+          id={id}
           type="search"
           name="q"
           value={q}
@@ -92,15 +93,18 @@ export function SearchBox({ className, autoFocus, onNavigate }: { className?: st
               setActive((a) => Math.max(-1, a - 1));
             } else if (e.key === "Escape") setOpen(false);
           }}
-          className="h-11 w-full rounded-full border border-input bg-background ps-10 pe-10 text-sm outline-none transition placeholder:text-muted-foreground focus:border-ring focus:bg-background focus:ring-3 focus:ring-ring/20 [&::-webkit-search-cancel-button]:hidden"
+          className="h-12 w-full rounded-xl border border-input bg-muted/60 ps-11 pe-24 text-[15px] outline-none transition placeholder:text-muted-foreground focus:border-foreground/40 focus:bg-card focus:ring-3 focus:ring-foreground/10 focus-visible:outline-none [&::-webkit-search-cancel-button]:hidden"
         />
         {isFetching ? (
-          <Loader2 className="absolute end-3.5 top-1/2 size-4 -translate-y-1/2 animate-spin text-muted-foreground" />
+          <Loader2 className="absolute end-16 top-1/2 size-4 -translate-y-1/2 animate-spin text-muted-foreground" />
         ) : q ? (
-          <button type="button" onClick={() => setQ("")} className="absolute end-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground hover:bg-muted" aria-label={t.header.clearSearch}>
+          <button type="button" onClick={() => setQ("")} className="absolute end-14 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full text-muted-foreground hover:bg-muted" aria-label={t.header.clearSearch}>
             <X className="size-4" />
           </button>
         ) : null}
+        <button type="submit" className="absolute end-1.5 top-1/2 flex h-9 w-11 -translate-y-1/2 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-colors hover:bg-[#ea580c]" aria-label={t.header.searchLabel}>
+          <Search className="size-4.5" aria-hidden />
+        </button>
       </form>
       {open && items.length > 0 ? (
         <ul id={listId} role="listbox" className="absolute inset-x-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border bg-popover p-1.5 shadow-xl">
@@ -122,12 +126,12 @@ export function SearchBox({ className, autoFocus, onNavigate }: { className?: st
                   <span className="line-clamp-1 text-sm font-medium">{it.name}</span>
                   {it.brand ? <span className="text-xs text-muted-foreground">{it.brand}</span> : null}
                 </span>
-                <span className="text-sm font-semibold tabular-nums">{it.price}</span>
+                <span className="price text-sm font-bold">{it.price}</span>
               </Link>
             </li>
           ))}
           <li>
-            <button type="button" onClick={() => go(`/recherche?q=${encodeURIComponent(q.trim())}`)} className="w-full rounded-xl p-2.5 text-center text-sm font-medium text-primary hover:bg-muted">
+            <button type="button" onClick={() => go(`/recherche?q=${encodeURIComponent(q.trim())}`)} className="w-full rounded-xl p-2.5 text-center text-sm font-semibold text-orange-strong hover:bg-muted">
               {fmt(t.header.seeAllResults, { q: q.trim() })}
             </button>
           </li>

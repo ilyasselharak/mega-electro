@@ -83,12 +83,12 @@ function FilterPanel({ facets }: { facets: ListingResult["facets"] }) {
       {facets.brands.length ? (
         <div role="group" aria-labelledby={`${id}-3`} className="pt-6">
         <h3 id={`${id}-3`} className="mb-3 text-sm font-semibold">{t.listing.brands}</h3>
-          <ul className="space-y-1">
+          <ul className="max-h-80 space-y-0.5 overflow-y-auto pe-1">
             {facets.brands.map((b) => (
               <li key={b.id}>
                 <Label className="flex min-h-9 cursor-pointer items-center gap-2.5 font-normal">
                   <Checkbox checked={selectedBrands.includes(b.slug)} onCheckedChange={(v) => toggleBrand(b.slug, v === true)} />
-                  <span className="flex-1">{b.name}</span>
+                  <span className="flex-1 capitalize">{b.name}</span>
                   <span className="text-xs tabular-nums text-muted-foreground">{b.count}</span>
                 </Label>
               </li>
@@ -106,14 +106,14 @@ export function ListingToolbar({ total, facets }: { total: number; facets: Listi
   const activeCount = FILTER_KEYS.filter((k) => sp.get(k)).length;
   return (
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <p className="flex items-center gap-2 text-sm text-muted-foreground" aria-live="polite">
+      <p className="price flex items-center gap-2 text-sm font-medium text-muted-foreground" aria-live="polite">
         {pending ? <Loader2 className="size-4 animate-spin" aria-hidden /> : null}
         {plural(locale, total, t.listing.resultCount)}
       </p>
       <div className="flex items-center gap-2">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" className="h-10 rounded-full px-4 lg:hidden">
+            <Button variant="outline" className="h-11 rounded-xl px-4 lg:hidden">
               <SlidersHorizontal /> {t.listing.filters}
               {activeCount ? <span className="ms-0.5 flex size-5 items-center justify-center rounded-full bg-primary text-[11px] text-primary-foreground">{activeCount}</span> : null}
             </Button>
@@ -135,7 +135,7 @@ export function ListingToolbar({ total, facets }: { total: number; facets: Listi
           </SheetContent>
         </Sheet>
         <Select value={sp.get("tri") ?? "pertinence"} onValueChange={(v) => update({ tri: v === "pertinence" ? null : v })} dir={locale === "ar" ? "rtl" : "ltr"}>
-          <SelectTrigger className="h-10 w-auto min-w-40 rounded-full" aria-label={t.listing.sortBy}>
+          <SelectTrigger className="h-11 w-auto min-w-40 rounded-xl bg-card" aria-label={t.listing.sortBy}>
             <SelectValue />
           </SelectTrigger>
           <SelectContent align="end">
@@ -151,7 +151,7 @@ export function ListingSidebar({ facets }: { facets: ListingResult["facets"] }) 
   const { t } = useI18n();
   return (
     <aside className="hidden lg:block" aria-label={t.listing.filters}>
-      <div className="sticky top-36 rounded-2xl border bg-card p-5"><FilterPanel facets={facets} /></div>
+      <div className="sticky top-40 rounded-xl bg-card p-5 shadow-card ring-1 ring-border/70"><FilterPanel facets={facets} /></div>
     </aside>
   );
 }
@@ -171,11 +171,11 @@ export function ActiveFilters({ brands }: { brands: { slug: string; name: string
   return (
     <div className="flex flex-wrap items-center gap-2">
       {chips.map((c) => (
-        <button key={c.label} type="button" onClick={() => update(c.clear)} className="inline-flex h-8 items-center gap-1.5 rounded-full border bg-card px-3 text-xs font-medium hover:bg-muted" aria-label={`${c.label} — ${t.common.close}`}>
+        <button key={c.label} type="button" onClick={() => update(c.clear)} className="inline-flex h-9 items-center gap-1.5 rounded-lg border bg-card px-3 text-xs font-medium hover:bg-muted" aria-label={`${c.label} — ${t.common.close}`}>
           {c.label} <X className="size-3" aria-hidden />
         </button>
       ))}
-      <button type="button" onClick={() => update(Object.fromEntries(FILTER_KEYS.map((k) => [k, null])))} className="h-8 px-1 text-xs font-medium text-primary hover:underline">
+      <button type="button" onClick={() => update(Object.fromEntries(FILTER_KEYS.map((k) => [k, null])))} className="h-8 px-1 text-xs font-medium text-orange-strong hover:underline">
         {t.listing.clearAll}
       </button>
     </div>

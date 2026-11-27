@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingBag, Check } from "lucide-react";
+import { ShoppingBag, ShoppingCart, Check } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useCart, type CartLine } from "@/hooks/use-cart";
@@ -37,15 +37,15 @@ export function AddToCartButton({ product, quantity = 1, variant = "full", class
         onClick={onClick}
         disabled={outOfStock}
         aria-label={outOfStock ? t.common.outOfStock : fmt(t.product.addNamed, { name: product.name })}
-        className={cn("size-10 rounded-full", className)}
+        className={cn("size-10 rounded-lg bg-primary text-primary-foreground shadow-none hover:bg-[#ea580c] disabled:bg-muted disabled:text-muted-foreground", className)}
       >
-        {added ? <Check /> : <ShoppingBag />}
+        {added ? <Check /> : <ShoppingCart />}
       </Button>
     );
   }
 
   return (
-    <Button type="button" onClick={onClick} disabled={outOfStock} className={cn("h-12 rounded-xl text-base", className)}>
+    <Button type="button" onClick={onClick} disabled={outOfStock} className={cn("h-12 rounded-xl bg-primary text-base font-bold text-primary-foreground hover:bg-[#ea580c] disabled:bg-muted disabled:text-muted-foreground disabled:opacity-100", className)}>
       {added ? <Check /> : <ShoppingBag />}
       {outOfStock ? t.common.outOfStock : added ? t.product.added : t.product.addToCart}
     </Button>

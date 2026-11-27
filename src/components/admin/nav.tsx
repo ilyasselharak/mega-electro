@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Boxes, LayoutDashboard, Package, Settings, ShoppingCart, Tags, Users, Warehouse, Award, ExternalLink, Link2, SearchCheck, Truck, MessageCircleQuestion } from "lucide-react";
+import { Boxes, LayoutDashboard, Package, Settings, ShoppingCart, Tags, Users, Warehouse, Award, ExternalLink, Link2, SearchCheck, Truck, MessageCircleQuestion, LayoutTemplate } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/admin", label: "Tableau de bord", icon: LayoutDashboard, exact: true },
   { href: "/admin/orders", label: "Commandes", icon: ShoppingCart, badge: "pending" as const },
+  { href: "/admin/vitrine", label: "Vitrine", icon: LayoutTemplate, adminOnly: true },
   { href: "/admin/products", label: "Produits", icon: Package },
   { href: "/admin/categories", label: "Catégories", icon: Tags },
   { href: "/admin/brands", label: "Marques", icon: Award },
@@ -36,7 +37,7 @@ export function AdminNav({ pendingOrders, isAdmin, onNavigate }: { pendingOrders
               active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "text-sidebar-foreground/70 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground",
             )}
           >
-            <Icon className={cn("size-4.5", active && "text-primary")} />
+            <Icon className={cn("size-4.5", active && "text-orange-strong")} />
             <span className="flex-1">{label}</span>
             {badge === "pending" && pendingOrders > 0 ? (
               <span className="rounded-full bg-brass px-2 py-0.5 text-[11px] font-bold text-brass-foreground">{pendingOrders}</span>

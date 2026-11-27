@@ -156,7 +156,7 @@ export function ImageManager({ value, onChange, onUploadingChange, scope = "prod
           ))}
           {pending.map((p) => (
             <li key={p.id} className="flex aspect-square flex-col items-center justify-center gap-2 rounded-xl border bg-muted/50 p-3 text-center">
-              <Loader2 className="size-6 animate-spin text-primary" />
+              <Loader2 className="size-6 animate-spin text-orange-strong" />
               <p className="line-clamp-1 text-xs text-muted-foreground">{p.name}</p>
               <div className="h-1.5 w-full overflow-hidden rounded-full bg-background"><div className="h-full bg-primary transition-all" style={{ width: `${p.progress}%` }} /></div>
             </li>
@@ -186,7 +186,7 @@ export function SingleImageField({ value, onChange, scope }: { value: string | n
   return (
     <div className="flex items-center gap-4">
       <div {...dz.props} className={cn("relative flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-dashed bg-white", dz.over && "border-primary")}>
-        {progress != null ? <Loader2 className="size-6 animate-spin text-primary" /> : value ? <StoreImage imageKey={value} alt="" fill sizes="96px" className="object-contain p-1.5" /> : <ImagePlus className="size-6 text-muted-foreground" />}
+        {progress != null ? <Loader2 className="size-6 animate-spin text-orange-strong" /> : value ? <StoreImage imageKey={value} alt="" fill sizes="96px" className="object-contain p-1.5" /> : <ImagePlus className="size-6 text-muted-foreground" />}
       </div>
       <div className="flex flex-col gap-2">
         <Button type="button" variant="outline" size="sm" onClick={() => input.current?.click()} disabled={progress != null}>{value ? "Remplacer" : "Ajouter une image"}</Button>

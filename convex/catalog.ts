@@ -341,4 +341,48 @@ export const sitemap = query({
   }),
 });
 
+/** Product cards by id (wishlist, recently viewed). Unknown or inactive ids are skipped. */
+export const productCards = query({
+  args: { ids: v.array(v.string()) },
+  handler: async (ctx, { ids }) => {
+    const card = makeCardLoader(ctx);
+    const out = [];
+    for (const id of ids.slice(0, 50)) {
+      const nid = ctx.db.normalizeId("products", id);
+      const p = nid ? await ctx.db.get(nid) : null;
+      if (p && p.status === "ACTIVE") out.push(await card(p));
+    }
+    return out;
+  },
+});
+
+/**
+ * Homepage merchandising. Collections are resolved to product cards (active products only).
+ * Campaign dates are applied by the storefront at render time.
+ */
+export const storefront = query({
+  args: {},
+  handler: async (ctx) => {
+    const doc = await ctx.db.query("storefront").first();
+    if (!doc) return null;
+    const card = makeCardLoader(ctx);
+    const collections = [];
+    for (const c of doc.collections.filter((c) => c.isActive)) {
+      const products = [];
+      for (const sku of c.skus.slice(0, 24)) {
+        const p = await ctx.db.query("products").withIndex("by_sku", (q) => q.eq("sku", sku)).first();
+        if (p && p.status === "ACTIVE") products.push(await card(p));
+      }
+      const { skus: _skus, ...rest } = c;
+      collections.push({ ...rest, products });
+    }
+    return {
+      banners: doc.banners.filter((b) => b.isActive),
+      collections,
+      sections: doc.sections,
+      theme: doc.theme ?? null,
+    };
+  },
+});
+
 export { categoryOut, brandOut };

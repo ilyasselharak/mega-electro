@@ -91,7 +91,7 @@ export default async function ProductsPage({ searchParams }: PageProps<"/[lang]/
                 <TableCell className="pe-5"><ProductRowActions id={p.id} name={p.name} /></TableCell>
               </TableRow>
             ))}
-            {data.items.length === 0 ? <TableRow><TableCell colSpan={6} className="py-12 text-center text-muted-foreground">Aucun produit. <Link href="/admin/products/new" className="text-primary hover:underline">Créer le premier</Link></TableCell></TableRow> : null}
+            {data.items.length === 0 ? <TableRow><TableCell colSpan={6} className="py-12 text-center text-muted-foreground">Aucun produit. <Link href="/admin/products/new" className="text-orange-strong hover:underline">Créer le premier</Link></TableCell></TableRow> : null}
           </TableBody>
         </Table>
       </Card>

@@ -83,7 +83,7 @@ export function RedirectsManager({ redirects }: { redirects: Redirect[] }) {
             {list.map((r) => (
               <TableRow key={r.id}>
                 <TableCell className="ps-5 font-mono text-xs">
-                  <span className="flex flex-wrap items-center gap-1.5"><span>{r.from}</span><ArrowRight className="size-3.5 text-muted-foreground" /><span className="text-primary">{r.to}</span></span>
+                  <span className="flex flex-wrap items-center gap-1.5"><span>{r.from}</span><ArrowRight className="size-3.5 text-muted-foreground" /><span className="text-orange-strong">{r.to}</span></span>
                   {r.note ? <span className="font-sans text-muted-foreground">{r.note}</span> : null}
                 </TableCell>
                 <TableCell className="tabular-nums">{r.statusCode}</TableCell>

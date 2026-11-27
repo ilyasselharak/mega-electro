@@ -64,7 +64,7 @@ export function FreeShippingProgress({ subtotal, threshold }: { subtotal: number
   return (
     <div>
       <p className="flex items-center gap-2 text-sm">
-        <Truck className="size-4 shrink-0 text-primary" aria-hidden />
+        <Truck className="size-4 shrink-0 text-orange-strong" aria-hidden />
         {remaining > 0 ? <span>{fmt(t.cart.freeShippingLeft, { amount: price(remaining) })}</span> : <strong>{t.cart.freeShippingReached}</strong>}
       </p>
       <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(Math.min(100, (subtotal / threshold) * 100))}>

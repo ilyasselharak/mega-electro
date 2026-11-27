@@ -1,6 +1,7 @@
 import { Header } from "@/components/store/header";
 import { Footer } from "@/components/store/footer";
 import { WhatsAppButton } from "@/components/store/whatsapp-button";
+import { BottomNav } from "@/components/store/bottom-nav";
 import { JsonLd } from "@/components/shared/json-ld";
 import { getDictionary } from "@/i18n/server";
 import { getSettings } from "@/server/queries/settings";
@@ -19,6 +20,9 @@ export default async function StoreLayout({ children }: LayoutProps<"/[lang]">) 
       <Header />
       <main id="contenu" className="flex-1">{children}</main>
       <Footer />
+      {/* Spacer so the footer is never hidden behind the mobile bottom navigation. */}
+      <div className="pb-bottom-nav lg:hidden [body:has(.has-sticky-cta)_&]:hidden" aria-hidden />
+      <BottomNav />
       <WhatsAppButton number={settings.whatsapp} message={t.home.whatsappGreeting} label={t.footer.whatsapp} />
     </>
   );

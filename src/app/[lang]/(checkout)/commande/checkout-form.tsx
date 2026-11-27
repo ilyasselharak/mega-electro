@@ -214,7 +214,7 @@ export function CheckoutForm({ defaults, config, whatsapp }: { defaults: { fullN
           <h2 id="sec-payment" className="text-lg font-bold">{t.checkout.payment}</h2>
           {!blocked ? (
             <div className="flex items-start gap-3 rounded-2xl border-2 border-primary bg-primary/5 p-4" role="radio" aria-checked="true">
-              <Wallet className="mt-0.5 size-6 shrink-0 text-primary" aria-hidden />
+              <Wallet className="mt-0.5 size-6 shrink-0 text-orange-strong" aria-hidden />
               <div>
                 <p className="font-semibold">{t.checkout.codLabel}</p>
                 <p className="text-sm text-muted-foreground">{t.checkout.codText}</p>

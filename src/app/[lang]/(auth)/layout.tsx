@@ -6,7 +6,6 @@ export default async function AuthLayout({ children }: LayoutProps<"/[lang]">) {
   return (
     <div className="grid min-h-dvh lg:grid-cols-2">
       <div className="relative hidden overflow-hidden bg-ink text-ink-foreground lg:flex lg:flex-col lg:justify-between lg:p-12">
-        <div className="absolute inset-0 bg-showroom [mask-image:linear-gradient(to_top,black,transparent)]" aria-hidden />
         <Logo tone="inverse" className="relative w-fit" />
         <div className="relative space-y-3">
           <p className="max-w-md font-heading text-5xl font-extrabold leading-[1.05] tracking-[-0.03em]">{t.auth.asideTitle}</p>

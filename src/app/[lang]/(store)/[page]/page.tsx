@@ -47,10 +47,10 @@ export default async function StaticPage({ params }: PageProps<"/[lang]/[page]">
       </div>
       {settings ? (
         <ul className="grid gap-3 sm:grid-cols-2">
-          <li><a href={`tel:${settings.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 rounded-2xl border bg-card p-4 hover:border-primary/40"><Phone className="size-5 text-primary" aria-hidden /><span dir="ltr">{settings.phone}</span></a></li>
-          <li><a href={`https://wa.me/${settings.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border bg-card p-4 hover:border-primary/40"><MessageCircle className="size-5 text-primary" aria-hidden />{t.footer.whatsapp}</a></li>
-          <li><a href={`mailto:${settings.email}`} className="flex items-center gap-3 rounded-2xl border bg-card p-4 hover:border-primary/40"><Mail className="size-5 text-primary" />{settings.email}</a></li>
-          <li className="flex items-center gap-3 rounded-2xl border bg-card p-4"><MapPin className="size-5 text-primary" />{settings.address}</li>
+          <li><a href={`tel:${settings.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 rounded-2xl border bg-card p-4 hover:border-primary/40"><Phone className="size-5 text-orange-strong" aria-hidden /><span dir="ltr">{settings.phone}</span></a></li>
+          <li><a href={`https://wa.me/${settings.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border bg-card p-4 hover:border-primary/40"><MessageCircle className="size-5 text-orange-strong" aria-hidden />{t.footer.whatsapp}</a></li>
+          <li><a href={`mailto:${settings.email}`} className="flex items-center gap-3 rounded-2xl border bg-card p-4 hover:border-primary/40"><Mail className="size-5 text-orange-strong" />{settings.email}</a></li>
+          <li className="flex items-center gap-3 rounded-2xl border bg-card p-4"><MapPin className="size-5 text-orange-strong" />{settings.address}</li>
         </ul>
       ) : null}
     </div>
