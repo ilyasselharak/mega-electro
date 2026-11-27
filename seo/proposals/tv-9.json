@@ -1,0 +1,715 @@
+[
+ {
+  "kind": "product",
+  "slug": "samsung-32-t5300-full-hd-smart-tv",
+  "source": "tv-9",
+  "sources": [
+   "Valeurs de la fiche ; résolution contradictoire avec le nom non reprise"
+  ],
+  "verify": [
+   "Résolution : le nom dit « Full HD », les caractéristiques indiquent 1366 × 768 (HD). Ni l'un ni l'autre n'est publié avant vérification ; nom corrigé sans « Full HD ».",
+   "Garantie « 1 AN » dans les caractéristiques mais champ garantie vide."
+  ],
+  "specsVerified": true,
+  "changes": {
+   "name": "Smart TV Samsung 32 pouces T5300",
+   "nameAr": "تلفاز سامسونج الذكي 32 بوصة T5300",
+   "shortDescription": "Smart TV Samsung T5300 de 32 pouces avec HDR, PurColor, son Dolby Digital Plus et Wi-Fi, pour une chambre ou une cuisine.",
+   "description": "La Samsung T5300 est une Smart TV de 32 pouces, un format pensé pour une chambre, une cuisine ou un petit salon. Elle reste fine (7,4 cm sans pied) et légère (4,1 kg).\n\n### Image\nHDR, PurColor et Mega Contrast améliorent les couleurs et le contraste des contenus compatibles.\n\n### Connectée\nWi-Fi intégré et port Ethernet pour les applications ; 2 entrées HDMI et 1 USB pour un décodeur, une console ou une clé.\n\n### Caractéristiques\n- Taille : 32 pouces\n- Smart TV avec Wi-Fi\n- HDR, PurColor, Mega Contrast\n- Audio : Dolby Digital Plus, 10 W\n- Fréquence : 50 Hz\n- 2 HDMI, 1 USB, Ethernet\n- Dimensions sans pied : 73,7 × 43,8 × 7,4 cm\n- Poids : 4,1 kg\n\nGarantie : 1 an.",
+   "metaTitle": "Smart TV Samsung 32 pouces T5300 – Prix Maroc",
+   "metaDescription": "Smart TV Samsung T5300 32 pouces, HDR, Dolby Digital Plus, Wi-Fi, 2 HDMI. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "تلفاز سامسونج 32 بوصة T5300 بالمغرب",
+    "metaDescriptionAr": "تلفاز سامسونج الذكي T5300 مقاس 32 بوصة، HDR وDolby Digital Plus وواي فاي. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "تلفاز سامسونج الذكي T5300 مقاس 32 بوصة مع HDR وPurColor وصوت Dolby Digital Plus وواي فاي، لغرفة النوم أو المطبخ.",
+    "descriptionAr": "سامسونج T5300 تلفاز ذكي مقاس 32 بوصة لغرفة النوم أو المطبخ أو صالون صغير، رفيع (7.4 سم بدون قاعدة) وخفيف (4.1 كلغ).\n\n### الصورة\nHDR وPurColor وMega Contrast لألوان وتباين أفضل.\n\n### متصل\nواي فاي ومنفذ إيثرنت، منفذا HDMI ومنفذ USB.\n\n### المواصفات\n- المقاس: 32 بوصة\n- تلفاز ذكي بواي فاي\n- HDR وPurColor\n- صوت Dolby Digital Plus\n- 2 HDMI و1 USB\n- الوزن: 4.1 كلغ\n\nالضمان: سنة.",
+    "keywords": "Smart TV Samsung 32 pouces, Samsung T5300, TV Samsung chambre, petite Smart TV, prix TV Samsung 32 pouces Maroc",
+    "keywordsAr": "تلفاز سامسونج 32 بوصة, تلفزة سامسونج, شاشة سامسونج صغيرة, تلفاز ذكي, ثمن تلفاز سامسونج في المغرب"
+   },
+   "faq": [
+    {
+     "question": "À quelle distance regarder un 32 pouces ?",
+     "answer": "Pour un 32 pouces, environ 1,3 à 2 mètres est confortable : plus près en 4K, un peu plus loin en HD.",
+     "questionAr": "على شحال من مسافة نشوف تلفزة 32 بوصة؟",
+     "answerAr": "تقريبا بين 1.3 و2 متر، أقرب شوية فالـ4K."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/wrryedmduun0nmlayrus",
+     "alt": "Smart TV Samsung 32 pouces T5300",
+     "altAr": "تلفاز سامسونج الذكي 32 بوصة T5300"
+    },
+    {
+     "key": "mega-electro/products/zq3mebroxux56nuehjmr",
+     "alt": "Smart TV Samsung 32 pouces T5300, vue 2",
+     "altAr": "تلفاز سامسونج الذكي 32 بوصة T5300، صورة 2"
+    },
+    {
+     "key": "mega-electro/products/h5ecqkkcdsvakkgmkutg",
+     "alt": "Smart TV Samsung 32 pouces T5300, vue 3",
+     "altAr": "تلفاز سامسونج الذكي 32 بوصة T5300، صورة 3"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Taille d'écran",
+     "value": "32 pouces"
+    },
+    {
+     "label": "Type d'écran",
+     "value": "LED"
+    },
+    {
+     "label": "Smart TV",
+     "value": "Oui"
+    },
+    {
+     "label": "Fréquence",
+     "value": "50 Hz"
+    },
+    {
+     "label": "Puissance sonore",
+     "value": "10 W"
+    },
+    {
+     "label": "Wi-Fi intégré",
+     "value": "Oui"
+    },
+    {
+     "label": "Entrées HDMI",
+     "value": "2"
+    },
+    {
+     "label": "Entrée USB",
+     "value": "1"
+    },
+    {
+     "label": "Ethernet (RJ45)",
+     "value": "Oui"
+    },
+    {
+     "label": "Bluetooth",
+     "value": "Non"
+    },
+    {
+     "label": "Vidéo",
+     "value": "HDR / PurColor / Mega Contrast"
+    },
+    {
+     "label": "Audio",
+     "value": "Dolby Digital Plus"
+    },
+    {
+     "label": "Dimensions avec pied",
+     "value": "73,7 × 46,5 × 15,1 cm"
+    },
+    {
+     "label": "Dimensions sans pied",
+     "value": "73,7 × 43,8 × 7,4 cm"
+    },
+    {
+     "label": "Poids",
+     "value": "4,1 kg"
+    },
+    {
+     "label": "Garantie",
+     "value": "1 an"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "smart-tv-50-morsat-android-14-4k-uhd-rcepteur-tnt",
+  "source": "tv-9",
+  "sources": [
+   "Valeurs de la fiche et de l'ancienne description Mega Electro (aucune valeur ajoutée)"
+  ],
+  "verify": [
+   "Récepteur TNT cité dans le nom, non détaillé. Garantie vide.",
+   "Allégations marketing de l'ancienne description (« catalogue illimité », « efficacité énergétique maximale ») non reprises."
+  ],
+  "specsVerified": true,
+  "changes": {
+   "name": "Smart TV Morsat 50 pouces 4K UHD Android 14",
+   "nameAr": "تلفاز مورسات الذكي 50 بوصة 4K بنظام أندرويد 14",
+   "shortDescription": "Smart TV Morsat de 50 pouces en 4K UHD sous Android 14, écran sans bordure, 3 HDMI et 2 USB.",
+   "description": "La Morsat 50 pouces (127 cm) affiche en 4K UHD et fonctionne sous Android 14 pour installer les applications de streaming. Son écran sans bordure met l'image en avant dans le salon.\n\n### 4K et rétroéclairage D-LED\nQuatre fois plus de pixels que le Full HD, pour un rendu plus détaillé sur un grand écran.\n\n### Connectique\n3 ports HDMI (console, décodeur, barre de son) et 2 ports USB pour lire des vidéos depuis une clé ou un disque.\n\n### Caractéristiques\n- Taille : 50 pouces (127 cm)\n- Résolution : 4K UHD\n- Rétroéclairage : D-LED\n- Système : Android 14\n- 3 HDMI, 2 USB\n- Récepteur TNT\n- Écran sans bordure",
+   "metaTitle": "Smart TV Morsat 50 pouces 4K Android 14 – Prix Maroc",
+   "metaDescription": "Smart TV Morsat 50 pouces 4K UHD sous Android 14, écran sans bordure, 3 HDMI et récepteur TNT. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "تلفاز مورسات 50 بوصة 4K بالمغرب",
+    "metaDescriptionAr": "تلفاز مورسات الذكي 50 بوصة 4K بنظام أندرويد 14، شاشة بدون إطار و3 منافذ HDMI. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "تلفاز مورسات الذكي 50 بوصة بدقة 4K بنظام أندرويد 14، شاشة بدون إطار، 3 منافذ HDMI و2 USB.",
+    "descriptionAr": "مورسات 50 بوصة (127 سم) بدقة 4K ونظام أندرويد 14 لتثبيت تطبيقات البث، بشاشة بدون إطار.\n\n### 4K\nأربع مرات بكسلات أكثر من Full HD.\n\n### التوصيلات\n3 منافذ HDMI ومنفذا USB.\n\n### المواصفات\n- المقاس: 50 بوصة\n- الدقة: 4K\n- أندرويد 14\n- 3 HDMI و2 USB\n- مستقبل TNT",
+    "keywords": "Smart TV Morsat 50 pouces, TV 4K Android 14, Morsat 4K UHD, TV 50 pouces pas chère, prix TV Morsat Maroc",
+    "keywordsAr": "تلفاز مورسات 50 بوصة, تلفزة 4K, شاشة أندرويد, تلفاز 50 بوصة رخيص, ثمن تلفاز مورسات في المغرب"
+   },
+   "faq": [
+    {
+     "question": "À quelle distance regarder un 50 pouces ?",
+     "answer": "Pour un 50 pouces en 4K, environ 2 à 3 mètres est confortable : plus près en 4K, un peu plus loin en HD.",
+     "questionAr": "على شحال من مسافة نشوف تلفزة 50 بوصة؟",
+     "answerAr": "تقريبا بين 2 و3 متر، أقرب شوية فالـ4K."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/g5pfl3j1zz6nxcjjsoov",
+     "alt": "Smart TV Morsat 50 pouces 4K UHD",
+     "altAr": "تلفاز مورسات الذكي 50 بوصة 4K"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Marque",
+     "value": "Morsat"
+    },
+    {
+     "label": "Taille d'écran",
+     "value": "50 pouces (127 cm)"
+    },
+    {
+     "label": "Résolution",
+     "value": "4K UHD"
+    },
+    {
+     "label": "Rétroéclairage",
+     "value": "D-LED"
+    },
+    {
+     "label": "Système",
+     "value": "Android 14"
+    },
+    {
+     "label": "HDMI",
+     "value": "3"
+    },
+    {
+     "label": "USB",
+     "value": "2"
+    },
+    {
+     "label": "Design",
+     "value": "Sans bordure"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "venezia-google-tv-50-pouce-4k-led-gtv50",
+  "source": "tv-9",
+  "sources": [],
+  "verify": [
+   "Ancienne description mêlant « Google TV » et « Android TV » ; « Google TV » retenu d'après le nom.",
+   "Fiche en rupture de stock ; garantie vide."
+  ],
+  "specsVerified": false,
+  "changes": {
+   "name": "Google TV Venezia 50 pouces 4K GTV50",
+   "nameAr": "تلفاز فينيزيا Google TV مقاس 50 بوصة 4K GTV50",
+   "shortDescription": "Google TV Venezia GTV50 de 50 pouces en 4K, Dolby Vision et Dolby Atmos, HDMI 2.1, Bluetooth et Chromecast intégré.",
+   "description": "Le Venezia GTV50 associe un écran 4K de 50 pouces et Google TV, qui regroupe les recommandations de YouTube, Netflix et des autres applications sur un même écran d'accueil.\n\n### Image et son\nDolby Vision et HDR pour les contenus compatibles, son Dolby Atmos sur 2 × 10 W.\n\n### Pour les consoles\nUn port HDMI 2.1 pour les consoles récentes, deux HDMI 2.0, sortie optique et Bluetooth pour un casque ou une enceinte.\n\n### Assistant Google\nRecherche vocale et Chromecast intégré pour diffuser depuis le téléphone.\n\n### Caractéristiques\n- Taille : 50 pouces (126 cm)\n- Résolution : 4K (3840 × 2160)\n- Dolby Vision, HDR\n- Audio : 2 × 10 W, Dolby Atmos\n- HDMI : 1 × 2.1, 2 × 2.0\n- 2 USB, Ethernet, sortie optique\n- Bluetooth, Wi-Fi, Chromecast intégré",
+   "metaTitle": "Google TV Venezia 50 pouces 4K GTV50 – Prix Maroc",
+   "metaDescription": "Google TV Venezia GTV50 50 pouces 4K, Dolby Vision, Dolby Atmos, HDMI 2.1 et Chromecast. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "تلفاز فينيزيا 50 بوصة 4K Google TV بالمغرب",
+    "metaDescriptionAr": "تلفاز فينيزيا GTV50 مقاس 50 بوصة 4K مع Dolby Vision وDolby Atmos وHDMI 2.1. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "تلفاز فينيزيا GTV50 بنظام Google TV مقاس 50 بوصة 4K مع Dolby Vision وDolby Atmos وHDMI 2.1 وبلوتوث.",
+    "descriptionAr": "فينيزيا GTV50 يجمع شاشة 4K مقاس 50 بوصة ونظام Google TV الذي يعرض توصيات يوتيوب ونتفليكس والتطبيقات الأخرى في شاشة واحدة.\n\n### الصورة والصوت\nDolby Vision وHDR، وصوت Dolby Atmos بقوة 2 × 10 واط.\n\n### للألعاب\nمنفذ HDMI 2.1 ومنفذا HDMI 2.0 وبلوتوث.\n\n### مساعد Google\nبحث صوتي وChromecast مدمج.\n\n### المواصفات\n- المقاس: 50 بوصة\n- الدقة: 4K\n- Dolby Vision\n- Dolby Atmos\n- HDMI 2.1",
+    "keywords": "Google TV Venezia 50 pouces, Venezia GTV50, TV 4K Dolby Vision, TV HDMI 2.1, prix TV Venezia Maroc",
+    "keywordsAr": "تلفاز فينيزيا, تلفزة 50 بوصة 4K, شاشة Google TV, تلفاز Dolby Vision, ثمن تلفاز فينيزيا في المغرب"
+   },
+   "faq": [
+    {
+     "question": "À quelle distance regarder un 50 pouces ?",
+     "answer": "Pour un 50 pouces en 4K, environ 2 à 3 mètres est confortable : plus près en 4K, un peu plus loin en HD.",
+     "questionAr": "على شحال من مسافة نشوف تلفزة 50 بوصة؟",
+     "answerAr": "تقريبا بين 2 و3 متر، أقرب شوية فالـ4K."
+    },
+    {
+     "question": "Peut-on envoyer une vidéo depuis son téléphone ?",
+     "answer": "Oui, avec le partage d'écran intégré (Google Cast) depuis un smartphone Android ; AirPlay aussi pour iPhone quand il est indiqué dans les caractéristiques.",
+     "questionAr": "واش نقدر نصيفط فيديو من التيليفون؟",
+     "answerAr": "إيه، بـ Google Cast من أندرويد، وAirPlay للآيفون إلا كان مذكور فالمواصفات."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/qd6arqkngxcpmuxvbby8",
+     "alt": "Google TV Venezia GTV50 50 pouces 4K",
+     "altAr": "تلفاز فينيزيا GTV50 مقاس 50 بوصة 4K"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "thomson-google-tv-43-uhd-side-feet",
+  "source": "tv-9",
+  "sources": [
+   "Valeurs de la fiche et de l'ancienne description Mega Electro (aucune valeur ajoutée)"
+  ],
+  "verify": [
+   "Audio, ports et garantie non renseignés."
+  ],
+  "specsVerified": true,
+  "changes": {
+   "name": "Google TV Thomson 43 pouces 4K UHD",
+   "nameAr": "تلفاز طومسون Google TV مقاس 43 بوصة 4K",
+   "shortDescription": "Google TV Thomson de 43 pouces en 4K UHD, Direct LED, 2 Go de RAM et 16 Go de stockage, Wi-Fi bi-bande et Bluetooth 5.0.",
+   "description": "Le Thomson 43 pouces affiche en 4K UHD dans un format qui convient au salon d'un appartement comme à une grande chambre. Son design sans cadre est posé sur deux pieds latéraux.\n\n### Google TV fluide\n2 Go de RAM et 16 Go de stockage, de quoi installer davantage d'applications que sur les modèles à 8 Go.\n\n### Commande vocale\nL'Assistant Google permet de chercher un film ou une chaîne à la voix.\n\n### Caractéristiques\n- Taille : 43 pouces\n- Résolution : 3840 × 2160 (4K UHD)\n- Technologie : Direct LED\n- Fréquence : 60 Hz\n- Système : Google TV (Android 11)\n- Mémoire : 2 Go RAM, 16 Go\n- Wi-Fi 2,4 + 5 GHz, Bluetooth 5.0\n- Design sans cadre, pieds latéraux",
+   "metaTitle": "Google TV Thomson 43 pouces 4K UHD – Prix Maroc",
+   "metaDescription": "Google TV Thomson 43 pouces 4K UHD, 2 Go RAM et 16 Go de stockage, Assistant Google et Bluetooth. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "تلفاز طومسون 43 بوصة 4K بالمغرب",
+    "metaDescriptionAr": "تلفاز طومسون Google TV مقاس 43 بوصة 4K، ذاكرة 2 جيجا و16 جيجا تخزين ومساعد Google. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "تلفاز طومسون Google TV مقاس 43 بوصة بدقة 4K، ذاكرة 2 جيجا وتخزين 16 جيجا، واي فاي وبلوتوث 5.0.",
+    "descriptionAr": "طومسون 43 بوصة بدقة 4K يناسب صالون شقة أو غرفة كبيرة، بتصميم بدون إطار على قاعدتين جانبيتين.\n\n### Google TV\nذاكرة 2 جيجا وتخزين 16 جيجا لتطبيقات أكثر.\n\n### أوامر صوتية\nمساعد Google للبحث بالصوت.\n\n### المواصفات\n- المقاس: 43 بوصة\n- الدقة: 4K\n- Google TV\n- 2 جيجا رام و16 جيجا تخزين\n- بلوتوث 5.0",
+    "keywords": "Google TV Thomson 43 pouces, TV Thomson 4K, TV 43 pouces UHD, Smart TV Google Assistant, prix TV Thomson Maroc",
+    "keywordsAr": "تلفاز طومسون, تلفزة 43 بوصة 4K, شاشة طومسون, تلفاز Google TV, ثمن تلفاز طومسون في المغرب"
+   },
+   "faq": [
+    {
+     "question": "À quelle distance regarder un 43 pouces ?",
+     "answer": "Pour un 43 pouces en 4K, environ 1,7 à 2,5 mètres est confortable : plus près en 4K, un peu plus loin en HD.",
+     "questionAr": "على شحال من مسافة نشوف تلفزة 43 بوصة؟",
+     "answerAr": "تقريبا بين 1.7 و2.5 متر، أقرب شوية فالـ4K."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/g81qtkzxpkye7nbbxxhf",
+     "alt": "Google TV Thomson 43 pouces 4K UHD pieds latéraux",
+     "altAr": "تلفاز طومسون 43 بوصة 4K"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Taille d'écran",
+     "value": "43 pouces"
+    },
+    {
+     "label": "Résolution",
+     "value": "3840 × 2160 (4K UHD)"
+    },
+    {
+     "label": "Technologie d'affichage",
+     "value": "Direct LED"
+    },
+    {
+     "label": "Fréquence",
+     "value": "60 Hz"
+    },
+    {
+     "label": "Système",
+     "value": "Google TV (Android 11)"
+    },
+    {
+     "label": "Mémoire",
+     "value": "2 Go RAM, 16 Go"
+    },
+    {
+     "label": "Commande vocale",
+     "value": "Assistant Google"
+    },
+    {
+     "label": "Wi-Fi",
+     "value": "2,4 + 5 GHz"
+    },
+    {
+     "label": "Bluetooth",
+     "value": "5.0"
+    },
+    {
+     "label": "Design",
+     "value": "Sans cadre, pieds latéraux"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "xiaomi-tv-a-32-2026-google-tv",
+  "source": "tv-9",
+  "sources": [],
+  "verify": [
+   "Garantie vide."
+  ],
+  "specsVerified": false,
+  "changes": {
+   "name": "Google TV Xiaomi TV A 32 pouces 2026",
+   "nameAr": "تلفاز شاومي TV A مقاس 32 بوصة إصدار 2026",
+   "shortDescription": "Xiaomi TV A 32 pouces 2026 sous Google TV : écran HD, HDR10/HLG, son Dolby Audio et DTS:X 2 × 8 W, Google Cast et Wi-Fi bi-bande.",
+   "description": "La Xiaomi TV A 32 2026 est une petite Google TV pour une chambre, une cuisine ou une pièce secondaire. Son écran est en HD (1366 × 768), un choix suffisant à cette taille et à distance normale.\n\n### Google TV\nAccès aux applications de streaming, Assistant Google et Google Cast pour envoyer une vidéo depuis le téléphone.\n\n### Son\nDeux haut-parleurs de 8 W compatibles Dolby Audio, DTS:X et DTS Virtual:X.\n\n### Fixation murale\nCompatible VESA 100 × 200 mm, cadre métallique à bordures fines.\n\n### Caractéristiques\n- Taille : 32 pouces\n- Résolution : HD (1366 × 768)\n- HDR10, HLG\n- Fréquence : 60 Hz\n- Mémoire : 1 Go RAM, 8 Go\n- Audio : 2 × 8 W, Dolby Audio, DTS:X\n- 2 HDMI, 1 USB, Ethernet\n- Wi-Fi 2,4 et 5 GHz, Bluetooth 5.0\n- VESA 100 × 200 mm",
+   "metaTitle": "Google TV Xiaomi TV A 32 pouces 2026 – Prix Maroc",
+   "metaDescription": "Xiaomi TV A 32 pouces 2026 Google TV, HDR10, Dolby Audio, Google Cast et Wi-Fi bi-bande. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "تلفاز شاومي 32 بوصة Google TV بالمغرب",
+    "metaDescriptionAr": "تلفاز شاومي TV A مقاس 32 بوصة 2026 بنظام Google TV مع HDR10 وDolby Audio وGoogle Cast. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "تلفاز شاومي TV A مقاس 32 بوصة إصدار 2026 بنظام Google TV: شاشة HD، HDR10، صوت Dolby Audio بقوة 2 × 8 واط وGoogle Cast.",
+    "descriptionAr": "شاومي TV A 32 إصدار 2026 تلفاز Google TV صغير لغرفة النوم أو المطبخ، بشاشة HD تكفي لهذا المقاس.\n\n### Google TV\nتطبيقات البث ومساعد Google وGoogle Cast.\n\n### الصوت\nمكبران 8 واط مع Dolby Audio وDTS:X.\n\n### التثبيت\nمتوافق مع VESA 100 × 200.\n\n### المواصفات\n- المقاس: 32 بوصة\n- الدقة: HD\n- HDR10\n- صوت 2 × 8 واط\n- 2 HDMI",
+    "keywords": "Xiaomi TV A 32 2026, Google TV 32 pouces, TV Xiaomi 32 pouces, petite TV connectée, prix TV Xiaomi 32 Maroc",
+    "keywordsAr": "تلفاز شاومي 32 بوصة, تلفزة شاومي, شاشة صغيرة, تلفاز Google TV, ثمن تلفاز شاومي 32 في المغرب"
+   },
+   "faq": [
+    {
+     "question": "À quelle distance regarder un 32 pouces ?",
+     "answer": "Pour un 32 pouces, environ 1,3 à 2 mètres est confortable : plus près en 4K, un peu plus loin en HD.",
+     "questionAr": "على شحال من مسافة نشوف تلفزة 32 بوصة؟",
+     "answerAr": "تقريبا بين 1.3 و2 متر، أقرب شوية فالـ4K."
+    },
+    {
+     "question": "Peut-on envoyer une vidéo depuis son téléphone ?",
+     "answer": "Oui, avec le partage d'écran intégré (Google Cast) depuis un smartphone Android ; AirPlay aussi pour iPhone quand il est indiqué dans les caractéristiques.",
+     "questionAr": "واش نقدر نصيفط فيديو من التيليفون؟",
+     "answerAr": "إيه، بـ Google Cast من أندرويد، وAirPlay للآيفون إلا كان مذكور فالمواصفات."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/vhckwkss2a2wzmmnqayq",
+     "alt": "Google TV Xiaomi TV A 32 pouces 2026",
+     "altAr": "تلفاز شاومي TV A مقاس 32 بوصة"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "google-tv-32-smart-hd-daiko-gled32aq83dk",
+  "source": "tv-9",
+  "sources": [
+   "Valeurs de l'ancienne description de la fiche"
+  ],
+  "verify": [],
+  "specsVerified": true,
+  "changes": {
+   "name": "Google TV Daiko 32 pouces HD GLED32AQ83DK",
+   "nameAr": "تلفاز دايكو Google TV مقاس 32 بوصة HD GLED32AQ83DK",
+   "shortDescription": "Google TV Daiko GLED32AQ83DK de 32 pouces HD sous Google TV 5.0 (Android 14), HDR10/HLG, Dolby Audio, Google Cast et AirPlay, garantie 24 mois.",
+   "description": "La Daiko GLED32AQ83DK est une Google TV de 32 pouces récente, sous Google TV 5.0 et Android 14, avec une garantie de 24 mois : un bon choix pour une chambre ou une cuisine.\n\n### Partage facile\nGoogle Cast et AirPlay : envoyez une vidéo depuis un téléphone Android ou un iPhone. Commande vocale incluse.\n\n### Connexions\nWi-Fi 2,4 + 5 GHz, Bluetooth 5.1, 2 HDMI, 1 USB et LAN.\n\n### Caractéristiques\n- Taille : 32 pouces\n- Résolution : HD 1366 × 768\n- Google TV 5.0, Android 14\n- HDR10, HLG\n- Dolby Audio\n- Fréquence : 60 Hz\n- 1 Go RAM, 8 Go\n- 2 HDMI, 1 USB, LAN\n- Wi-Fi 2,4 + 5 GHz, Bluetooth 5.1\n\nGarantie : 2 ans.",
+   "metaTitle": "Google TV Daiko 32 pouces GLED32AQ83DK – Prix Maroc",
+   "metaDescription": "Google TV Daiko 32 pouces HD, Android 14, Google Cast et AirPlay, garantie 24 mois. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "تلفاز دايكو 32 بوصة Google TV بالمغرب",
+    "metaDescriptionAr": "تلفاز دايكو GLED32AQ83DK مقاس 32 بوصة بنظام Google TV وأندرويد 14، ضمان 24 شهرا. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "تلفاز دايكو GLED32AQ83DK مقاس 32 بوصة HD بنظام Google TV 5.0، HDR10، Dolby Audio، Google Cast وAirPlay، ضمان 24 شهرا.",
+    "descriptionAr": "دايكو GLED32AQ83DK تلفاز Google TV مقاس 32 بوصة بنظام Google TV 5.0 وأندرويد 14، بضمان 24 شهرا.\n\n### مشاركة سهلة\nGoogle Cast وAirPlay، وأوامر صوتية.\n\n### التوصيلات\nواي فاي ثنائي، بلوتوث 5.1، 2 HDMI.\n\n### المواصفات\n- المقاس: 32 بوصة\n- HD\n- Google TV 5.0\n- Dolby Audio\n- 2 HDMI\n\nالضمان: سنتان.",
+    "keywords": "Google TV Daiko 32 pouces, Daiko GLED32AQ83DK, TV 32 pouces Android 14, petite Smart TV AirPlay, prix TV Daiko 32 Maroc",
+    "keywordsAr": "تلفاز دايكو 32 بوصة, تلفزة دايكو, شاشة Google TV صغيرة, تلفاز ذكي, ثمن تلفاز دايكو في المغرب"
+   },
+   "faq": [
+    {
+     "question": "À quelle distance regarder un 32 pouces ?",
+     "answer": "Pour un 32 pouces, environ 1,3 à 2 mètres est confortable : plus près en 4K, un peu plus loin en HD.",
+     "questionAr": "على شحال من مسافة نشوف تلفزة 32 بوصة؟",
+     "answerAr": "تقريبا بين 1.3 و2 متر، أقرب شوية فالـ4K."
+    },
+    {
+     "question": "Peut-on envoyer une vidéo depuis son téléphone ?",
+     "answer": "Oui, avec le partage d'écran intégré (Google Cast) depuis un smartphone Android ; AirPlay aussi pour iPhone quand il est indiqué dans les caractéristiques.",
+     "questionAr": "واش نقدر نصيفط فيديو من التيليفون؟",
+     "answerAr": "إيه، بـ Google Cast من أندرويد، وAirPlay للآيفون إلا كان مذكور فالمواصفات."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/dmkgdfvjoxah2y7q2omn",
+     "alt": "Google TV Daiko GLED32AQ83DK 32 pouces",
+     "altAr": "تلفاز دايكو GLED32AQ83DK مقاس 32 بوصة"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Marque",
+     "value": "Daiko"
+    },
+    {
+     "label": "Modèle",
+     "value": "GLED32AQ83DK"
+    },
+    {
+     "label": "Taille",
+     "value": "32 pouces"
+    },
+    {
+     "label": "Résolution",
+     "value": "HD 1366 × 768"
+    },
+    {
+     "label": "Système",
+     "value": "Google TV 5.0 / Android 14"
+    },
+    {
+     "label": "HDR",
+     "value": "HDR10, HLG"
+    },
+    {
+     "label": "Audio",
+     "value": "Dolby Audio"
+    },
+    {
+     "label": "Fréquence",
+     "value": "60 Hz"
+    },
+    {
+     "label": "RAM",
+     "value": "1 Go"
+    },
+    {
+     "label": "Stockage",
+     "value": "8 Go"
+    },
+    {
+     "label": "HDMI",
+     "value": "2"
+    },
+    {
+     "label": "USB",
+     "value": "1"
+    },
+    {
+     "label": "Wi-Fi",
+     "value": "2,4 + 5 GHz"
+    },
+    {
+     "label": "Bluetooth",
+     "value": "5.1"
+    },
+    {
+     "label": "Google Cast / AirPlay",
+     "value": "Oui"
+    },
+    {
+     "label": "Garantie",
+     "value": "24 mois"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "tv-qled-50-pouces-4k-google-tv-120hz-gaming-daiko-qled50gu25dk",
+  "source": "tv-9",
+  "sources": [
+   "Valeurs de l'ancienne description de la fiche"
+  ],
+  "verify": [],
+  "specsVerified": true,
+  "changes": {
+   "name": "TV QLED Daiko 50 pouces 4K Google TV 120 Hz QLED50GU25DK",
+   "nameAr": "تلفاز دايكو QLED مقاس 50 بوصة 4K بتردد 120 هرتز QLED50GU25DK",
+   "shortDescription": "TV QLED Daiko de 50 pouces en 4K, 120 Hz avec VRR et ALLM, HDMI 2.1, Google TV 5.0 et Dolby Audio 2 × 10 W, garantie 24 mois.",
+   "description": "La Daiko QLED50GU25DK vise ceux qui jouent autant qu'ils regardent : une dalle QLED 4K de 50 pouces à 120 Hz, compatible VRR et ALLM pour les consoles récentes.\n\n### Pour les jeux\nLe 120 Hz, le VRR (taux variable) et le mode ALLM (faible latence automatique) via HDMI 2.1 rendent l'image plus fluide et plus réactive avec une console compatible.\n\n### Image\nQLED, 350 nits, contraste 5000:1, HDR10, HLG et MEMC pour les mouvements rapides.\n\n### Google TV 5.0\nApplications de streaming, commande vocale, Chromecast et AirPlay.\n\n### Caractéristiques\n- Taille : 50 pouces\n- Résolution : 4K UHD (3840 × 2160)\n- Dalle : QLED, 350 nits, contraste 5000:1\n- Fréquence : 120 Hz, VRR, ALLM, MEMC\n- HDMI 2.1\n- HDR10, HLG\n- Google TV 5.0, Android 14\n- Audio : Dolby Audio 2 × 10 W\n- Wi-Fi 2,4 et 5 GHz\n\nGarantie : 2 ans.",
+   "metaTitle": "TV QLED Daiko 50 pouces 4K 120 Hz – Prix Maroc",
+   "metaDescription": "TV QLED Daiko 50 pouces 4K 120 Hz, VRR, ALLM et HDMI 2.1 pour consoles, Google TV 5.0, garantie 24 mois. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "تلفاز دايكو QLED مقاس 50 بوصة 120 هرتز بالمغرب",
+    "metaDescriptionAr": "تلفاز دايكو QLED مقاس 50 بوصة 4K بتردد 120 هرتز وHDMI 2.1 للألعاب، ضمان 24 شهرا. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "تلفاز دايكو QLED مقاس 50 بوصة 4K بتردد 120 هرتز مع VRR وALLM وHDMI 2.1 ونظام Google TV 5.0، ضمان 24 شهرا.",
+    "descriptionAr": "دايكو QLED50GU25DK لمن يلعب ويشاهد: شاشة QLED بدقة 4K مقاس 50 بوصة بتردد 120 هرتز مع VRR وALLM.\n\n### للألعاب\n120 هرتز وVRR وALLM عبر HDMI 2.1.\n\n### الصورة\nQLED بسطوع 350 nits وتباين 5000:1 وHDR10.\n\n### Google TV 5.0\nتطبيقات وأوامر صوتية وChromecast وAirPlay.\n\n### المواصفات\n- المقاس: 50 بوصة\n- 4K\n- QLED\n- 120 هرتز\n- HDMI 2.1\n- صوت 2 × 10 واط\n\nالضمان: سنتان.",
+    "keywords": "TV QLED Daiko 50 pouces, Daiko QLED50GU25DK, TV 4K 120Hz, TV gaming HDMI 2.1, prix TV QLED Maroc",
+    "keywordsAr": "تلفاز QLED دايكو, تلفزة 50 بوصة 4K, شاشة للألعاب 120 هرتز, تلفاز PS5, ثمن تلفاز QLED في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Est-elle adaptée à une PS5 ou une Xbox Series ?",
+     "answer": "Elle offre 120 Hz, VRR et ALLM via HDMI 2.1, les fonctions qu'exploitent les consoles récentes compatibles.",
+     "questionAr": "واش مناسبة لـ PS5 ولا Xbox؟",
+     "answerAr": "فيها 120 هرتز وVRR وALLM عبر HDMI 2.1، اللي كيستعملوهم الكونسولات الجديدة."
+    },
+    {
+     "question": "À quelle distance regarder un 50 pouces ?",
+     "answer": "Pour un 50 pouces en 4K, environ 2 à 3 mètres est confortable : plus près en 4K, un peu plus loin en HD.",
+     "questionAr": "على شحال من مسافة نشوف تلفزة 50 بوصة؟",
+     "answerAr": "تقريبا بين 2 و3 متر، أقرب شوية فالـ4K."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/kudobelhkxykqeapwa0p",
+     "alt": "TV QLED Daiko QLED50GU25DK 50 pouces 4K",
+     "altAr": "تلفاز دايكو QLED50GU25DK مقاس 50 بوصة 4K"
+    },
+    {
+     "key": "mega-electro/products/fhrqo8dtbmsia1fzxdfs",
+     "alt": "TV QLED Daiko QLED50GU25DK 50 pouces 4K, vue 2",
+     "altAr": "تلفاز دايكو QLED50GU25DK مقاس 50 بوصة 4K، صورة 2"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Marque",
+     "value": "Daiko"
+    },
+    {
+     "label": "Modèle",
+     "value": "QLED50GU25DK"
+    },
+    {
+     "label": "Taille",
+     "value": "50 pouces"
+    },
+    {
+     "label": "Résolution",
+     "value": "4K UHD 3840 × 2160"
+    },
+    {
+     "label": "Dalle",
+     "value": "QLED"
+    },
+    {
+     "label": "Luminosité",
+     "value": "350 nits"
+    },
+    {
+     "label": "Contraste",
+     "value": "5000:1"
+    },
+    {
+     "label": "Fréquence",
+     "value": "120 Hz"
+    },
+    {
+     "label": "Jeu",
+     "value": "VRR, ALLM, HDMI 2.1"
+    },
+    {
+     "label": "Image",
+     "value": "HDR10, HLG, MEMC"
+    },
+    {
+     "label": "Système",
+     "value": "Google TV 5.0 / Android 14"
+    },
+    {
+     "label": "Audio",
+     "value": "Dolby Audio, 2 × 10 W"
+    },
+    {
+     "label": "Wi-Fi",
+     "value": "2,4 et 5 GHz"
+    },
+    {
+     "label": "Garantie",
+     "value": "24 mois"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "kenz-ventilateur-de-sol-18-pouces-puissant-mtallique-robuste",
+  "source": "tv-9",
+  "sources": [],
+  "verify": [
+   "Catégorie : ventilateur rangé dans « TV & Image ». À déplacer vers « Climatisation & chauffage » dans l'admin.",
+   "Nombre de vitesses et garantie non renseignés."
+  ],
+  "specsVerified": false,
+  "changes": {
+   "name": "Ventilateur de sol Kenz 18 pouces métallique LN-1801",
+   "nameAr": "مروحة أرضية كنز 18 بوصة معدنية LN-1801",
+   "shortDescription": "Ventilateur de sol Kenz LN-1801 de 18 pouces, structure métallique robuste et 79 W, pour brasser l'air d'une grande pièce.",
+   "description": "Le Kenz LN-1801 est un ventilateur de sol de 18 pouces à structure métallique : plus robuste qu'un modèle en plastique, il convient à un grand salon, un atelier ou un commerce.\n\n### Puissant\nAvec 79 W et des pales de 18 pouces, il déplace un volume d'air important.\n\n### Caractéristiques\n- Modèle : LN-1801\n- Type : ventilateur de sol\n- Diamètre : 18 pouces\n- Puissance : 79 W\n- Tension : 220 V – 50 Hz\n- Structure métallique\n- Couleur : silver",
+   "metaTitle": "Ventilateur de sol Kenz 18 pouces LN-1801 – Prix Maroc",
+   "metaDescription": "Ventilateur de sol Kenz LN-1801 18 pouces, métallique et robuste, 79 W, pour grandes pièces et commerces. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "مروحة أرضية كنز 18 بوصة بالمغرب",
+    "metaDescriptionAr": "مروحة أرضية كنز LN-1801 مقاس 18 بوصة معدنية وقوية، 79 واط، للغرف الكبيرة والمحلات. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "مروحة أرضية كنز LN-1801 مقاس 18 بوصة بهيكل معدني متين وقوة 79 واط، لتحريك هواء غرفة كبيرة.",
+    "descriptionAr": "كنز LN-1801 مروحة أرضية 18 بوصة بهيكل معدني، أمتن من البلاستيك، للصالون الكبير أو الورشة أو المحل.\n\n### قوية\n79 واط وأجنحة 18 بوصة.\n\n### المواصفات\n- الموديل: LN-1801\n- القطر: 18 بوصة\n- القوة: 79 واط\n- معدنية",
+    "keywords": "ventilateur de sol Kenz, Kenz LN-1801, ventilateur métallique 18 pouces, ventilateur puissant, prix ventilateur Kenz Maroc",
+    "keywordsAr": "فانتيلاتور كنز, مروحة أرضية, فانتيلاتور معدني, مروحة قوية, ثمن الفانتيلاتور في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Un ventilateur consomme-t-il beaucoup ?",
+     "answer": "Non, bien moins qu'un climatiseur : c'est l'une des façons les plus économiques de se rafraîchir.",
+     "questionAr": "واش الفانتيلاتور كيستهلك بزاف؟",
+     "answerAr": "لا، أقل بزاف من الكليماتيزور."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/dqm4cn2geizhth1p9lch",
+     "alt": "Ventilateur de sol Kenz LN-1801 18 pouces métallique",
+     "altAr": "مروحة أرضية كنز LN-1801 معدنية"
+    }
+   ]
+  }
+ },
+ {
+  "kind": "product",
+  "slug": "ventilateur-20-pouces-aluminium-3-vitesses-sur-socle",
+  "source": "tv-9",
+  "sources": [
+   "Valeurs de la fiche et de l'ancienne description Mega Electro (aucune valeur ajoutée)"
+  ],
+  "verify": [
+   "Catégorie : ventilateur rangé dans « TV & Image ». À déplacer vers « Climatisation & chauffage » dans l'admin.",
+   "Garantie non renseignée."
+  ],
+  "specsVerified": true,
+  "changes": {
+   "name": "Ventilateur sur socle General 20 pouces aluminium 3 vitesses",
+   "nameAr": "مروحة جنرال على قاعدة 20 بوصة ألومنيوم 3 سرعات",
+   "shortDescription": "Ventilateur sur socle General de 20 pouces en aluminium, 3 vitesses, pour un grand volume d'air.",
+   "description": "Ce ventilateur General de 20 pouces sur socle est l'un des plus grands de notre catalogue : il convient aux grands salons, aux ateliers et aux commerces.\n\n### À savoir\nSon niveau sonore annoncé est de 80 dB : un modèle puissant, plus adapté à un grand espace qu'à une chambre.\n\n### Caractéristiques\n- Diamètre : 20 pouces\n- Vitesses : 3\n- Pose : sur socle\n- Niveau sonore : 80 dB\n- Couleur : gris",
+   "metaTitle": "Ventilateur sur socle General 20 pouces – Prix Maroc",
+   "metaDescription": "Ventilateur sur socle General 20 pouces en aluminium, 3 vitesses, pour grands salons et commerces. Livraison partout au Maroc, paiement à la livraison.",
+   "seo": {
+    "titleAr": "مروحة جنرال 20 بوصة على قاعدة بالمغرب",
+    "metaDescriptionAr": "مروحة جنرال على قاعدة مقاس 20 بوصة من الألومنيوم بثلاث سرعات للفضاءات الكبيرة. توصيل لكل المغرب والدفع عند الاستلام.",
+    "shortDescriptionAr": "مروحة جنرال على قاعدة مقاس 20 بوصة من الألومنيوم بثلاث سرعات، لحجم هواء كبير.",
+    "descriptionAr": "مروحة جنرال 20 بوصة على قاعدة من أكبر المراوح عندنا: للصالونات الكبيرة والورشات والمحلات.\n\n### للعلم\nمستوى الصوت 80 ديسيبل: مناسبة للفضاءات الكبيرة.\n\n### المواصفات\n- القطر: 20 بوصة\n- 3 سرعات\n- الصوت: 80 ديسيبل",
+    "keywords": "ventilateur 20 pouces, ventilateur General aluminium, ventilateur sur socle, grand ventilateur, prix ventilateur 20 pouces Maroc",
+    "keywordsAr": "فانتيلاتور كبير, مروحة 20 بوصة, فانتيلاتور جنرال, مروحة ألومنيوم, ثمن الفانتيلاتور في المغرب"
+   },
+   "faq": [
+    {
+     "question": "Un ventilateur consomme-t-il beaucoup ?",
+     "answer": "Non, bien moins qu'un climatiseur : c'est l'une des façons les plus économiques de se rafraîchir.",
+     "questionAr": "واش الفانتيلاتور كيستهلك بزاف؟",
+     "answerAr": "لا، أقل بزاف من الكليماتيزور."
+    }
+   ],
+   "imageAlts": [
+    {
+     "key": "mega-electro/products/zyvaolytl8mtxafvkmcw",
+     "alt": "Ventilateur sur socle General 20 pouces aluminium",
+     "altAr": "مروحة جنرال 20 بوصة ألومنيوم"
+    }
+   ],
+   "specs": [
+    {
+     "label": "Marque",
+     "value": "General"
+    },
+    {
+     "label": "Type",
+     "value": "Ventilateur sur socle"
+    },
+    {
+     "label": "Dimensions",
+     "value": "20 pouces"
+    },
+    {
+     "label": "Vitesses",
+     "value": "3"
+    },
+    {
+     "label": "Niveau sonore",
+     "value": "80 dB"
+    },
+    {
+     "label": "Couleur",
+     "value": "Gris"
+    }
+   ]
+  }
+ }
+]
