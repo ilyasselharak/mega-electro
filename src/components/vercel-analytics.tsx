@@ -1,22 +1,9 @@
 "use client";
 
-import { Analytics, type BeforeSendEvent } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/next";
+import { analyticsBeforeSend } from "@/lib/analytics-filter";
 
-/**
- * Vercel Web Analytics (cookieless page views).
- * - Back-office pages are not counted, so staff browsing doesn't skew the store's numbers.
- * - Order numbers in confirmation URLs are replaced by a placeholder.
- * - Query strings are dropped: search terms and filters can contain whatever a visitor typed.
- */
-function beforeSend(event: BeforeSendEvent): BeforeSendEvent | null {
-  const url = new URL(event.url);
-  const path = url.pathname.replace(/^\/(ar|fr)(?=\/|$)/, "") || "/";
-  if (path.startsWith("/admin")) return null;
-  url.pathname = url.pathname.replace(/(\/commande\/confirmation\/)[^/]+/, "$1[number]");
-  url.search = "";
-  return { ...event, url: url.toString() };
-}
-
+/** Vercel Web Analytics (cookieless page views), with the privacy filter in src/lib/analytics-filter.ts. */
 export function VercelAnalytics() {
-  return <Analytics beforeSend={beforeSend} />;
+  return <Analytics beforeSend={analyticsBeforeSend} />;
 }
