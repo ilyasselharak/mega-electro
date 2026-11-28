@@ -7,6 +7,7 @@ import { getDictionary, getLocale } from "@/i18n/server";
 import { localizedMetadata } from "@/lib/seo-server";
 import { getSettings } from "@/server/queries/settings";
 import { getSeoSettings } from "@/server/queries/seo";
+import { formatPrice } from "@/lib/money";
 
 export const dynamicParams = false;
 
@@ -23,15 +24,18 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/[page]">):
   const { page } = await params;
   const content = await contentFor(page);
   if (!content) return {};
-  return localizedMetadata({ title: content.title, description: content.description, path: `/${page}`, seo: await getSeoSettings() });
+  return localizedMetadata({ title: content.metaTitle ?? content.title, description: content.description, path: `/${page}`, seo: await getSeoSettings() });
 }
 
 export default async function StaticPage({ params }: PageProps<"/[lang]/[page]">) {
   const { page } = await params;
   const content = await contentFor(page);
   if (!content) notFound();
-  const settings = page === "contact" ? await getSettings() : null;
-  const t = await getDictionary();
+  const [store, t, locale] = await Promise.all([getSettings(), getDictionary(), getLocale()]);
+  const settings = page === "contact" ? store : null;
+  // Amounts come from Paramètres → Boutique, so the page always matches the cart.
+  const fill = (text: string) =>
+    text.replace("{shippingFee}", formatPrice(store.shippingFee, locale)).replace("{freeShippingThreshold}", formatPrice(store.freeShippingThreshold, locale));
 
   return (
     <div className="container-page max-w-3xl space-y-6 py-6 sm:py-10">
@@ -41,7 +45,7 @@ export default async function StaticPage({ params }: PageProps<"/[lang]/[page]">
         {content.sections.map((s, i) => (
           <section key={i}>
             {s.heading ? <h2 className="text-xl">{s.heading}</h2> : null}
-            {s.body.map((p, j) => <p key={j}>{p}</p>)}
+            {s.body.map((p, j) => <p key={j}>{fill(p)}</p>)}
           </section>
         ))}
       </div>
