@@ -32,7 +32,7 @@ answers in AI search (ChatGPT Search and others), with a brand voice distinct fr
 |---|---|
 | Product fields | `convex/schema.ts` → `products`: `name`, `nameAr`, `shortDescription`, `description`, `metaTitle`, `metaDescription`, `seo.{h1,keywords,titleAr,metaDescriptionAr,descriptionAr,shortDescriptionAr,keywordsAr,ogTitle,ogDescription}`, `faq[] {question,answer,questionAr,answerAr}`, `images[] {key,alt,altAr}`, `specs[] {label,value}`, `warrantyMonths` |
 | Category fields | `categories`: `nameAr`, `description`, `metaTitle`, `metaDescription`, `seo.{h1,longDescription,titleAr,metaDescriptionAr,descriptionAr,keywords,keywordsAr,imageAlt}` |
-| Site SEO settings | `seoSettings` (Admin → SEO → Paramètres); defaults in `convex/lib/seoRules.ts` |
+| Site SEO settings | `seoSettings` (Admin → SEO → Paramètres), FR fields + `…Ar` twins (`defaultTitleAr`, `homeTitleAr`, `homeSeoTextAr`…); defaults in `convex/lib/seoRules.ts`. Bulk edits: proposal entry `{"kind":"settings","slug":"site-settings","changes":{…}}` (text fields, `canonicalBaseUrl`, `orgType` only) |
 | Metadata builder | `src/lib/seo.ts`, `src/lib/seo-server.ts` (canonical, hreflang fr-MA/ar-MA, OG) |
 | JSON-LD | `src/lib/seo.ts`: Store/Organization, WebSite+SearchAction, Product+Offer (shipping, returns), BreadcrumbList, ItemList |
 | Sitemap / robots | `src/app/sitemap.xml`, `src/app/sitemaps/[section]`, `src/app/robots.ts` |
@@ -125,7 +125,8 @@ Do not reuse a product's primary keyword. Category renames that change the slug 
 ## Workflow: technical SEO check
 
 - Every indexable URL: 200, one H1, self canonical, `hreflang` fr-MA + ar-MA + x-default, `<html lang dir>` correct.
-- Sitemap URLs must be the final host (no redirects) and match canonicals.
+- Sitemap URLs must be the final host (no redirects) and match canonicals. The final host is
+  `https://www.mega-electro.ma` (apex 308 → www); `canonicalBaseUrl` is set to it since 2026-11-28.
 - Filtered/sorted/search URLs: `noindex`; cart, checkout, account, admin, auth: disallowed/noindex.
 - Product JSON-LD matches the visible page (price in MAD, availability from stock, no rating).
 - `robots.txt` allows search and AI crawlers (`OAI-SearchBot`, `Googlebot`, `Bingbot`) on public pages.
