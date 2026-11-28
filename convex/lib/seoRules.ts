@@ -36,6 +36,19 @@ export type SeoSettingsValues = {
   homeOgTitle: string;
   homeOgDescription: string;
   homeOgImageKey: string;
+  defaultTitleAr: string;
+  defaultDescriptionAr: string;
+  defaultKeywordsAr: string;
+  ogTitleAr: string;
+  ogDescriptionAr: string;
+  homeTitleAr: string;
+  homeDescriptionAr: string;
+  homeKeywordsAr: string;
+  homeH1Ar: string;
+  homeSeoHeadingAr: string;
+  homeSeoTextAr: string;
+  homeOgTitleAr: string;
+  homeOgDescriptionAr: string;
   robotsExtraDisallow: string;
   robotsExtraAllow: string;
   sitemapIncludeBrands: boolean;
@@ -92,6 +105,19 @@ export const DEFAULT_SEO: SeoSettingsValues = {
   homeOgTitle: "",
   homeOgDescription: "",
   homeOgImageKey: "",
+  defaultTitleAr: "",
+  defaultDescriptionAr: "",
+  defaultKeywordsAr: "",
+  ogTitleAr: "",
+  ogDescriptionAr: "",
+  homeTitleAr: "",
+  homeDescriptionAr: "",
+  homeKeywordsAr: "",
+  homeH1Ar: "",
+  homeSeoHeadingAr: "",
+  homeSeoTextAr: "",
+  homeOgTitleAr: "",
+  homeOgDescriptionAr: "",
   robotsExtraDisallow: "",
   robotsExtraAllow: "",
   sitemapIncludeBrands: true,
@@ -116,10 +142,11 @@ export const DEFAULT_SEO: SeoSettingsValues = {
 };
 
 /** Private / transactional areas and faceted-filter URLs: always disallowed in robots.txt. */
-export const BASE_ROBOTS_DISALLOW = ["/admin", "/api/", "/commande", "/panier", "/compte", "/connexion", "/inscription", "/*?*tri=", "/*?*marque=", "/*?*min=", "/*?*max="];
+const PRIVATE_PATHS = ["/admin", "/commande", "/panier", "/compte", "/connexion", "/inscription"];
+export const BASE_ROBOTS_DISALLOW = [...PRIVATE_PATHS, ...PRIVATE_PATHS.map((p) => `/ar${p}`), "/api/", "/*?*tri=", "/*?*marque=", "/*?*min=", "/*?*max="];
 
 /** Paths that must never be blocked in robots.txt (product/category/brand pages, home, assets). */
-export const PROTECTED_ROBOTS_PATHS = ["/", "/produit", "/categorie", "/marque", "/promotions", "/_next"];
+export const PROTECTED_ROBOTS_PATHS = ["/", "/produit", "/categorie", "/marque", "/promotions", "/_next", "/ar", "/ar/produit", "/ar/categorie", "/ar/marque", "/ar/promotions"];
 
 export function isProtectedRobotsPath(path: string) {
   const p = path.trim().replace(/\*+$/, "");

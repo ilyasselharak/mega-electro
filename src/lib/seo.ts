@@ -82,7 +82,8 @@ export function buildMetadata({ title, description, path, image, imageAlt, noInd
       locale: OG_LOCALE[locale],
       alternateLocale: [OG_LOCALE[locale === "fr" ? "ar" : "fr"]],
       type,
-      images: [{ url: ogImage, alt: imageAlt || shareTitle }],
+      // The generated fallback is 1200×630; uploaded images are served 1200 px wide.
+      images: [{ url: ogImage, alt: imageAlt || shareTitle, ...(image || s.ogImageKey ? { width: 1200 } : { width: 1200, height: 630 }) }],
     },
     twitter: { card: "summary_large_image", title: shareTitle, description: shareDesc, images: [socialImage] },
     robots: {
@@ -106,28 +107,77 @@ export function pagedTitle(title: string, page: number | undefined, label = "Pag
 
 type JsonLd = Record<string, unknown>;
 
+/** Moroccan numbers in international format (0643115212 → +212643115212); anything else is returned as typed. */
+export function internationalPhone(phone: string) {
+  const d = phone.replace(/[^\d+]/g, "");
+  if (/^0[5-7]\d{8}$/.test(d)) return `+212${d.slice(1)}`;
+  if (/^(00)?212\d{9}$/.test(d)) return `+${d.replace(/^00/, "")}`;
+  return phone.trim();
+}
+
+/** "Casablanca, Maroc" → locality only; "12 rue X, Casablanca, Maroc" → street + locality. */
+function postalAddress(address: string): JsonLd {
+  const parts = address.split(",").map((s) => s.trim()).filter(Boolean);
+  if (parts.length > 1 && /^(maroc|morocco|المغرب)$/i.test(parts[parts.length - 1])) parts.pop();
+  const locality = parts.length ? parts[parts.length - 1] : "";
+  const street = parts.slice(0, -1).join(", ");
+  return { "@type": "PostalAddress", ...(street ? { streetAddress: street } : {}), ...(locality ? { addressLocality: locality } : {}), addressCountry: "MA" };
+}
+
+/** Return policy from Admin → SEO → Données structurées (shared by Organization and every Offer). */
+function returnPolicyJsonLd(seo: SeoSettings): JsonLd | undefined {
+  if (!seo.sdReturnPolicy || seo.returnDays <= 0) return undefined;
+  return {
+    "@type": "MerchantReturnPolicy",
+    applicableCountry: "MA",
+    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+    merchantReturnDays: seo.returnDays,
+    ...(seo.returnMethod ? { returnMethod: `https://schema.org/${seo.returnMethod}` } : {}),
+    ...(seo.returnFees ? { returnFees: `https://schema.org/${seo.returnFees}` } : {}),
+  };
+}
+
+/** Raster logo (Google prefers PNG/JPG over SVG): Admin → SEO logo, else the generated /logo.png. */
+export const FALLBACK_LOGO_PATH = "/logo.png";
+
 export function organizationJsonLd(
   st: { storeName: string; phone: string; email: string; address: string; facebookUrl?: string | null; instagramUrl?: string | null; tiktokUrl?: string | null },
   seo: SeoSettings,
 ): JsonLd {
   const sameAs = [st.facebookUrl, st.instagramUrl, st.tiktokUrl, ...seo.orgSameAs.split(/\s+/)].filter((u): u is string => Boolean(u && /^https?:\/\//.test(u)));
-  const isStore = seo.orgType !== "Organization";
+  // Store is a LocalBusiness (physical shop); OnlineStore and Organization take no opening/price properties.
+  const isShop = seo.orgType === "Store";
+  const telephone = st.phone ? internationalPhone(st.phone) : "";
+  const returnPolicy = returnPolicyJsonLd(seo);
   return {
     "@context": "https://schema.org",
-    "@type": seo.orgType || "Store",
+    "@type": seo.orgType || "OnlineStore",
     "@id": urlFor("/#organization", seo),
     name: seo.siteName || st.storeName,
+    alternateName: "ميغا إلكترو",
     ...(seo.orgLegalName ? { legalName: seo.orgLegalName } : {}),
     ...(seo.orgDescription ? { description: seo.orgDescription } : {}),
     url: urlFor("/", seo),
-    logo: seo.orgLogoKey ? imageUrl(seo.orgLogoKey, 512) : urlFor("/icon.svg", seo),
+    logo: { "@type": "ImageObject", url: seo.orgLogoKey ? imageUrl(seo.orgLogoKey, 512) : urlFor(FALLBACK_LOGO_PATH, seo), width: 512, height: 512 },
     image: seo.ogImageKey ? imageUrl(seo.ogImageKey, 1200) : urlFor(FALLBACK_OG_PATH, seo),
-    telephone: st.phone,
-    email: st.email,
-    address: { "@type": "PostalAddress", streetAddress: st.address, addressCountry: "MA" },
-    ...(isStore
-      ? { priceRange: seo.priceRange || undefined, currenciesAccepted: "MAD", paymentAccepted: "Cash", areaServed: { "@type": "Country", name: "Morocco" } }
+    ...(telephone ? { telephone } : {}),
+    ...(st.email ? { email: st.email } : {}),
+    ...(st.address ? { address: postalAddress(st.address) } : {}),
+    ...(telephone || st.email
+      ? {
+          contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "customer service",
+            ...(telephone ? { telephone } : {}),
+            ...(st.email ? { email: st.email } : {}),
+            areaServed: "MA",
+            availableLanguage: ["French", "Arabic"],
+          },
+        }
       : {}),
+    areaServed: { "@type": "Country", name: "Morocco" },
+    ...(isShop ? { ...(seo.priceRange ? { priceRange: seo.priceRange } : {}), currenciesAccepted: "MAD", paymentAccepted: "Cash" } : {}),
+    ...(returnPolicy ? { hasMerchantReturnPolicy: returnPolicy } : {}),
     ...(sameAs.length ? { sameAs } : {}),
   };
 }
@@ -138,8 +188,9 @@ export function websiteJsonLd(seo: SeoSettings): JsonLd {
     "@type": "WebSite",
     "@id": urlFor("/#website", seo),
     name: seo.siteName,
+    alternateName: "ميغا إلكترو",
     url: urlFor("/", seo),
-    inLanguage: "fr-MA",
+    inLanguage: ["fr-MA", "ar-MA"],
     publisher: { "@id": urlFor("/#organization", seo) },
     potentialAction: {
       "@type": "SearchAction",
@@ -191,17 +242,7 @@ export function productJsonLd(
         },
       }
     : undefined;
-  const returnPolicy =
-    seo.sdReturnPolicy && seo.returnDays > 0
-      ? {
-          "@type": "MerchantReturnPolicy",
-          applicableCountry: "MA",
-          returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-          merchantReturnDays: seo.returnDays,
-          ...(seo.returnMethod ? { returnMethod: `https://schema.org/${seo.returnMethod}` } : {}),
-          ...(seo.returnFees ? { returnFees: `https://schema.org/${seo.returnFees}` } : {}),
-        }
-      : undefined;
+  const returnPolicy = returnPolicyJsonLd(seo);
   return {
     "@context": "https://schema.org",
     "@type": "Product",

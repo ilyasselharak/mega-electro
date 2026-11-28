@@ -50,11 +50,14 @@ if (!file) {
 const proposals = JSON.parse(readFileSync(file, "utf8"));
 const products = snapshot("products");
 const categories = snapshot("categories");
+const settingsDocs = snapshot("seoSettings");
 // Backup of the current SEO fields of every document touched, before anything else happens.
-writeFileSync(`backups/seo/logs/${stamp}-snapshot.json`, JSON.stringify({ deployment, products, categories }, null, 1));
+writeFileSync(`backups/seo/logs/${stamp}-snapshot.json`, JSON.stringify({ deployment, products, categories, seoSettings: settingsDocs }, null, 1));
 
 const PRODUCT_KEYS = new Set(["name", "nameAr", "shortDescription", "description", "metaTitle", "metaDescription", "seo", "faq", "imageAlts", "specs"]);
 const CATEGORY_KEYS = new Set(["nameAr", "description", "metaTitle", "metaDescription", "seo"]);
+// Site-wide settings (kind "settings", slug "site-settings"): text and schema type only, mirrors convex/seoBulk.ts.
+const SETTINGS_KEYS = new Set(["canonicalBaseUrl", "defaultTitle", "defaultDescription", "defaultKeywords", "defaultTitleAr", "defaultDescriptionAr", "defaultKeywordsAr", "ogTitle", "ogDescription", "ogTitleAr", "ogDescriptionAr", "orgType", "orgDescription", "homeTitle", "homeDescription", "homeKeywords", "homeH1", "homeSeoHeading", "homeSeoText", "homeOgTitle", "homeOgDescription", "homeTitleAr", "homeDescriptionAr", "homeKeywordsAr", "homeH1Ar", "homeSeoHeadingAr", "homeSeoTextAr", "homeOgTitleAr", "homeOgDescriptionAr"]);
 const SEO_KEYS = new Set(["h1", "keywords", "titleAr", "metaDescriptionAr", "descriptionAr", "shortDescriptionAr", "keywordsAr", "ogTitle", "ogDescription", "longDescription", "imageAlt"]);
 const TITLE_SUFFIX = " | Mega Electro".length; // added by the page template
 
@@ -69,7 +72,20 @@ for (const p of [...products, ...categories]) {
 function validate(entry) {
   const where = `${entry.kind}:${entry.slug}`;
   const changes = entry.changes ?? {};
-  const allowed = entry.kind === "product" ? PRODUCT_KEYS : CATEGORY_KEYS;
+  const allowed = entry.kind === "product" ? PRODUCT_KEYS : entry.kind === "settings" ? SETTINGS_KEYS : CATEGORY_KEYS;
+  if (entry.kind === "settings") {
+    // Home and default titles are rendered as-is (no " | Mega Electro" suffix).
+    len("homeTitle", changes.homeTitle, [40, 60], 70);
+    len("homeTitleAr", changes.homeTitleAr, [30, 60], 70);
+    len("defaultTitle", changes.defaultTitle, [30, 60], 70);
+    len("defaultTitleAr", changes.defaultTitleAr, [30, 60], 70);
+    for (const k of ["homeDescription", "homeDescriptionAr", "defaultDescription", "defaultDescriptionAr"]) len(k, changes[k], [110, 160], 175);
+    if (changes.canonicalBaseUrl && !/^https:\/\/[a-z0-9.-]+$/i.test(changes.canonicalBaseUrl)) errors.push(`${where}: canonicalBaseUrl must be an https origin without path`);
+    for (const k of ["defaultKeywords", "defaultKeywordsAr", "homeKeywords", "homeKeywordsAr"]) {
+      const list = (changes[k] ?? "").split(",").map((x) => x.trim()).filter(Boolean);
+      if (new Set(list.map((x) => x.toLowerCase())).size !== list.length) errors.push(`${where}: ${k} has duplicates`);
+    }
+  }
   for (const k of Object.keys(changes)) if (!allowed.has(k)) errors.push(`${where}: field "${k}" is not allowed`);
   for (const k of Object.keys(changes.seo ?? {})) if (!SEO_KEYS.has(k)) errors.push(`${where}: field "seo.${k}" is not allowed`);
   if (changes.specs && !entry.specsVerified) errors.push(`${where}: specs need "specsVerified": true and sources`);
@@ -79,12 +95,12 @@ function validate(entry) {
     if (typeof v === "string" && !v.trim()) errors.push(`${where}: "${k}" is empty (omit the field instead)`);
   }
   for (const [k, v] of Object.entries(changes.seo ?? {})) if (typeof v === "string" && !v.trim()) errors.push(`${where}: "seo.${k}" is empty`);
-  const len = (label, v, [lo, hi], hard) => {
+  function len(label, v, [lo, hi], hard) {
     if (v == null) return;
     const n = v.trim().length;
     if (n > hard) errors.push(`${where}: ${label} ${n} chars (hard max ${hard})`);
     else if (n < lo || n > hi) warnings.push(`${where}: ${label} ${n} chars (target ${lo}–${hi})`);
-  };
+  }
   len("metaTitle", changes.metaTitle, [40, 60 - 0], 75);
   len("seo.titleAr", changes.seo?.titleAr, [30, 60], 75);
   len("metaDescription", changes.metaDescription, [120, 160], 175);
@@ -139,7 +155,7 @@ function diff(doc, changes) {
 const plan = [];
 for (const entry of proposals) {
   validate(entry);
-  const doc = (entry.kind === "product" ? products : categories).find((d) => d.slug === entry.slug);
+  const doc = entry.kind === "settings" ? settingsDocs[0] : (entry.kind === "product" ? products : categories).find((d) => d.slug === entry.slug);
   if (!doc) {
     errors.push(`${entry.kind}:${entry.slug}: not found`);
     continue;

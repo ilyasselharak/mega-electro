@@ -23,13 +23,15 @@ const selfCanonical = (seo: SeoSettings, path: string, canonical: string | null)
 export async function sitemapEntries(section: SitemapSection): Promise<Entry[]> {
   const [data, seo] = await Promise.all([getSitemapData(), getSeoSettings()]);
   if (!seo.robotsIndex) return [];
-  const now = Date.now();
+  // Listing pages change when the catalog does: last product or category update, not "now"
+  // (a lastmod that changes on every fetch is ignored by Google).
+  const catalogUpdated = Math.max(0, ...data.products.map((p) => p.updatedAt), ...data.categories.map((c) => c.updatedAt)) || undefined;
   switch (section) {
     case "pages":
       return [
-        { loc: urlFor("/", seo), lastmod: now, changefreq: "daily", priority: 1 },
-        { loc: urlFor("/promotions", seo), lastmod: now, changefreq: "daily", priority: 0.8 },
-        { loc: urlFor("/recherche", seo), lastmod: now, changefreq: "daily", priority: 0.6 },
+        { loc: urlFor("/", seo), lastmod: catalogUpdated, changefreq: "daily", priority: 1 },
+        { loc: urlFor("/promotions", seo), lastmod: catalogUpdated, changefreq: "daily", priority: 0.8 },
+        { loc: urlFor("/recherche", seo), lastmod: catalogUpdated, changefreq: "daily", priority: 0.6 },
         ...(seo.sitemapIncludeStaticPages
           ? [...Object.keys(STATIC_PAGES).map((p) => ({ loc: urlFor(`/${p}`, seo), changefreq: "yearly", priority: 0.3 })), { loc: urlFor("/suivi-commande", seo), changefreq: "yearly", priority: 0.3 }]
           : []),

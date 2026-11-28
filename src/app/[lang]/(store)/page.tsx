@@ -28,16 +28,18 @@ export async function generateMetadata() {
   const [seo, locale] = await Promise.all([getSeoSettings(), getLocale()]);
   const t = await getDictionary(locale);
   const ogKey = seo.homeOgImageKey || seo.ogImageKey;
-  // The French homepage SEO is edited in Admin → SEO; Arabic uses the dictionary.
+  // Homepage SEO is edited in Admin → SEO → Page d'accueil (French and Arabic); empty = built-in text.
+  const ar = locale === "ar";
+  const pick = (fr: string, arValue: string) => (ar ? arValue : fr);
   return localizedMetadata({
-    title: locale === "ar" ? `${t.brand.name} — ${t.home.heroBadge}` : seo.homeTitle || seo.defaultTitle,
+    title: pick(seo.homeTitle || seo.defaultTitle, seo.homeTitleAr || seo.defaultTitleAr || `${t.brand.name} — ${t.home.heroBadge}`),
     absoluteTitle: true,
-    description: locale === "ar" ? t.home.metaDescription : seo.homeDescription || seo.defaultDescription,
+    description: pick(seo.homeDescription || seo.defaultDescription, seo.homeDescriptionAr || seo.defaultDescriptionAr || t.home.metaDescription),
     path: "/",
-    keywords: locale === "ar" ? undefined : keywordList(seo.homeKeywords, seo.defaultKeywords),
+    keywords: ar ? keywordList(seo.homeKeywordsAr, seo.defaultKeywordsAr) : keywordList(seo.homeKeywords, seo.defaultKeywords),
     image: ogKey ? imageUrl(ogKey, 1200) : undefined,
-    ogTitle: locale === "ar" ? null : seo.homeOgTitle || seo.ogTitle,
-    ogDescription: locale === "ar" ? null : seo.homeOgDescription || seo.ogDescription,
+    ogTitle: pick(seo.homeOgTitle || seo.ogTitle, seo.homeOgTitleAr || seo.ogTitleAr),
+    ogDescription: pick(seo.homeOgDescription || seo.ogDescription, seo.homeOgDescriptionAr || seo.ogDescriptionAr),
     seo,
   });
 }
@@ -169,9 +171,10 @@ export default async function HomePage() {
   const notes = [settings.freeShippingThreshold > 0 ? fmt(t.home.heroNoteFree, { amount: formatPrice(settings.freeShippingThreshold, locale) }) : null, settings.codEnabled ? t.home.heroNoteCod : null]
     .filter(Boolean)
     .join(ar ? "، " : ", ");
-  // The French H1 stays editable in Admin → SEO (homeH1); otherwise the brand line.
-  const h1 = !ar && seo.homeH1 ? seo.homeH1 : t.home.heroTitle;
-  const seoParagraphs = !ar && seo.homeSeoText ? seo.homeSeoText.split(/\n{2,}/) : [t.home.seoText1, t.home.seoText2];
+  // H1 editable per language in Admin → SEO (homeH1 / homeH1Ar); otherwise the brand line.
+  const h1 = (ar ? seo.homeH1Ar : seo.homeH1) || t.home.heroTitle;
+  const seoText = ar ? seo.homeSeoTextAr : seo.homeSeoText;
+  const seoParagraphs = seoText ? seoText.split(/\n{2,}/) : [t.home.seoText1, t.home.seoText2];
   const logos = new Map(brands.map((b) => [b.slug, b.logoKey]));
   const topBrands = ranking.slice(0, 12);
 
@@ -336,7 +339,7 @@ export default async function HomePage() {
     seo: () => (
       <section key="seo" className="container-page pb-6 pt-4">
         <div className="max-w-3xl">
-          <h2 className="mb-3 text-lg font-bold">{!ar && seo.homeSeoHeading ? seo.homeSeoHeading : t.home.seoTitle}</h2>
+          <h2 className="mb-3 text-lg font-bold">{(ar ? seo.homeSeoHeadingAr : seo.homeSeoHeading) || t.home.seoTitle}</h2>
           <div className="prose-store text-muted-foreground">
             {seoParagraphs.map((para, i) => <p key={i} className="whitespace-pre-line">{para}</p>)}
           </div>

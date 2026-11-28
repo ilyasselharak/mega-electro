@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+# Site-wide SEO settings + homepage (FR/AR). Facts only from the store settings, the catalog and /livraison-retours.
+import json
+c = {
+  # The apex redirects (308) to www: canonicals, hreflang, sitemap and JSON-LD must announce the final host.
+  "canonicalBaseUrl": "https://www.mega-electro.ma",
+  # No physical shop is documented (address = "Casablanca, Maroc"); Store would claim a LocalBusiness.
+  "orgType": "OnlineStore",
+  "orgDescription": "Boutique en ligne d'électroménager basée à Casablanca : gros et petit électroménager, climatisation, chauffage et TV, livrés dans tout le Maroc avec paiement à la livraison.",
+  "defaultTitle": "Mega Electro – Électroménager en ligne au Maroc",
+  "defaultDescription": "Réfrigérateurs, machines à laver, climatiseurs, TV et petit électroménager neufs. Livraison partout au Maroc et paiement en espèces à la livraison.",
+  "defaultKeywords": "Mega Electro, électroménager Maroc, électroménager en ligne Maroc, réfrigérateur Maroc, machine à laver Maroc, climatiseur Maroc, Smart TV Maroc, chauffe-eau Maroc, petit électroménager Maroc, paiement à la livraison",
+  "defaultTitleAr": "ميغا إلكترو – الأجهزة المنزلية أونلاين في المغرب",
+  "defaultDescriptionAr": "ثلاجات، آلات التصبين، مكيفات، تلفازات وأجهزة منزلية صغيرة جديدة. التوصيل لجميع مدن المغرب والدفع نقداً عند الاستلام.",
+  "defaultKeywordsAr": "ميغا إلكترو, الأجهزة المنزلية المغرب, إلكتروميناجي, ثلاجة, فريكو, ماكينة التصبين, كليماتيزور, تلفاز, سخان الماء, الدفع عند الاستلام",
+  "homeTitle": "Électroménager en ligne au Maroc | Mega Electro",
+  "homeDescription": "Réfrigérateurs, lave-linge, climatiseurs, TV, chauffage et petit électroménager : commandez en ligne, livraison partout au Maroc, paiement à la livraison.",
+  "homeKeywords": "électroménager Maroc, magasin électroménager en ligne, achat électroménager Maroc, électroménager Casablanca, électroménager paiement à la livraison",
+  "homeOgTitle": "Mega Electro – L'électroménager livré partout au Maroc",
+  "homeOgDescription": "Commandez en ligne : notre équipe vous appelle pour confirmer, puis vous payez en espèces à la livraison.",
+  "homeSeoHeading": "Votre électroménager en ligne au Maroc",
+  "homeSeoText": "\n\n".join([
+    "Mega Electro est une boutique en ligne d'électroménager basée à Casablanca. Vous y trouvez de quoi équiper toute la maison : réfrigérateurs, congélateurs, machines à laver, lave-vaisselle, fours et plaques de cuisson, mais aussi climatiseurs, appareils de chauffage, chauffe-eau, téléviseurs et petit électroménager pour la cuisine et l'entretien.",
+    "Le catalogue réunit notamment Daiko, Kenz, LG, Tatch, Goldenstar et Samsung. Chaque fiche produit indique le prix, la disponibilité, les caractéristiques connues et, lorsqu'elle est communiquée, la durée de garantie.",
+    "Nous livrons dans toutes les villes du Maroc : comptez 24 à 48 h pour Casablanca, Rabat et les grandes villes, et 48 à 72 h pour les autres. Après votre commande, notre équipe vous appelle pour la confirmer ; vous payez en espèces à la livraison, après avoir vérifié votre colis devant le livreur.",
+  ]),
+  "homeTitleAr": "الأجهزة المنزلية أونلاين في المغرب | ميغا إلكترو",
+  "homeDescriptionAr": "ثلاجات، آلات التصبين، مكيفات، تلفازات، تدفئة وأجهزة منزلية صغيرة: اطلب أونلاين، التوصيل لجميع مدن المغرب والدفع عند الاستلام.",
+  "homeKeywordsAr": "الأجهزة المنزلية المغرب, متجر إلكتروميناجي أونلاين, شراء الأجهزة المنزلية, الأجهزة المنزلية الدار البيضاء, الدفع عند الاستلام",
+  "homeOgTitleAr": "ميغا إلكترو – أجهزة منزلية تصلك لجميع مدن المغرب",
+  "homeOgDescriptionAr": "اطلب أونلاين: يتصل بك فريقنا لتأكيد الطلب، ثم تدفع نقداً عند الاستلام.",
+  "homeSeoHeadingAr": "أجهزتك المنزلية أونلاين في المغرب",
+  "homeSeoTextAr": "\n\n".join([
+    "ميغا إلكترو متجر إلكتروني للأجهزة المنزلية مقره الدار البيضاء. تجد فيه ما تحتاجه لتجهيز بيتك: ثلاجات، مجمدات، آلات التصبين، غسالات الأواني، أفران وطباخات، إلى جانب المكيفات وأجهزة التدفئة وسخانات الماء والتلفازات والأجهزة المنزلية الصغيرة للمطبخ والتنظيف.",
+    "يضم الكتالوج علامات مثل Daiko وKenz وLG وTatch وGoldenstar وSamsung. توضح كل صفحة منتج الثمن والتوفر والمواصفات المعروفة، ومدة الضمان عندما تكون متوفرة.",
+    "نوصل إلى جميع مدن المغرب: من 24 إلى 48 ساعة للدار البيضاء والرباط والمدن الكبرى، ومن 48 إلى 72 ساعة لباقي المدن. بعد الطلب يتصل بك فريقنا للتأكيد، وتدفع نقداً عند الاستلام بعد التحقق من الطرد أمام المُوصّل.",
+  ]),
+}
+for k in ("defaultTitle","defaultTitleAr","homeTitle","homeTitleAr","defaultDescription","defaultDescriptionAr","homeDescription","homeDescriptionAr"):
+    print(k, len(c[k]))
+json.dump([{"kind": "settings", "slug": "site-settings", "source": "global-seo", "changes": c}], open("seo/proposals/global.json", "w"), ensure_ascii=False, indent=1)

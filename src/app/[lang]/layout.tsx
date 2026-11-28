@@ -22,16 +22,18 @@ export function generateStaticParams() {
 
 // Site-wide defaults, editable in Admin → SEO → Paramètres globaux. Pages override them.
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await getSeoSettings();
-  const keywords = keywordList(seo.defaultKeywords);
+  const [seo, locale] = await Promise.all([getSeoSettings(), getLocale()]);
+  const ar = locale === "ar";
+  // Arabic pages use the Arabic defaults (Admin → SEO → Global), falling back to French.
+  const keywords = keywordList(ar ? seo.defaultKeywordsAr || seo.defaultKeywords : seo.defaultKeywords);
   return {
     metadataBase: new URL(siteBase(seo)),
-    title: { default: seo.defaultTitle, template: `%s | ${seo.siteName}` },
-    description: seo.defaultDescription,
+    title: { default: (ar && seo.defaultTitleAr) || seo.defaultTitle, template: `%s | ${seo.siteName}` },
+    description: (ar && seo.defaultDescriptionAr) || seo.defaultDescription,
     ...(keywords.length ? { keywords } : {}),
     applicationName: seo.siteName,
     formatDetection: { telephone: false },
-    openGraph: { siteName: seo.siteName, locale: "fr_MA", type: "website" },
+    openGraph: { siteName: seo.siteName, locale: ar ? "ar_MA" : "fr_MA", type: "website" },
     robots: { index: seo.robotsIndex, follow: seo.robotsFollow },
     verification: {
       ...(seo.googleVerification ? { google: seo.googleVerification } : {}),

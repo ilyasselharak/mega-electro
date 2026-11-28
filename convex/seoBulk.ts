@@ -54,7 +54,60 @@ const categoryChanges = v.object({
   seo: v.optional(v.object({ ...seoFields, longDescription: v.optional(v.string()), imageAlt: v.optional(v.string()) })),
 });
 
+/**
+ * Site-wide SEO settings (single seoSettings document). Text and schema typing only: robots, indexing,
+ * sitemap switches, verification codes, shipping and return terms are not reachable from here.
+ */
+const settingsChanges = v.object({
+  canonicalBaseUrl: v.optional(v.string()),
+  defaultTitle: v.optional(v.string()),
+  defaultDescription: v.optional(v.string()),
+  defaultKeywords: v.optional(v.string()),
+  defaultTitleAr: v.optional(v.string()),
+  defaultDescriptionAr: v.optional(v.string()),
+  defaultKeywordsAr: v.optional(v.string()),
+  ogTitle: v.optional(v.string()),
+  ogDescription: v.optional(v.string()),
+  ogTitleAr: v.optional(v.string()),
+  ogDescriptionAr: v.optional(v.string()),
+  orgType: v.optional(v.union(v.literal("Store"), v.literal("OnlineStore"), v.literal("Organization"))),
+  orgDescription: v.optional(v.string()),
+  homeTitle: v.optional(v.string()),
+  homeDescription: v.optional(v.string()),
+  homeKeywords: v.optional(v.string()),
+  homeH1: v.optional(v.string()),
+  homeSeoHeading: v.optional(v.string()),
+  homeSeoText: v.optional(v.string()),
+  homeOgTitle: v.optional(v.string()),
+  homeOgDescription: v.optional(v.string()),
+  homeTitleAr: v.optional(v.string()),
+  homeDescriptionAr: v.optional(v.string()),
+  homeKeywordsAr: v.optional(v.string()),
+  homeH1Ar: v.optional(v.string()),
+  homeSeoHeadingAr: v.optional(v.string()),
+  homeSeoTextAr: v.optional(v.string()),
+  homeOgTitleAr: v.optional(v.string()),
+  homeOgDescriptionAr: v.optional(v.string()),
+});
+
+type Kind = "product" | "category" | "settings";
+type AnyDoc = Doc<"products"> | Doc<"categories"> | Doc<"seoSettings">;
+/** Log label: slug for catalog documents, a fixed name for the settings document. */
+const labelOf = (doc: AnyDoc) => ("slug" in doc ? doc.slug : "site-settings");
+
 const LIMITS: Record<string, number> = {
+  canonicalBaseUrl: 200,
+  defaultTitle: 90,
+  defaultTitleAr: 90,
+  homeTitle: 90,
+  homeTitleAr: 90,
+  defaultDescription: 200,
+  defaultDescriptionAr: 200,
+  homeDescription: 200,
+  homeDescriptionAr: 200,
+  homeSeoText: 5000,
+  homeSeoTextAr: 5000,
+  orgDescription: 500,
   name: 160,
   nameAr: 160,
   shortDescription: 400,
@@ -82,7 +135,7 @@ const stable = (v: unknown): unknown => (Array.isArray(v) ? v.map(stable) : v &&
 const same = (a: unknown, b: unknown) => JSON.stringify(stable(a)) === JSON.stringify(stable(b));
 
 /** Flattens the requested changes into field-level operations against the current document. */
-function plan(doc: Doc<"products"> | Doc<"categories">, changes: Record<string, unknown>): Change[] {
+function plan(doc: AnyDoc, changes: Record<string, unknown>): Change[] {
   const out: Change[] = [];
   const push = (field: string, before: unknown, after: unknown) => {
     if (typeof after === "string") {
@@ -91,6 +144,7 @@ function plan(doc: Doc<"products"> | Doc<"categories">, changes: Record<string, 
       const max = LIMITS[field] ?? LIMITS[field.split(":")[0]];
       if (max && value.length > max) fail(`${field} : ${value.length} caractères (maximum ${max}).`);
       after = value;
+      if (field === "canonicalBaseUrl" && !/^https:\/\/[a-z0-9.-]+$/i.test(value)) fail("canonicalBaseUrl : origine https sans chemin ni barre finale.");
     }
     if (!same(before, after)) out.push({ field, before: before ?? null, after });
   };
@@ -123,7 +177,7 @@ function plan(doc: Doc<"products"> | Doc<"categories">, changes: Record<string, 
 }
 
 /** Applies field-level values to a document copy (shared by apply and rollback). */
-function patchFor(doc: Doc<"products"> | Doc<"categories">, values: { field: string; value: unknown }[]) {
+function patchFor(doc: AnyDoc, values: { field: string; value: unknown }[]) {
   const patch: Record<string, unknown> = {};
   let seo = { ...((doc as { seo?: Record<string, unknown> }).seo ?? {}) };
   let images = "images" in doc ? [...doc.images] : null;
@@ -145,15 +199,18 @@ function patchFor(doc: Doc<"products"> | Doc<"categories">, values: { field: str
   return patch;
 }
 
-async function load(ctx: MutationCtx, kind: "product" | "category", id: string) {
+async function load(ctx: MutationCtx, kind: Kind, id: string): Promise<AnyDoc> {
+  if (kind === "settings") return (await ctx.db.get(ctx.db.normalizeId("seoSettings", id) as Id<"seoSettings">)) ?? fail(`Paramètres SEO introuvables : ${id}`);
   const doc = kind === "product" ? await ctx.db.get(ctx.db.normalizeId("products", id) as Id<"products">) : await ctx.db.get(ctx.db.normalizeId("categories", id) as Id<"categories">);
   if (!doc) fail(`${kind} introuvable : ${id}`);
   return doc;
 }
 
-async function write(ctx: MutationCtx, kind: "product" | "category", doc: Doc<"products"> | Doc<"categories">, patch: Record<string, unknown>) {
+async function write(ctx: MutationCtx, kind: Kind, doc: AnyDoc, patch: Record<string, unknown>) {
   const now = Date.now();
-  if (kind === "product") {
+  if (kind === "settings") {
+    await ctx.db.patch((doc as Doc<"seoSettings">)._id, { ...(patch as Partial<Doc<"seoSettings">>), updatedAt: now });
+  } else if (kind === "product") {
     const p = doc as Doc<"products">;
     const next = { ...p, ...patch } as Doc<"products">;
     const searchText = "shortDescription" in patch || "name" in patch ? await buildSearchText(ctx, next) : p.searchText;
@@ -168,11 +225,12 @@ const applyArgs = {
   /** Short label stored in the log ("pilot-10", "categories-v1"). */
   source: v.string(),
   dryRun: v.boolean(),
-  kind: v.union(v.literal("product"), v.literal("category")),
+  kind: v.union(v.literal("product"), v.literal("category"), v.literal("settings")),
   id: v.string(),
   expectedUpdatedAt: v.number(),
   product: v.optional(productChanges),
   category: v.optional(categoryChanges),
+  settings: v.optional(settingsChanges),
 };
 
 /** One entity per call (the script batches calls). Returns the field-level diff that was (or would be) applied. */
@@ -181,19 +239,19 @@ export const apply = internalMutation({
   handler: async (ctx, a) => {
     if (!/^[a-z0-9-]{3,60}$/.test(a.batchId)) fail("batchId invalide.");
     const doc = await load(ctx, a.kind, a.id);
-    const changes = (a.kind === "product" ? a.product : a.category) ?? fail("Aucune modification fournie.");
+    const changes = (a.kind === "product" ? a.product : a.kind === "category" ? a.category : a.settings) ?? fail("Aucune modification fournie.");
     const diff = plan(doc, changes as Record<string, unknown>);
     if (doc.updatedAt !== a.expectedUpdatedAt) {
-      return { status: "conflict" as const, slug: doc.slug, diff, message: "Modifié depuis la préparation : relancez la préparation pour ce document." };
+      return { status: "conflict" as const, slug: labelOf(doc), diff, message: "Modifié depuis la préparation : relancez la préparation pour ce document." };
     }
-    if (!diff.length) return { status: "unchanged" as const, slug: doc.slug, diff };
-    if (a.dryRun) return { status: "dry-run" as const, slug: doc.slug, diff };
+    if (!diff.length) return { status: "unchanged" as const, slug: labelOf(doc), diff };
+    if (a.dryRun) return { status: "dry-run" as const, slug: labelOf(doc), diff };
     await write(ctx, a.kind, doc, patchFor(doc, diff.map((c) => ({ field: c.field, value: c.after }))));
     const appliedAt = Date.now();
     for (const c of diff) {
-      await ctx.db.insert("seoChangeLog", { batchId: a.batchId, source: a.source, kind: a.kind, entityId: a.id, slug: doc.slug, field: c.field, before: c.before, after: c.after, appliedAt });
+      await ctx.db.insert("seoChangeLog", { batchId: a.batchId, source: a.source, kind: a.kind, entityId: a.id, slug: labelOf(doc), field: c.field, before: c.before, after: c.after, appliedAt });
     }
-    return { status: "applied" as const, slug: doc.slug, diff };
+    return { status: "applied" as const, slug: labelOf(doc), diff };
   },
 });
 

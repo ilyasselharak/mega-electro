@@ -39,7 +39,7 @@ export function SeoSettingsForm({ initial, canEdit, envSiteUrl }: { initial: Seo
           <Label htmlFor={name}>{label}</Label>
           {opts.counter ? <span className="font-mono text-xs tabular-nums text-muted-foreground">{value.length} / {opts.counter[0]}–{opts.counter[1]}</span> : null}
         </div>
-        {opts.rows ? <Textarea id={name} rows={opts.rows} placeholder={opts.placeholder} {...register(name)} /> : <Input id={name} placeholder={opts.placeholder} {...register(name)} />}
+        {opts.rows ? <Textarea id={name} dir={opts.dir} rows={opts.rows} placeholder={opts.placeholder} {...register(name)} /> : <Input id={name} dir={opts.dir} placeholder={opts.placeholder} {...register(name)} />}
         {err(name)?.message ? <p className="text-xs text-destructive">{err(name)?.message}</p> : opts.hint ? <p className="text-xs text-muted-foreground">{opts.hint}</p> : null}
       </div>
     );
@@ -116,6 +116,9 @@ export function SeoSettingsForm({ initial, canEdit, envSiteUrl }: { initial: Seo
                 {text("defaultTitle", "Titre SEO du site (par défaut)", { counter: [SEO_LIMITS.titleMin, SEO_LIMITS.titleMax] })}
                 {text("defaultDescription", "Méta-description par défaut", { rows: 3, counter: [SEO_LIMITS.descMin, SEO_LIMITS.descMax] })}
                 {text("defaultKeywords", "Mots-clés par défaut", { hint: "Séparés par des virgules." })}
+                {text("defaultTitleAr", "Titre SEO du site — arabe", { counter: [SEO_LIMITS.titleMin, SEO_LIMITS.titleMax], dir: "rtl", hint: "Pages /ar. Vide = titre français." })}
+                {text("defaultDescriptionAr", "Méta-description par défaut — arabe", { rows: 3, counter: [SEO_LIMITS.descMin, SEO_LIMITS.descMax], dir: "rtl" })}
+                {text("defaultKeywordsAr", "Mots-clés par défaut — arabe", { dir: "rtl", hint: "Arabe et darija, séparés par des virgules." })}
                 {text("canonicalBaseUrl", "URL canonique du site", { placeholder: envSiteUrl || "https://www.mega-electro.ma", hint: `Origine utilisée dans les URL canoniques, le sitemap et le JSON-LD. Vide = NEXT_PUBLIC_SITE_URL (${envSiteUrl || "non défini"}).` })}
               </CardContent>
             </Card>
@@ -143,6 +146,19 @@ export function SeoSettingsForm({ initial, canEdit, envSiteUrl }: { initial: Seo
                 {image("homeOgImageKey", "Image Open Graph de l'accueil (1200×630)")}
               </CardContent>
             </Card>
+            <Card>
+              <CardHeader><CardTitle>Accueil en arabe (/ar)</CardTitle><CardDescription>Vide = texte arabe intégré au site.</CardDescription></CardHeader>
+              <CardContent className="grid gap-4">
+                {text("homeTitleAr", "Titre SEO de l'accueil — arabe", { counter: [SEO_LIMITS.titleMin, SEO_LIMITS.titleMax], dir: "rtl", hint: "Affiché tel quel (sans suffixe)." })}
+                {text("homeDescriptionAr", "Méta-description de l'accueil — arabe", { rows: 3, counter: [SEO_LIMITS.descMin, SEO_LIMITS.descMax], dir: "rtl" })}
+                {text("homeKeywordsAr", "Mots-clés de l'accueil — arabe", { dir: "rtl" })}
+                {text("homeH1Ar", "Titre H1 de l'accueil — arabe", { dir: "rtl" })}
+                {text("homeSeoHeadingAr", "Titre du bloc texte SEO — arabe", { dir: "rtl" })}
+                {text("homeSeoTextAr", "Texte SEO (bas de page) — arabe", { rows: 8, dir: "rtl", hint: "Paragraphes séparés par une ligne vide." })}
+                {text("homeOgTitleAr", "Titre Open Graph de l'accueil — arabe", { dir: "rtl" })}
+                {text("homeOgDescriptionAr", "Description Open Graph de l'accueil — arabe", { rows: 2, dir: "rtl" })}
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="social" className="space-y-6">
@@ -151,6 +167,8 @@ export function SeoSettingsForm({ initial, canEdit, envSiteUrl }: { initial: Seo
               <CardContent className="grid gap-4">
                 {text("ogTitle", "Titre Open Graph par défaut")}
                 {text("ogDescription", "Description Open Graph par défaut", { rows: 2 })}
+                {text("ogTitleAr", "Titre Open Graph par défaut — arabe", { dir: "rtl" })}
+                {text("ogDescriptionAr", "Description Open Graph par défaut — arabe", { rows: 2, dir: "rtl" })}
                 {image("ogImageKey", "Image Open Graph par défaut (1200×630)", "Vide = visuel Mega Electro généré automatiquement.")}
                 {image("socialImageKey", "Image de partage Twitter/X par défaut", "Vide = image Open Graph.")}
               </CardContent>
@@ -161,12 +179,12 @@ export function SeoSettingsForm({ initial, canEdit, envSiteUrl }: { initial: Seo
             <Card>
               <CardHeader><CardTitle>Informations sur l&apos;organisation</CardTitle><CardDescription>Téléphone, e-mail, adresse et réseaux sociaux viennent de Paramètres → Boutique.</CardDescription></CardHeader>
               <CardContent className="grid gap-4">
-                {select("orgType", "Type", [{ value: "Store", label: "Magasin (Store)" }, { value: "OnlineStore", label: "Boutique en ligne (OnlineStore)" }, { value: "Organization", label: "Organisation" }])}
+                {select("orgType", "Type", [{ value: "Store", label: "Magasin physique (Store)" }, { value: "OnlineStore", label: "Boutique en ligne (OnlineStore)" }, { value: "Organization", label: "Organisation" }])}
                 {text("orgLegalName", "Raison sociale")}
                 {text("orgDescription", "Description de l'entreprise", { rows: 3 })}
                 {image("orgLogoKey", "Logo (PNG/JPG carré, 112 px min.)", "Vide = icône SVG du site. Google recommande un logo matriciel.")}
                 {text("orgSameAs", "Autres profils (une URL par ligne)", { rows: 3, hint: "Ex : page Google Business, LinkedIn, YouTube." })}
-                {text("priceRange", "Gamme de prix", { placeholder: "$$" })}
+                {v.orgType === "Store" ? text("priceRange", "Gamme de prix", { placeholder: "$$", hint: "Magasin physique uniquement." }) : null}
               </CardContent>
             </Card>
           </TabsContent>
@@ -175,7 +193,7 @@ export function SeoSettingsForm({ initial, canEdit, envSiteUrl }: { initial: Seo
             <Card>
               <CardHeader><CardTitle>Types de données structurées</CardTitle><CardDescription>Avis et notes ne sont jamais émis tant qu&apos;il n&apos;existe pas de vrais avis clients.</CardDescription></CardHeader>
               <CardContent className="grid gap-3 sm:grid-cols-2">
-                {toggle("sdOrganization", "Organization / Store")}
+                {toggle("sdOrganization", "Organization / OnlineStore")}
                 {toggle("sdWebsite", "WebSite + recherche")}
                 {toggle("sdBreadcrumbs", "BreadcrumbList")}
                 {toggle("sdProduct", "Product + Offer")}
